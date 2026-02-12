@@ -1,0 +1,261 @@
+.container {
+    padding: 2rem;
+    color: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    /* Space for player */
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+/* Balance Card */
+.balanceCard {
+    background: linear-gradient(135deg, #222, #111);
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.balanceInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.balanceLabel {
+    color: #888;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.balanceValue {
+    font-size: 3.5rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #00ff88;
+}
+
+.icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+.currency {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #666;
+    margin-top: 1rem;
+}
+
+.historyBtn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.historyBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Packages Grid */
+.sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #00ff88;
+    padding-left: 1rem;
+}
+
+.packagesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.packageCard {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.packageCard:hover {
+    transform: translateY(-5px);
+    border-color: #00ff88;
+}
+
+.turbo {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0f2e1f 100%);
+    border-color: #00ff8844;
+}
+
+.packageName {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.packageCredits {
+    background: #00ff8822;
+    color: #00ff88;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.packageDesc {
+    color: #888;
+    margin: 1.5rem 0;
+    flex-grow: 1;
+}
+
+.packagePrice {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.buyBtn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    background: #fff;
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.buyBtn:hover {
+    background: #ddd;
+    transform: scale(1.02);
+}
+
+.turbo .buyBtn {
+    background: #00ff88;
+    color: #000;
+}
+
+.turbo .buyBtn:hover {
+    background: #00e078;
+}
+
+/* History Table */
+.historyContainer {
+    background: #151515;
+    border-radius: 12px;
+    border: 1px solid #222;
+    overflow: hidden;
+}
+
+.historyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historyTable th,
+.historyTable td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid #222;
+}
+
+.historyTable th {
+    background: #222;
+    color: #aaa;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.historyTable tbody tr:hover {
+    background: #1a1a1a;
+}
+
+.textRight {
+    text-align: right;
+}
+
+.badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.badge.purchase {
+    background: #00ff8822;
+    color: #00ff88;
+}
+
+.badge.boost {
+    background: #ff005522;
+    color: #ff0055;
+}
+
+.positive {
+    color: #00ff88;
+    font-weight: 600;
+}
+
+.negative {
+    color: #ff4444;
+    font-weight: 600;
+}
+
+.emptyHistory {
+    padding: 3rem;
+    text-align: center;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .balanceCard {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .balanceValue {
+        justify-content: center;
+    }
+}

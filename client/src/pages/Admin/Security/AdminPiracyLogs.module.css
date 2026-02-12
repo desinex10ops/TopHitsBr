@@ -1,0 +1,110 @@
+.container {
+    padding: 2rem;
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.8rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+}
+
+.refreshBtn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.refreshBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tableContainer {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+    background: rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.statusCol {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.userName {
+    font-weight: bold;
+}
+
+.userEmail {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.success {
+    color: #4caf50;
+}
+
+.blocked {
+    color: #f44336;
+}
+
+.expired {
+    color: #ff9800;
+}
+
+.failed {
+    color: #9e9e9e;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.pagination button {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

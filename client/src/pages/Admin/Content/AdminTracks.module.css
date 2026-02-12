@@ -1,0 +1,135 @@
+.container {
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.searchBox {
+    background: #222;
+    border: 1px solid #333;
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 300px;
+}
+
+.actionsHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btnDeleteBulk {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btnDeleteBulk:hover {
+    background: #bf0810;
+}
+
+.selectedRow {
+    background-color: rgba(29, 185, 84, 0.1);
+}
+
+
+.searchBox input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    width: 100%;
+}
+
+.tableWrapper {
+    background: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #282828;
+}
+
+.table th {
+    background: #222;
+    color: #b3b3b3;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.cover {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.badgeSuccess {
+    background: rgba(29, 185, 84, 0.2);
+    color: #1ed760;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badgeInactive {
+    background: rgba(255, 255, 255, 0.1);
+    color: #888;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btnIcon {
+    background: #333;
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btnIcon:hover {
+    background: #444;
+}
+
+.btnDelete:hover {
+    background: #e50914;
+}

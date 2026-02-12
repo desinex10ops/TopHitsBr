@@ -1,0 +1,20 @@
+# Node
+node_modules/
+
+# Build
+dist/
+build/
+
+# Storage pesado
+server/storage/
+storage/
+
+# Arquivos grandes
+*.mp3
+*.mp4
+*.zip
+*.rar
+*.7z
+
+# Logs
+*.log

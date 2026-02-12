@@ -1,0 +1,281 @@
+.container {
+    padding-bottom: 40px;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 60px;
+    /* Space for avatar overlap */
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+}
+
+.headerContent {
+    position: absolute;
+    bottom: -40px;
+    left: 40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    width: calc(100% - 80px);
+}
+
+.avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #121212;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    background-color: #333;
+}
+
+.artistInfo {
+    margin-bottom: 40px;
+    /* Align with bottom of avatar roughly */
+    flex: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.artistName {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.playBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #1DB954;
+    border: none;
+    color: #000;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.playBtn:hover {
+    transform: scale(1.05);
+    background-color: #1ed760;
+}
+
+.followBtn {
+    padding: 8px 20px;
+    border: 1px solid #777;
+    border-radius: 4px;
+    background: transparent;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.followBtn:hover {
+    border-color: #fff;
+    transform: scale(1.02);
+}
+
+.section {
+    margin-top: 40px;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Reusing grid styles */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: #181818;
+    padding: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    background: #282828;
+}
+
+.cardImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardSubtitle {
+    font-size: 0.875rem;
+    color: #b3b3b3;
+}
+
+/* News Section */
+.newsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.newsCard {
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.newsCard:hover {
+    transform: translateY(-5px);
+}
+
+.newsImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.newsContent {
+    padding: 15px;
+}
+
+.newsDate {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.newsTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.newsText {
+    font-size: 0.9rem;
+    color: #ccc;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Popular List */
+.popularList {
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; remove gap to look more like a list */
+}
+
+.popularRow {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 4px;
+    color: #b3b3b3;
+    font-size: 0.9rem;
+    gap: 15px;
+}
+
+.popularRow:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.popularIndex {
+    width: 20px;
+    text-align: right;
+    font-size: 1rem;
+}
+
+.popularInfo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.popularThumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.popularTitle {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.popularPlays {
+    width: 150px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.popularDuration {
+    width: 50px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}

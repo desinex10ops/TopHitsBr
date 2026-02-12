@@ -1,0 +1,245 @@
+.container {
+    padding: 0;
+    padding-bottom: 100px;
+    color: #fff;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    padding: 60px 30px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(29, 185, 84, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.heroTitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.heroSubtitle {
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.betaBadge {
+    font-size: 0.8rem;
+    background: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #aaa;
+    letter-spacing: 1px;
+    vertical-align: middle;
+}
+
+.heroCta {
+    background: #1db954;
+    color: #000;
+    border: none;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.heroCta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+    background: #1ed760;
+}
+
+/* Controls & Filters */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 auto 40px;
+    max-width: 1400px;
+    padding: 0 30px;
+}
+
+.searchBar {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.searchBar input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.filterPills {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pill {
+    background: transparent;
+    border: 1px solid #333;
+    color: #b3b3b3;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.pill:hover {
+    border-color: #555;
+    color: white;
+}
+
+.pillActive {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    font-weight: 600;
+}
+
+.pillActive:hover {
+    background: #f0f0f0;
+    border-color: #f0f0f0;
+    color: #000;
+}
+
+.sortWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.select {
+    padding: 8px 12px;
+    background: transparent;
+    color: #b3b3b3;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.select:hover {
+    color: #fff;
+}
+
+.select option {
+    background: #222;
+    color: #fff;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.loading,
+.empty {
+    text-align: center;
+    padding: 50px;
+    color: #666;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 2.5rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .filterPills {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .controls {
+        padding: 0 16px;
+    }
+}

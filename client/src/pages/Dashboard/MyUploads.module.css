@@ -1,0 +1,414 @@
+/* MyUploads.module.css */
+.container {
+    padding: 20px;
+    color: white;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: #333;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.backBtn:hover {
+    background: #444;
+}
+
+.uploadBtn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+}
+
+.uploadBtn:hover {
+    background-color: var(--accent-hover);
+    transform: scale(1.05);
+}
+
+/* --- Album Grid --- */
+.albumGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.albumCard {
+    background: #181818;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.albumCard:hover {
+    background: #282828;
+}
+
+.albumCoverWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.albumCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.albumPlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #555;
+    background: linear-gradient(135deg, #333 0%, #222 100%);
+}
+
+.playOverlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.albumCard:hover .playOverlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.playAlbumBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    border: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.playAlbumBtn:hover {
+    transform: scale(1.1);
+    background: var(--accent-hover);
+}
+
+.albumInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.albumTitle {
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.albumArtist {
+    color: #b3b3b3;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.albumMeta {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+/* --- Album Details --- */
+.albumDetails {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.albumHeader {
+    display: flex;
+    gap: 30px;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    padding: 0 0 20px 0;
+}
+
+.bigCover {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    /* Standard Spotify-like rounding */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.bigCover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bigPlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+}
+
+.headerInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.bigTitle {
+    font-size: 3rem;
+    /* Título bem grande estilo Spotify */
+    font-weight: 900;
+    margin: 0 0 15px 0;
+    line-height: 1;
+}
+
+.metaRow {
+    color: #b3b3b3;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+.artistName {
+    color: white;
+    font-weight: 700;
+}
+
+.actionButtons {
+    margin-top: 20px;
+}
+
+.primaryBtn {
+    background-color: var(--accent-color);
+    color: black;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.primaryBtn:hover {
+    transform: scale(1.05);
+}
+
+/* --- Track List Details --- */
+.trackList {
+    display: flex;
+    flex-direction: column;
+}
+
+.trackItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.trackItem:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.trackIndex {
+    width: 30px;
+    color: #b3b3b3;
+    font-size: 1rem;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.trackInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.trackTitle {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.trackMeta {
+    color: #b3b3b3;
+    font-size: 0.85rem;
+}
+
+.trackActions {
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.trackItem:hover .trackActions {
+    opacity: 1;
+}
+
+.iconBtn {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background 0.2s;
+}
+
+.iconBtn:hover {
+    color: white;
+    background: #333;
+}
+
+.deleteBtn:hover {
+    color: #ff4444;
+}
+
+/* --- Common --- */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    color: #666;
+    background: #181818;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.emptyIcon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+/* Modal de Upload embutido (se usarmos) */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    overflow-y: auto;
+}
+
+.modalContent {
+    background: #121212;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin-bottom: 50px;
+}
+
+.closeModalBtn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+}

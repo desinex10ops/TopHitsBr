@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>TopHitsBr</title>
+</head>
+
+<body>
+  <div id="root" style="color: white; font-size: 24px; text-align: center; padding-top: 50px;">LOADING APPLICATION...
+  </div>
+  <script>
+    window.onerror = function (message, source, lineno, colno, error) {
+      const errorDiv = document.createElement('div');
+      errorDiv.style.position = 'fixed';
+      errorDiv.style.top = '0';
+      errorDiv.style.left = '0';
+      errorDiv.style.width = '100vw';
+      errorDiv.style.height = '100vh';
+      errorDiv.style.backgroundColor = 'rgba(0,0,0,0.9)';
+      errorDiv.style.color = 'red';
+      errorDiv.style.zIndex = '9999';
+      errorDiv.style.padding = '20px';
+      errorDiv.style.overflow = 'auto';
+      errorDiv.style.fontFamily = 'monospace';
+      errorDiv.style.whiteSpace = 'pre-wrap';
+      errorDiv.innerHTML = `<h1>Critical Error</h1><h2>${message}</h2><p>${source}:${lineno}:${colno}</p><pre>${error ? error.stack : ''}</pre>`;
+      document.body.appendChild(errorDiv);
+    };
+  </script>
+  <script type="module" src="/src/main.jsx?v=debug3"></script>
+</body>
+
+</html>

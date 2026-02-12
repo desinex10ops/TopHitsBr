@@ -1,0 +1,247 @@
+.footer {
+    background-color: #090909;
+    border-top: 1px solid #ff0000;
+    color: #b3b3b3;
+    /* Text color slightly distinct from background */
+    padding: 80px 0 30px;
+    font-family: 'Inter', sans-serif;
+    margin-top: auto;
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.topSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Brand Column */
+.brandColumn {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+}
+
+.logo {
+    max-width: 160px;
+    margin-bottom: 20px;
+    filter: brightness(1.1);
+    /* Ensure logo pops on dark bg */
+}
+
+.description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #888;
+    margin-bottom: 25px;
+}
+
+/* Social Icons */
+.socials {
+    display: flex;
+    gap: 15px;
+}
+
+.socialIcon {
+    color: #fff;
+    font-size: 1.4rem;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.socialIcon:hover {
+    background: #ff0000;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+
+/* Links Grid */
+.linksGrid {
+    flex: 2;
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    /* Center links section */
+    flex-wrap: wrap;
+}
+
+.column {
+    min-width: 150px;
+}
+
+.column h3,
+.appsColumn h3 {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.column ul li a {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s, padding-left 0.2s;
+    display: inline-block;
+}
+
+.column ul li a:hover {
+    color: #fff;
+    padding-left: 5px;
+    /* Subtle movement */
+    text-decoration: none;
+}
+
+/* Apps Column */
+.appsColumn {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align specifically */
+}
+
+.apps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.appBtn {
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+}
+
+.appBtn:hover {
+    border-color: #ff0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.appIcon {
+    font-size: 24px;
+    color: #fff;
+}
+
+.appText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.appText span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.appText strong {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Bottom Bar */
+.bottomBar {
+    border-top: 1px solid #1a1a1a;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.legalLinks {
+    display: flex;
+    gap: 20px;
+}
+
+.legalLinks a {
+    color: #666;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.legalLinks a:hover {
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .topSection {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .brandColumn,
+    .linksGrid,
+    .appsColumn {
+        width: 100%;
+        max-width: none;
+        align-items: center;
+        text-align: center;
+    }
+
+    .linksGrid {
+        justify-content: space-around;
+        gap: 30px;
+    }
+
+    .appsColumn {
+        align-items: center;
+    }
+
+    .bottomBar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .socials {
+        justify-content: center;
+        /* Center icons on mobile */
+    }
+}

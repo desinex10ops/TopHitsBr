@@ -1,0 +1,146 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal {
+    background: #181818;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #333;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    color: #fff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    color: #fff;
+}
+
+.fileLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #444;
+    padding: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #888;
+    background: #222;
+}
+
+.fileLabel:hover {
+    border-color: #1ed760;
+    color: #1ed760;
+    background: rgba(29, 185, 84, 0.05);
+}
+
+.fileLabel input {
+    display: none;
+}
+
+.icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.currentFile {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #1ed760;
+}
+
+.lyricsSection {
+    margin-top: 20px;
+}
+
+.lyricsSection label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.lyricsSection textarea {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    resize: vertical;
+}
+
+.footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.saveBtn {
+    background: #1ed760;
+    border: none;
+    color: #000;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.saveBtn:hover {
+    background: #1db954;
+    transform: scale(1.05);
+}

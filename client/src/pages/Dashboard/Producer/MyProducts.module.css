@@ -1,0 +1,116 @@
+.container {
+    padding: 20px;
+    color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.createBtn {
+    background: #1db954;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.createBtn:hover {
+    transform: scale(1.05);
+    background: #1ed760;
+}
+
+.tableWrapper {
+    background: #181818;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #282828;
+}
+
+.table th {
+    background: #2a2a2a;
+    color: #b3b3b3;
+    font-weight: 500;
+}
+
+.coverThumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.badge {
+    background: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.status {
+    font-size: 0.85rem;
+    text-transform: capitalize;
+}
+
+.status.active {
+    color: #1db954;
+}
+
+.status.inactive {
+    color: #666;
+}
+
+.status.banned {
+    color: #ff4d4d;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actionBtn {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.actionBtn:hover {
+    color: white;
+}
+
+.empty {
+    padding: 40px;
+    text-align: center;
+    color: #666;
+}

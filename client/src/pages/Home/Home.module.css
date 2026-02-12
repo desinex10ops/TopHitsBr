@@ -1,0 +1,331 @@
+/* Layout */
+.homeLayout {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /* background-color: #000; Removed to show body background */
+    min-height: 100vh;
+}
+
+.mainContent {
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Sections */
+.section {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.title,
+.sectionTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Grid Layout for Albums/Tracks */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+/* Cards */
+.card {
+    background: #181818;
+    padding: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    background-color: #282828;
+}
+
+.coverWrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.cover {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.coverPlaceholder {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    border-radius: 4px;
+    color: #666;
+}
+
+/* Overlays and Buttons */
+.overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.playBtn,
+.addBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.playBtn {
+    background-color: #1db954;
+    color: #000;
+}
+
+.playBtn:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+}
+
+.addBtn {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.addBtn:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: #fff;
+    transform: scale(1.05);
+}
+
+/* Info Text */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trackTitle {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.artistName {
+    color: #b3b3b3;
+    font-size: 14px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Pen Drive Section */
+.penDriveSection {
+    margin: 60px 0;
+    width: 100%;
+}
+
+/* CTA Button in Home */
+.ctaContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.ctaButton {
+    background: linear-gradient(90deg, #ff0000 0%, #cc0000 100%);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
+}
+
+.ctaButton:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6);
+    background: linear-gradient(90deg, #ff3333 0%, #e60000 100%);
+}
+
+.ctaButton:active {
+    transform: translateY(1px);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+/* Mobile Warning */
+.mobileWarning {
+    display: none;
+    /* Hidden on desktop */
+    text-align: center;
+    padding: 40px 20px;
+    background: #222;
+    border-radius: 12px;
+    border: 1px solid #333;
+    color: #aaa;
+    margin: 20px 0;
+}
+
+.mobileWarning h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.mobileWarning p {
+    font-size: 0.9rem;
+    margin: 0 auto;
+}
+
+.solidBackgroundSection {
+    background-color: #121212;
+    /* Solid color to block bg image */
+    margin: 40px -20px -20px -20px;
+    /* Negative margins to extend to edges */
+    padding: 40px 20px;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 -20px 50px rgba(18, 18, 18, 1);
+    /* Smooth transition */
+}
+
+@media (max-width: 768px) {
+    .solidBackgroundSection {
+        margin: 20px -10px -10px -10px;
+        padding: 20px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .homeLayout {
+        padding: 10px;
+        /* Reduced padding on mobile */
+    }
+
+    .ctaContainer {
+        display: none;
+        /* Hide top CTA on mobile */
+    }
+
+    .penDriveSection {
+        /* Instead of hiding section, we might want to hide the widget inside it */
+    }
+
+    .penDriveWidgetWrapper {
+        display: block;
+        /* Show on mobile as requested by reference image */
+        margin-bottom: 20px;
+    }
+
+    .mobileWarning {
+        display: none;
+        /* Hide warning since we are showing the widget */
+    }
+
+    .sectionTitle {
+        font-size: 1.5rem;
+        /* Slightly smaller titles */
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns on mobile */
+        gap: 12px;
+        /* Smaller gap for mobile */
+        padding-bottom: 0;
+        overflow-x: hidden;
+        /* Prevent side scroll */
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        /* Full width of grid cell */
+        min-width: 0;
+        /* Allow shrinking */
+        display: block;
+        margin-right: 0;
+    }
+
+    /* Adjust specific card types if needed */
+    .card .coverWrapper {
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+}

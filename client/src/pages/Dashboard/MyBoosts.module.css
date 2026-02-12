@@ -1,0 +1,207 @@
+.container {
+    padding: 1rem;
+    color: #fff;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.header h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #888;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: #444;
+}
+
+.card.premium {
+    border-color: #ffaa0055;
+    background: linear-gradient(145deg, #1a1a1a, #222);
+}
+
+.card.advanced {
+    border-color: #00ccff55;
+}
+
+.card.basic {
+    border-color: #444;
+}
+
+.smartBadge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(90deg, #ff0055, #ff4444);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(255, 0, 85, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tierIcon {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.8rem;
+    border-radius: 50%;
+    display: flex;
+}
+
+.targetInfo h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    margin-bottom: 0.2rem;
+}
+
+.typeBadge {
+    font-size: 0.75rem;
+    background: #333;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+.status {
+    margin-left: auto;
+    /* Push to right? No, absolute badge handles right. stick to flow */
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: none;
+    /* Hidden mainly, badge is better */
+}
+
+.metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.label {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.value small {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.progressBar {
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+
+.progressFill {
+    height: 100%;
+    background: #00ff88;
+    border-radius: 3px;
+    transition: width 0.5s ease-out;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.detail strong {
+    color: #fff;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 4rem;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.emptyState button {
+    background: #ff0055;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 1rem;
+}

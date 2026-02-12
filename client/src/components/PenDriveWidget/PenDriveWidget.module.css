@@ -1,0 +1,473 @@
+.widget {
+    background: #090909;
+    /* Mais escuro e flat para ser premium */
+    border: 1px solid #222;
+    border-radius: 16px;
+    /* Bordas um pouco menos arredondadas ficam mais profissionais */
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+    /* Efeito de brilho no topo */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Header Principal */
+.mainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 20px;
+}
+
+.titleColumn {
+    flex: 1;
+}
+
+.controlsColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.titleSection h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.titleSection p {
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 8px 0 0;
+}
+
+/* Link Ver Pen Drive */
+.headerLink {
+    color: #1ed760;
+    /* Verde Spotify Clean */
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.2s;
+    text-transform: uppercase;
+}
+
+.headerLink:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Switch de Modos */
+.modeSwitch {
+    display: inline-flex;
+    background: #121212;
+    border-radius: 8px;
+    /* Menos arredondado "pill" */
+    padding: 4px;
+    border: 1px solid #2a2a2a;
+}
+
+.modeBtn {
+    background: transparent;
+    border: none;
+    color: #888;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.modeBtn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modeBtnActive {
+    background: #2a2a2a !important;
+    /* Cinza médio em vez de verde forte no switch */
+    color: white !important;
+    font-weight: 700;
+}
+
+.modeBtnActive:hover {
+    background: #333 !important;
+}
+
+/* Área de Busca e Conteúdo */
+.contentArea {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.leftCol {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.rightCol {
+    flex: 1;
+    background: #111;
+    border-radius: 12px;
+    padding: 0;
+    /* Padding controlado internamente */
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Para o header do card ficar flush */
+}
+
+/* Input Styles - Estilo "Search Bar" */
+.inputWrapper {
+    display: flex;
+    background: #181818;
+    border-radius: 8px;
+    /* Combinando com o tema mais quadrado */
+    padding: 0 20px;
+    align-items: center;
+    border: 1px solid #333;
+    transition: all 0.2s ease;
+    height: 60px;
+    /* Input alto e imponente */
+}
+
+.inputWrapper:focus-within {
+    border-color: #555;
+    background: #202020;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    height: 100%;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.input::placeholder {
+    color: #444;
+    font-weight: 400;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.inputArrow {
+    font-size: 1.4rem;
+    color: #1db954;
+}
+
+/* Resultados da Busca de Álbuns (Grid Visual) */
+.albumGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.albumCard {
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+    group: hover;
+}
+
+.albumCard:hover {
+    transform: translateY(-4px);
+}
+
+.albumCover {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 10px;
+    transition: filter 0.2s;
+}
+
+.albumCard:hover .albumCover {
+    filter: brightness(1.1);
+}
+
+.albumInfo {
+    padding: 0 2px;
+}
+
+.albumTitle {
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+    color: #fff;
+}
+
+.albumArtist {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Lista de Músicas */
+.trackList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Mais espaçamento */
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.trackItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border-bottom: 1px solid #222;
+    /* Linha sutil apenas */
+    padding: 15px 0;
+    transition: border-color 0.2s;
+}
+
+.trackItem:hover {
+    border-color: #444;
+}
+
+.trackInfo strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    color: #eee;
+}
+
+.trackInfo span {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.addTrackBtn {
+    background: transparent;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 4px;
+    /* Botão quadrado/arredondado moderno */
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addTrackBtn:hover {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+/* Coluna Direita (Meu Pen Drive) - Estilo "Cartão de Crédito" / Recibo */
+.rightCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.queueHeader {
+    background: #181818;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.queueHeader strong {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+.queueHeader span {
+    background: #1db954;
+    color: black;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.queueList {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 0;
+}
+
+.queueItem {
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    transition: background 0.1s;
+}
+
+.queueItem:hover {
+    background: #1a1a1a;
+}
+
+.checkIcon {
+    color: #1db954;
+    margin-right: 15px;
+    font-size: 0.9rem;
+}
+
+.queueTitle {
+    color: #ddd;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.actionBtn {
+    margin: 20px;
+    background: #1db954;
+    color: black;
+    border: none;
+    padding: 18px;
+    border-radius: 50px;
+    /* Full pill button */
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(29, 185, 84, 0.3);
+}
+
+.actionBtn:hover {
+    transform: scale(1.02);
+    background: #1ed760;
+    box-shadow: 0 6px 25px rgba(29, 185, 84, 0.4);
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+
+    .contentArea,
+    .mainHeader {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .titleColumn,
+    .controlsColumn {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .controlsColumn {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .widget {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .mainHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        border-bottom: none;
+        margin-bottom: 20px;
+    }
+
+    .titleSection h2 {
+        font-size: 1.5rem;
+    }
+
+    .controlsColumn {
+        flex-direction: column;
+        align-items: center;
+        /* Center buttons */
+        gap: 10px;
+        width: 100%;
+    }
+
+    .headerLink {
+        align-self: flex-end;
+        /* Keep link at top right visually if possible, or just center */
+        margin-bottom: 10px;
+    }
+
+    .modeSwitch {
+        width: 100%;
+        display: flex;
+    }
+
+    .modeBtn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .contentArea {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .leftCol,
+    .rightCol {
+        width: 100%;
+        flex: auto;
+    }
+
+    .rightCol {
+        margin-top: 20px;
+    }
+
+    .albumGrid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+}

@@ -1,0 +1,217 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal {
+    background-color: #181818;
+    width: 600px;
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #333;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.form {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bannerUpload {
+    height: 150px;
+    background-color: #333;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadLabel {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    transition: background 0.2s;
+    backdrop-filter: blur(4px);
+}
+
+.uploadLabel:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.avatarContainer {
+    padding: 0 20px;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.avatarWrapper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 50%;
+    border: 4px solid #181818;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #333;
+}
+
+.avatarOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.avatarWrapper:hover .avatarOverlay {
+    opacity: 1;
+}
+
+.fieldsGrid {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #b3b3b3;
+}
+
+.field input,
+.field textarea {
+    background-color: #333;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 10px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: #666;
+    outline: none;
+}
+
+.actions {
+    padding: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cancelBtn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.saveBtn {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.1s;
+}
+
+.saveBtn:hover {
+    transform: scale(1.02);
+}
+
+.saveBtn:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}

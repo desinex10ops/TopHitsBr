@@ -1,0 +1,391 @@
+.header {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 240px;
+    /* Aligned with Sidebar */
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s;
+}
+
+.header.scrolled {
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+}
+
+/* Responsividade para Header */
+@media (max-width: 768px) {
+    .header {
+        left: 0;
+        /* Mobile has no sidebar or it's overlay */
+        height: 60px;
+        padding: 0 16px;
+    }
+}
+
+/* LEFT SECTION */
+.leftSection {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex: 1;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo span {
+    color: var(--accent-color);
+}
+
+.mainNav {
+    display: flex;
+    gap: 24px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #b3b3b3;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.navLink:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+/* CENTER SECTION (Search) */
+.centerSection {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+}
+
+.searchBar {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 20px;
+    color: #fff;
+    font-size: 1.4rem;
+    pointer-events: none;
+    /* Let clicks pass through to input/form if needed, or make it a button */
+    z-index: 10;
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 14px 20px 14px 55px;
+    border-radius: 8px;
+    /* Slightly less rounded for a more modern tech feel, or keep 50px */
+    border: 1px solid transparent;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.searchBar input:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.searchBar input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* RIGHT SECTION */
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.miniPlayer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.trackInfo {
+    display: flex;
+    flex-direction: column;
+    max-width: 120px;
+}
+
+.trackName {
+    font-size: 0.8rem;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artistName {
+    font-size: 0.7rem;
+    color: #b3b3b3;
+}
+
+.playerControls {
+    display: flex;
+    gap: 8px;
+}
+
+.playerControls button {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.playerControls button:hover {
+    color: #fff;
+}
+
+.playPauseBtn {
+    background: #fff !important;
+    color: #000 !important;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 1.2rem;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.actionBtn:hover {
+    color: #fff;
+}
+
+.actionLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: none;
+    /* Show only icon on smaller screens or to save space */
+}
+
+.actionBtn[title="Upload"] .actionLabel,
+.actionBtn[title="Dashboard"] .actionLabel {
+    display: block;
+    /* Important actions */
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.6rem;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    padding: 0 4px;
+}
+
+/* Profile Dropdown */
+.profileWrapper {
+    position: relative;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.avatar:hover {
+    border-color: #fff;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 220px;
+    background: #282828;
+    border-radius: 4px;
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    z-index: 1100;
+    animation: fadeIn 0.1s ease-out;
+}
+
+.dropdownHeader {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownHeader strong {
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.dropdownHeader span {
+    color: #b3b3b3;
+    font-size: 0.8rem;
+}
+
+.dropdownDivider {
+    height: 1px;
+    background: #3e3e3e;
+    margin: 4px 0;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    transition: background 0.2s;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdownItem:hover {
+    background: #3e3e3e;
+    color: #fff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .linkText {
+        display: none;
+    }
+
+    .miniPlayer {
+        display: none;
+        /* Hide mini player on menu to save space */
+    }
+
+    .logo span {
+        display: none;
+        /* Optional: simpler logo */
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: 60px;
+        padding: 0 16px;
+    }
+
+    .mainNav {
+        display: none;
+        /* Move to bottom nav or hamburger */
+    }
+
+    .centerSection {
+        margin: 0 10px;
+    }
+
+    .actionLabel {
+        display: none;
+    }
+}

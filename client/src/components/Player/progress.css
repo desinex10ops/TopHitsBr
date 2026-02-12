@@ -1,0 +1,20 @@
+.progressContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin-left: 20px;
+}
+
+.progressBar {
+    flex: 1;
+    cursor: pointer;
+    accent-color: var(--accent-color);
+}
+
+.time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: monospace;
+}

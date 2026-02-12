@@ -1,0 +1,137 @@
+.container {
+    padding: 100px 20px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #fff;
+    min-height: 80vh;
+}
+
+.checkoutGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .checkoutGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.summarySection,
+.paymentSection {
+    background: #181818;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.items {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.itemRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #b3b3b3;
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1db954;
+}
+
+.secureText {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1db954;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.methods {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.methodCard {
+    background: #282828;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.methodCard.active {
+    border-color: #1db954;
+    background: #1db95420;
+}
+
+.methodCard.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.payButton {
+    width: 100%;
+    background: #1db954;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.payButton:hover:not(:disabled) {
+    transform: scale(1.02);
+}
+
+.payButton:disabled {
+    background: #555;
+    cursor: wait;
+}
+
+.successCard {
+    text-align: center;
+    padding: 60px;
+    background: #181818;
+    border-radius: 12px;
+}
+
+.successIcon {
+    font-size: 4rem;
+    color: #1db954;
+    margin-bottom: 20px;
+}
+
+.loadingText {
+    text-align: center;
+    margin-top: 10px;
+    color: #b3b3b3;
+}
+
+.button {
+    background: #1db954;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}

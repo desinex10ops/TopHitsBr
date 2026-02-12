@@ -1,0 +1,83 @@
+/* App.css */
+:root {
+    --primary-color: #1ed760;
+    /* Spotify Green */
+    --hover-color: #1fdf64;
+    --bg-dark: #121212;
+    --bg-card: #181818;
+    --bg-highlight: #282828;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+
+    /* Dynamic Theme Variables (Default) */
+    --dynamic-primary: #121212;
+    --dynamic-secondary: #282828;
+    --dynamic-accent: #1ed760;
+    --dynamic-overlay: rgba(0, 0, 0, 0.5);
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: transparent;
+    /* Allow body bg to show */
+    color: white;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 240px;
+    /* Largura da Sidebar */
+    padding-top: 100px;
+    /* Header Height (80px) + Space (20px) */
+    padding-bottom: 90px;
+    /* Altura do Player */
+    min-height: 100vh;
+    /* Dynamic Background applied here too */
+    background: linear-gradient(180deg, var(--dynamic-primary) 0%, #090909 100%);
+    /* Semi-transparent */
+    overflow-y: auto;
+    transition: background 1s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.full-content {
+    flex: 1;
+    min-height: 100vh;
+    background: transparent;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding-bottom: 140px;
+        /* Player + Menu Mobile */
+    }
+}
+
+/* Ambient Background */
+.app-container {
+    background: transparent;
+    min-height: 100vh;
+    transition: background 1s ease;
+}
+
+/* Scrollbar Customizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}

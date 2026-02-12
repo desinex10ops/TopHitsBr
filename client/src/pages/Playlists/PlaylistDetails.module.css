@@ -1,0 +1,143 @@
+/* PlaylistDetails.module.css */
+
+.trackList {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 0 20px 20px;
+    margin-top: 20px;
+}
+
+.trackHeader {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px 80px;
+    /* Index, Title/Artist, Actions/Plays, Duration */
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b3b3b3;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.trackItem {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px 80px;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    color: #b3b3b3;
+    font-size: 0.95rem;
+    cursor: default;
+    border: 1px solid transparent;
+}
+
+.trackItem:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.trackItem.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #1ed760;
+}
+
+.trackIndex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    position: relative;
+}
+
+.trackIndex .indexNum {
+    display: block;
+}
+
+.trackIndex .playIcon {
+    display: none;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.trackItem:hover .trackIndex .indexNum {
+    display: none;
+}
+
+.trackItem:hover .trackIndex .playIcon {
+    display: block;
+}
+
+.trackInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.trackName {
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.trackItem.active .trackName {
+    color: #1ed760;
+}
+
+.trackArtist {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.trackActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    gap: 15px;
+}
+
+.trackItem:hover .trackActions {
+    opacity: 1;
+}
+
+.trackDuration {
+    text-align: right;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+}
+
+.actionBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.actionBtn:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .trackHeader {
+        display: none;
+    }
+
+    .trackItem {
+        grid-template-columns: 40px 1fr 50px;
+        gap: 10px;
+        padding: 12px 10px;
+    }
+}

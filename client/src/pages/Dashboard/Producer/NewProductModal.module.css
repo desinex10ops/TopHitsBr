@@ -1,0 +1,170 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #282828;
+    width: 600px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #333;
+}
+
+.tabs button {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+}
+
+.tabs button.activeTab {
+    color: #1db954;
+    border-bottom: 2px solid #1db954;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formGroup label {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    background: #121212;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 4px;
+    color: white;
+    font-size: 1rem;
+}
+
+.formGroup textarea {
+    resize: vertical;
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+
+.row .formGroup {
+    flex: 1;
+}
+
+.filesSection {
+    background: #181818;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fileInput {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: 1px dashed #444;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.fileInput label {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.fileInput input {
+    background: transparent;
+    border: none;
+    font-size: 0.8rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.submitBtn,
+.nextBtn {
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.1s;
+}
+
+.submitBtn:hover,
+.nextBtn:hover {
+    transform: scale(1.05);
+    background: #1ed760;
+}
+
+.submitBtn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+}

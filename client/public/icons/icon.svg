@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#1db954"/>
+  <circle cx="256" cy="256" r="200" fill="#121212"/>
+  <path fill="#1db954" d="M360 144v176c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64c8.8 0 17.2 1.8 24 5V192h-88v-48h128z"/>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="200" fill="#1db954">♫</text>
+</svg>
