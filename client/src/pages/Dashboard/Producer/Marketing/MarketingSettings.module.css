@@ -1,0 +1,281 @@
+.container {
+    padding-top: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0;
+}
+
+.sectionSubtitle {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+}
+
+.divider {
+    height: 1px;
+    background: #333;
+    margin: 40px 0;
+}
+
+.addBtn {
+    background: #1db954;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.addBtn:hover {
+    transform: scale(1.05);
+}
+
+/* Coupon Cards */
+.couponGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.couponCard {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.couponCard:hover {
+    border-color: #555;
+}
+
+.couponHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.icon {
+    color: #1db954;
+    font-size: 1.2rem;
+}
+
+.code {
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    background: #222;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.couponDetails {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail span {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.detail strong {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.deleteBtn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #d32f2f;
+    color: #d32f2f;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+    background: #d32f2f;
+    color: #fff;
+}
+
+/* Pixel Cards */
+.pixelGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.pixelCard {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.pixelHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.pixelIcon {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.pixelCard h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.pixelDesc {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.inputGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.pixelInput,
+.modalInput {
+    flex: 1;
+    background: #222;
+    border: 1px solid #444;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: #fff;
+    outline: none;
+}
+
+.pixelInput:focus,
+.modalInput:focus {
+    border-color: #1db954;
+}
+
+.savePixelBtn {
+    background: #333;
+    border: none;
+    color: #fff;
+    width: 40px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.savePixelBtn:hover {
+    background: #1db954;
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #181818;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #333;
+}
+
+.modal h2 {
+    margin-top: 0;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modalActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cancelBtn {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    flex: 1;
+    cursor: pointer;
+}
+
+.confirmBtn {
+    background: #1db954;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    flex: 1;
+    font-weight: 600;
+    cursor: pointer;
+}

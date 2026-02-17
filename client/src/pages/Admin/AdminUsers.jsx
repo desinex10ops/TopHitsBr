@@ -1,8 +1,7 @@
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import styles from './Admin.module.css';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import { FiSlash, FiCheckCircle, FiDollarSign } from 'react-icons/fi';
 
 const AdminUsers = () => {
@@ -22,7 +21,7 @@ const AdminUsers = () => {
 
     const fetchUsers = async () => {
         try {
-            const res = await api.get('/music/admin/users');
+            const res = await api.get('/admin/users');
             setUsers(res.data);
         } catch (error) {
             console.error('Erro ao buscar usuários:', error);
@@ -34,7 +33,7 @@ const AdminUsers = () => {
 
     const handleToggleBan = async (user) => {
         try {
-            const res = await api.patch(`/music/admin/users/${user.id}/ban`);
+            const res = await api.patch(`/admin/users/${user.id}/toggle-ban`);
 
             // Update local state
             setUsers(users.map(u =>
@@ -60,7 +59,7 @@ const AdminUsers = () => {
         if (!selectedUser || !creditAmount) return;
 
         try {
-            const res = await api.post(`/music/admin/users/${selectedUser.id}/credits`, {
+            const res = await api.post(`/admin/users/${selectedUser.id}/credits`, {
                 amount: parseFloat(creditAmount),
                 action: creditAction
             });

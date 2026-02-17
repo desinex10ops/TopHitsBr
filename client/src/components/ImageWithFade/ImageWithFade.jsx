@@ -1,5 +1,4 @@
-import * as React from 'react';
-const { useState } = React;
+import React, { useState } from 'react';
 import styles from './ImageWithFade.module.css';
 
 const ImageWithFade = ({ src, alt, className }) => {
@@ -11,6 +10,7 @@ const ImageWithFade = ({ src, alt, className }) => {
             alt={alt}
             className={`${className} ${styles.img} ${loaded ? styles.loaded : ''}`}
             onLoad={() => setLoaded(true)}
+            crossOrigin="anonymous"
         />
     );
 };

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styles from './StatsCard.module.css';
 
 const StatsCard = ({ title, value, icon, color }) => {

@@ -38,7 +38,91 @@
     background: #181818;
     border-radius: 12px;
     padding: 20px;
+    padding: 20px;
     overflow-x: auto;
+}
+
+.mobileList {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.orderCard {
+    background: #181818;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #333;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.orderId {
+    color: #1DB954;
+    font-weight: bold;
+}
+
+.orderDate {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.cardRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    color: #b3b3b3;
+    font-size: 0.9rem;
+}
+
+.value {
+    color: white;
+    font-weight: 500;
+}
+
+.valueHighlight {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+    .tableContainer {
+        display: none;
+    }
+
+    .mobileList {
+        display: flex;
+    }
+
+    .controls {
+        margin-bottom: 15px;
+    }
+
+    .searchBar {
+        max-width: 100%;
+    }
 }
 
 .table {

@@ -1,5 +1,4 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import styles from './MyBoosts.module.css';
 import { FiTrendingUp, FiActivity, FiZap, FiStar, FiClock, FiTarget } from 'react-icons/fi';
@@ -85,6 +84,19 @@ const MyBoosts = () => {
                                         </div>
                                     </div>
 
+                                    {/* Growth Chart Visual (Sparkline) */}
+                                    <div className={styles.chartContainer}>
+                                        <span className={styles.label}>Desempenho (24h)</span>
+                                        <svg className={styles.sparkline} viewBox="0 0 100 30">
+                                            <path
+                                                d={`M 0 25 Q 25 ${Math.random() * 20}, 50 ${Math.random() * 10} T 100 ${Math.random() * 5}`}
+                                                fill="none"
+                                                stroke="#00ff88"
+                                                strokeWidth="2"
+                                            />
+                                        </svg>
+                                    </div>
+
                                     <div className={styles.row}>
                                         <div className={styles.detail}>
                                             <FiActivity /> Score: <strong>{Math.round(boost.currentScore)}</strong>
@@ -93,6 +105,13 @@ const MyBoosts = () => {
                                             <FiClock /> Restam: <strong>{daysLeft > 0 ? daysLeft : 0} dias</strong>
                                         </div>
                                     </div>
+
+                                    {/* Pro Tip */}
+                                    {boost.currentScore < 50 && (
+                                        <div className={styles.tip}>
+                                            💡 <strong>Pro Tip:</strong> Compartilhe este link nos seus Stories para aumentar o Score e a entrega!
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         );

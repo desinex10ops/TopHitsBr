@@ -60,6 +60,98 @@
     transform: scale(1.05);
 }
 
+/* --- Boost CTA Banner --- */
+.boostBanner {
+    background: linear-gradient(135deg, #ff0055 0%, #ff4d00 100%);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(255, 0, 85, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.boostBanner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.boostContent {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 1;
+}
+
+.boostIcon {
+    font-size: 2.5rem;
+    color: white;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.boostText h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+    color: white;
+}
+
+.boostText p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 500px;
+    line-height: 1.4;
+}
+
+.boostActionBtn {
+    background: white;
+    color: #ff0055;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    z-index: 1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.boostActionBtn:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .boostBanner {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .boostContent {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .boostText p {
+        font-size: 0.85rem;
+    }
+}
+
 /* --- Album Grid --- */
 .albumGrid {
     display: grid;

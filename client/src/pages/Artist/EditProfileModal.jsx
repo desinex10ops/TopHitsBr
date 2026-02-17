@@ -1,8 +1,7 @@
-import * as React from 'react';
-const { useState, useEffect, useRef } = React;
+import React, { useState, useEffect, useRef } from 'react';
 import { FiX, FiCamera, FiVideo } from 'react-icons/fi';
 import api from '../../services/api';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import styles from './EditProfileModal.module.css';
 import { getStorageUrl } from '../../utils/urlUtils';
 

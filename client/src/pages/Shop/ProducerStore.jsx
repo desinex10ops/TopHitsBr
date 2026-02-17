@@ -4,10 +4,13 @@ import api from '../../services/api';
 import ProductCard from '../../components/Shop/ProductCard';
 import styles from './ProducerStore.module.css';
 import { FiInstagram, FiYoutube, FiGlobe, FiMapPin, FiUser } from 'react-icons/fi';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
-import { useCart } from '../../contexts/CartContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
+import { useCart } from '@/contexts/CartContext';
 import { getStorageUrl } from '../../utils/urlUtils';
+import ChatModal from '../Dashboard/Chat/ChatModal';
+import { useAuth } from '@/contexts/AuthContext';
+import { FiMessageSquare } from 'react-icons/fi';
 
 const ProducerStore = () => {
     const { username } = useParams();
@@ -17,6 +20,8 @@ const ProducerStore = () => {
     const { playTrack } = usePlayer();
     const { addToCart } = useCart();
     const { addToast } = useToast();
+    const { user } = useAuth();
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     useEffect(() => {
         fetchStore();
@@ -103,6 +108,15 @@ const ProducerStore = () => {
                                     </a>
                                 )}
                             </div>
+                            {user && user.id !== producer.id && (
+                                <button
+                                    className={styles.messageBtn}
+                                    onClick={() => setIsChatOpen(true)}
+                                    title="Enviar Mensagem"
+                                >
+                                    <FiMessageSquare /> Converse com o Produtor
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -126,6 +140,16 @@ const ProducerStore = () => {
                     )}
                 </div>
             </div>
+
+            {user && (
+                <ChatModal
+                    isOpen={isChatOpen}
+                    onClose={() => setIsChatOpen(false)}
+                    recipientId={producer.id}
+                    recipientName={producer.artisticName}
+                    recipientAvatar={getStorageUrl(producer.avatar)}
+                />
+            )}
         </div>
     );
 };

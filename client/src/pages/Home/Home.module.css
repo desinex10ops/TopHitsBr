@@ -42,6 +42,10 @@
     margin-top: 5px;
 }
 
+.mobileGreeting {
+    display: none;
+}
+
 /* Grid Layout for Albums/Tracks */
 .grid {
     display: grid;
@@ -271,10 +275,31 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .homeLayout {
-        padding: 10px;
-        /* Reduced padding on mobile */
+        padding: 0 0 80px 0;
+        /* No side padding, just bottom for menu */
+        overflow-x: hidden;
+        /* Strict overflow control */
+    }
+
+    /* Add padding to specific content containers instead of parent */
+    .mobileHidden {
+        display: none !important;
+    }
+
+    .featuredArtistsWrapper,
+    .boostedWrapper,
+    .featuredAlbumsWrapper {
+        margin-bottom: 30px;
+    }
+
+    .mobileGreeting {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin: 20px 0 10px;
     }
 
     .ctaContainer {
@@ -282,9 +307,6 @@
         /* Hide top CTA on mobile */
     }
 
-    .penDriveSection {
-        /* Instead of hiding section, we might want to hide the widget inside it */
-    }
 
     .penDriveWidgetWrapper {
         display: block;
@@ -303,23 +325,26 @@
     }
 
     .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 columns on mobile */
+        display: flex;
+        overflow-x: auto;
         gap: 12px;
-        /* Smaller gap for mobile */
-        padding-bottom: 0;
-        overflow-x: hidden;
-        /* Prevent side scroll */
+        padding-bottom: 15px;
+        scroll-snap-type: x mandatory;
         width: 100%;
+        overscroll-behavior-x: contain;
+        /* Prevent sway */
+    }
+
+    .grid::-webkit-scrollbar {
+        display: none;
     }
 
     .card {
-        width: 100%;
-        /* Full width of grid cell */
-        min-width: 0;
-        /* Allow shrinking */
-        display: block;
+        min-width: 130px;
+        /* Fixed width for scroll */
+        width: 130px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
         margin-right: 0;
     }
 
@@ -328,4 +353,122 @@
         height: auto;
         aspect-ratio: 1/1;
     }
+}
+
+/* SEARCH RESULTS STYLES */
+.searchSection {
+    margin-bottom: 40px;
+}
+
+.subTitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* Artist Grid (Circles) */
+.artistGrid {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.artistCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.artistAvatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.artistCard:hover .artistAvatar {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.artistNameLabel {
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Track List (Rows) */
+.trackList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.trackItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #181818;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.trackItem:hover {
+    background: #282828;
+}
+
+.trackCover {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.trackInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.trackName {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.trackArtist {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.playMiniBtn {
+    background: transparent;
+    border: 1px solid #bbb;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.trackItem:hover .playMiniBtn {
+    background: #1db954;
+    border-color: #1db954;
+    color: #000;
 }

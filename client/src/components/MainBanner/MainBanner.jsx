@@ -1,11 +1,10 @@
-import * as React from 'react';
-const { useState, useEffect, useRef } = React;
+import React, { useState, useEffect, useRef } from 'react';
 import {
     FiPlay, FiPause, FiSkipBack, FiSkipForward, FiVolume2,
     FiPlus, FiDownload, FiHeart, FiSave, FiDisc
 } from 'react-icons/fi';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
 import PlaylistModal from '../Player/PlaylistModal';
 import styles from './MainBanner.module.css';
 import api from '../../services/api';
@@ -31,8 +30,16 @@ const MainBanner = () => {
 
     const videoRef = useRef(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-    const [isMuted, setIsMuted] = useState(false); // Unmuted by default
+    const [isMuted, setIsMuted] = useState(false);
     const [favorites, setFavorites] = useState([]);
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Load favorites from localStorage
     useEffect(() => {
@@ -50,11 +57,11 @@ const MainBanner = () => {
                     api.get('/music/admin/settings').catch(() => ({ data: {} }))
                 ]);
 
-                const boosts = boostsRes.data
-                    .filter(b => b && b.item) // Safety check
+                const boosts = (boostsRes.data || [])
+                    .filter(b => b && b.item)
                     .map(b => b.item);
-                const tracks = musicRes.data;
-                const settings = settingsRes.data;
+                const tracks = Array.isArray(musicRes.data) ? musicRes.data : [];
+                const settings = settingsRes.data || {};
 
                 let finalHighlights = [];
 
@@ -62,12 +69,7 @@ const MainBanner = () => {
                 if (settings.featured_track_ids) {
                     try {
                         const manualIds = JSON.parse(settings.featured_track_ids);
-                        console.log("MainBanner - Parsed Manual IDs:", manualIds);
-
                         const manualTracks = tracks.filter(t => manualIds.includes(t.id));
-                        console.log("MainBanner - Found Manual Tracks:", manualTracks);
-
-                        // Maintain order of IDs
                         manualIds.forEach(id => {
                             const track = manualTracks.find(t => t.id === id);
                             if (track) finalHighlights.push(track);
@@ -80,7 +82,6 @@ const MainBanner = () => {
                 // 2. Premium Boosts (If slots available)
                 if (finalHighlights.length < 5) {
                     for (let boost of boosts) {
-                        // Avoid duplicates
                         if (!finalHighlights.find(h => h.id === boost.id)) {
                             finalHighlights.push(boost);
                         }
@@ -93,13 +94,18 @@ const MainBanner = () => {
                     const linkedTrackId = settings.banner_track_id ? parseInt(settings.banner_track_id) : null;
                     const linkedTrack = linkedTrackId ? tracks.find(t => t.id === linkedTrackId) : null;
 
+                    // Use mobile banner if on mobile and available
+                    const bannerImg = (isMobile && settings.home_banner_mobile)
+                        ? settings.home_banner_mobile
+                        : (settings.banner_image || (linkedTrack ? linkedTrack.coverpath : null));
+
                     finalHighlights.push({
                         id: 'banner-custom',
                         title: settings.banner_title,
                         artist: settings.banner_subtitle || 'Destaque',
                         album: 'TopHitsBr',
                         genre: 'Destaque',
-                        coverpath: settings.banner_image || (linkedTrack ? linkedTrack.coverpath : null), // Fallback to linked track cover
+                        coverpath: bannerImg,
                         videopath: settings.banner_video || null,
                         filepath: '',
                         isCustom: true,
@@ -208,7 +214,9 @@ const MainBanner = () => {
         }
     }, [currentIndex, activeItem]);
 
-    if (loading || !activeItem) return <div className={styles.skeletonBanner}></div>;
+    if (loading || !activeItem) return <div className={styles.skeletonBanner}></div>; // Kept this one for initial render
+
+    console.log("MainBanner ActiveItem:", activeItem);
 
     const isCurrentTrackPlaying = currentTrack?.id === activeItem.id && isPlaying;
     // Helper to know if WE (the video) are playing with sound
@@ -307,13 +315,15 @@ const MainBanner = () => {
                     muted={isMuted}
                     loop
                     playsInline
+                    crossOrigin="anonymous"
                 />
             ) : (
-                <div
+                <img
+                    src={getStorageUrl(activeItem.coverpath)}
+                    alt={activeItem.title}
                     className={styles.bannerBackground}
-                    style={{ backgroundImage: `url(${getStorageUrl(activeItem.coverpath)})` }}
-                >
-                </div>
+                    crossOrigin="anonymous"
+                />
             )}
 
             <div className={styles.overlay}></div>
@@ -388,6 +398,7 @@ const MainBanner = () => {
                             src={getStorageUrl(activeItem.coverpath)}
                             alt={activeItem.title}
                             className={`${styles.coverImage} ${(isCurrentTrackPlaying || isVideoPlaying) ? styles.playing : ''}`}
+                            crossOrigin="anonymous"
                         />
                         <div className={styles.downloadOverlay}>
                             <div className={styles.downloadBtn}>

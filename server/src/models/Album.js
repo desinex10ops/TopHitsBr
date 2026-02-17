@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
         },
         description: {
             type: DataTypes.TEXT
+        },
+        featured: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
 

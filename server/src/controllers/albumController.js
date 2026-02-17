@@ -2,12 +2,62 @@ const { Album, Track, User } = require('../database');
 const fs = require('fs');
 const path = require('path');
 
+exports.getAlbum = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const album = await Album.findByPk(id, {
+            include: [
+                { model: Track },
+                { model: User, as: 'Artist', attributes: ['id', 'name', 'artisticName', 'avatar'] }
+            ]
+        });
+
+        if (!album) return res.status(404).json({ error: 'Álbum não encontrado.' });
+
+        const formattedAlbum = {
+            ...album.toJSON(),
+            year: album.releaseDate ? new Date(album.releaseDate).getFullYear() : '2023'
+        };
+
+        res.json(formattedAlbum);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao buscar detalhes do álbum.' });
+    }
+};
+
+exports.getFeaturedAlbums = async (req, res) => {
+    try {
+        const albums = await Album.findAll({
+            where: { featured: true },
+            include: [
+                { model: Track, limit: 1 },
+                { model: User, as: 'Artist', attributes: ['artisticName', 'name'] }
+            ],
+            limit: 10
+        });
+
+        const formatted = albums.map(a => ({
+            id: a.id,
+            title: a.title,
+            artist: a.Artist?.artisticName || a.Artist?.name || 'Desconhecido',
+            coverUrl: a.cover ? `${process.env.API_URL}/storage/${a.cover}` : null,
+            featured: true
+        }));
+
+        res.json(formatted);
+    } catch (error) {
+        console.error("Error fetching featured albums:", error);
+        res.status(500).json({ error: 'Erro ao buscar álbuns em destaque.' });
+    }
+};
+
 exports.getArtistAlbums = async (req, res) => {
     try {
         const { id } = req.params; // Artist User ID
         const albums = await Album.findAll({
             where: { UserId: id },
-            include: [{ model: Track, attributes: ['id', 'title', 'plays', 'duration'] }],
+            include: [{ model: Track, attributes: ['id', 'title', 'plays', 'duration', 'coverpath'] }],
             order: [['releaseDate', 'DESC'], ['createdAt', 'DESC']]
         });
         res.json(albums);

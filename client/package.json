@@ -11,13 +11,17 @@
   },
   "dependencies": {
     "axios": "^1.6.0",
+    "date-fns": "^4.1.0",
+    "emoji-picker-react": "^4.18.0",
+    "music-metadata-browser": "^2.5.11",
     "node-vibrant": "^3.1.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.20.0",
     "react-toastify": "^11.0.5",
-    "recharts": "^3.7.0"
+    "recharts": "^3.7.0",
+    "socket.io-client": "^4.8.3"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

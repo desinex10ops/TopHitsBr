@@ -1,10 +1,10 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import styles from './RecommendedAlbums.module.css';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
 import api from '../../services/api';
+import SectionHeader from '../SectionHeader/SectionHeader';
 
 const RecommendedAlbums = () => {
     const [albums, setAlbums] = useState([]);
@@ -55,16 +55,14 @@ const RecommendedAlbums = () => {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>
-                Mais Adicionados <span>do Mês 🔥</span>
-            </h2>
+            <SectionHeader title="Mais Adicionados" subtitle="do Mês 🔥" />
             <div className={styles.grid}>
                 {albums.map((album, idx) => (
                     <div key={idx} className={styles.card} onClick={() => handleAddAlbum(album)}>
                         <div className={styles.coverWrapper}>
                             <div className={styles.badge}>#{idx + 1}</div>
                             {album.coverpath ? (
-                                <img src={getStorageUrl(album.coverpath)} alt={album.album} className={styles.cover} />
+                                <img src={getStorageUrl(album.coverpath)} alt={album.album} className={styles.cover} crossOrigin="anonymous" />
                             ) : (
                                 <div style={{ width: '100%', aspectRatio: 1, background: '#333' }}></div>
                             )}

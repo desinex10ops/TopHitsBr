@@ -1,10 +1,10 @@
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from 'react';
 import api from '../../../services/api';
-import { useToast } from '../../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import { FiEdit, FiTrash2, FiMic, FiSearch } from 'react-icons/fi';
 import styles from './AdminTracks.module.css';
 import KaraokeModal from './KaraokeModal';
+import EditTrackModal from './EditTrackModal';
 import { getStorageUrl } from '../../../utils/urlUtils';
 
 const AdminTracks = () => {
@@ -19,7 +19,7 @@ const AdminTracks = () => {
 
     const fetchTracks = async () => {
         try {
-            const response = await api.get('/music');
+            const response = await api.get('/admin/tracks');
             setTracks(response.data);
         } catch (error) {
             console.error('Erro ao buscar músicas:', error);
@@ -32,13 +32,27 @@ const AdminTracks = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Tem certeza que deseja excluir esta música?')) return;
         try {
-            await api.delete(`/music/${id}`);
+            await api.delete(`/admin/tracks/${id}`);
             setTracks(tracks.filter(t => t.id !== id));
             addToast('Música excluída!', 'success');
         } catch (error) {
             addToast('Erro ao excluir música.', 'error');
         }
     };
+
+    // Edit Modal State
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [trackToEdit, setTrackToEdit] = useState(null);
+
+    const openEditModal = (track) => {
+        setTrackToEdit(track);
+        setIsEditModalOpen(true);
+    };
+
+    const handleUpdateTrack = (updatedTrack) => {
+        setTracks(tracks.map(t => t.id === updatedTrack.id ? updatedTrack : t));
+    };
+
     // Karaoke Modal State
     const [selectedTrack, setSelectedTrack] = useState(null);
     const [isKaraokeModalOpen, setIsKaraokeModalOpen] = useState(false);
@@ -182,7 +196,26 @@ const AdminTracks = () => {
                                     </td>
                                     <td>
                                         <div className={styles.actions}>
-                                            <button className={styles.btnIcon} title="Editar (Em breve)">
+                                            <button
+                                                className={`${styles.btnIcon} ${track.featured ? styles.btnFeatured : ''}`}
+                                                title={track.featured ? "Remover Destaque" : "Destacar"}
+                                                onClick={async () => {
+                                                    try {
+                                                        const res = await api.patch(`/admin/tracks/${track.id}/feature`);
+                                                        setTracks(tracks.map(t => t.id === track.id ? { ...t, featured: res.data.featured } : t));
+                                                        addToast(res.data.featured ? 'Música destacada!' : 'Destaque removido.', 'success');
+                                                    } catch (err) {
+                                                        addToast('Erro ao destacar.', 'error');
+                                                    }
+                                                }}
+                                            >
+                                                <FiStar fill={track.featured ? "currentColor" : "none"} />
+                                            </button>
+                                            <button
+                                                className={styles.btnIcon}
+                                                title="Editar"
+                                                onClick={() => openEditModal(track)}
+                                            >
                                                 <FiEdit />
                                             </button>
                                             <button
@@ -210,6 +243,14 @@ const AdminTracks = () => {
                     onClose={() => setIsKaraokeModalOpen(false)}
                     track={selectedTrack}
                     onSave={handleSaveKaraoke}
+                />
+            )}
+
+            {isEditModalOpen && (
+                <EditTrackModal
+                    track={trackToEdit}
+                    onClose={() => setIsEditModalOpen(false)}
+                    onUpdate={handleUpdateTrack}
                 />
             )}
         </div>

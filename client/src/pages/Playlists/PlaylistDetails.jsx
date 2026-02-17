@@ -1,16 +1,15 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
 import homeStyles from '../Home/Home.module.css'; // Reutilizando estilos base
 import listStyles from './PlaylistDetails.module.css'; // Estilos específicos de lista
-import { usePlayer } from '../../contexts/PlayerContext';
+import { usePlayer } from '@/contexts/PlayerContext';
 import SkeletonCard from '../../components/SkeletonCard/SkeletonCard';
 import ImageWithFade from '../../components/ImageWithFade/ImageWithFade';
 import BoostedSlider from '../../components/BoostedSlider/BoostedSlider';
 import { FiPlay, FiShare2, FiHeart, FiEdit2, FiSearch, FiPlus, FiTrash2, FiMessageSquare, FiClock } from 'react-icons/fi';
-import { useAuth } from '../../contexts/AuthContext'; // To check owner/user
+import { useAuth } from '@/contexts/AuthContext'; // To check owner/user
 import { toast } from 'react-toastify';
 
 const PlaylistDetails = () => {

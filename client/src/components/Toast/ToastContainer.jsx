@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styles from './Toast.module.css';
 
 const ToastContainer = ({ toasts, removeToast }) => {

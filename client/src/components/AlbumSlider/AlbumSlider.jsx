@@ -1,6 +1,5 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useRef } = React;
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AlbumSlider.module.css';
 import ImageWithFade from '../ImageWithFade/ImageWithFade';

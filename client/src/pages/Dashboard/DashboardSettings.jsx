@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FiSave, FiLock, FiBell, FiMoon } from 'react-icons/fi';
 import styles from './Dashboard.module.css';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import api from '../../services/api';
 
 const DashboardSettings = () => {

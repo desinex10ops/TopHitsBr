@@ -1,0 +1,87 @@
+.container {
+    padding: 10px 0 0 16px;
+    /* Reduced top padding */
+    display: none;
+    /* Hidden on desktop by default, shown in mobile query */
+}
+
+.scrollArea {
+    display: flex;
+    gap: 12px;
+    /* Tighter gap */
+    overflow-x: auto;
+    padding-right: 16px;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+.scrollArea::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.storyItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 72px;
+}
+
+.avatarRing {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(45deg, #1db954 0%, #1ed760 100%);
+    /* Brand Green Gradient */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.avatarRing:active {
+    transform: scale(0.95);
+}
+
+.activeRing {
+    background: #555;
+    /* Gray for seen/inactive if needed, but logic seems reversed in component. 
+                         The component uses 'activeRing' for first item. 
+                         I will assume first item is 'New' or 'Special'. 
+                         Let's keep the gradient for all for now or make the first one special. */
+    background: linear-gradient(45deg, #FF0000 0%, #FF4D4D 100%);
+    /* Red for 'Live' or 'Special' */
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #121212;
+    /* Thicker border to separate from ring */
+    object-fit: cover;
+}
+
+.name {
+    font-size: 0.75rem;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .container {
+        display: block;
+    }
+}

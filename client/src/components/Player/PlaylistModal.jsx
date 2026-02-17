@@ -1,10 +1,9 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import styles from './PlaylistModal.module.css';
 import { FiX, FiPlus } from 'react-icons/fi';
 import api from '../../services/api';
-import { useToast } from '../../contexts/ToastContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '@/contexts/ToastContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 const PlaylistModal = ({ track, onClose }) => {
     const [playlists, setPlaylists] = useState([]);

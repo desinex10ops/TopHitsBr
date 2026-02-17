@@ -1,12 +1,13 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useState } = React;
+import React, { useState } from 'react';
 import styles from './PenDriveWidget.module.css';
 import api from '../../services/api';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
+import { useNavigate } from 'react-router-dom';
 
 const PenDriveWidget = () => {
+    const navigate = useNavigate();
     const [mode, setMode] = useState('album'); // 'album' | 'track'
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState([]);
@@ -101,12 +102,16 @@ const PenDriveWidget = () => {
                 </div>
 
                 <div className={styles.controlsColumn}>
-                    <a href="#" className={styles.headerLink}>
+                    <button
+                        className={styles.headerLink}
+                        onClick={() => navigate('/pendrive')}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: '5px' }}
+                    >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                             <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                         </svg> VER MEU PEN DRIVE
-                    </a>
+                    </button>
 
                     <div className={styles.modeSwitch}>
                         <button

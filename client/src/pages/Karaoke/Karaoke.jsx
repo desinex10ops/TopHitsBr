@@ -1,11 +1,10 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import styles from './Karaoke.module.css';
 import { FiMic, FiMoreHorizontal, FiDownload, FiPlusCircle, FiX, FiPlay } from 'react-icons/fi';
 import api from '../../services/api';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
 
 const genres = [
     { name: 'Sertanejo', icon: '🎸', color: '#ff6b6b' },

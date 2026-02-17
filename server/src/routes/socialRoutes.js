@@ -8,6 +8,7 @@ router.delete('/follow/:id', authMiddleware, socialController.unfollowUser);
 
 router.post('/like/:id', authMiddleware, socialController.likeTrack);
 router.delete('/like/:id', authMiddleware, socialController.unlikeTrack);
+router.get('/like/:id/status', authMiddleware, socialController.checkLikeStatus);
 
 router.post('/like/playlist/:id', authMiddleware, socialController.likePlaylist);
 router.delete('/like/playlist/:id', authMiddleware, socialController.unlikePlaylist);

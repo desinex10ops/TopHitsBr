@@ -12,4 +12,7 @@ router.post('/mock-success', authMiddleware, paymentController.mockPaymentSucces
 // Webhook (No auth middleware usually, requires signature verification)
 router.post('/webhook', paymentController.handleWebhook);
 
+// Manual Confirmation (Auth required)
+router.post('/confirm-manual', authMiddleware, paymentController.confirmManualPayment);
+
 module.exports = router;

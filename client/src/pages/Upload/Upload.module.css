@@ -1,8 +1,6 @@
 .container {
     max-width: 1000px;
-    /* Mais largo para o novo design */
     margin: 120px auto 40px;
-    /* Aumentado para compensar header fixo */
     padding: 0 20px;
     font-family: 'Inter', sans-serif;
     animation: fadeIn 0.5s ease-out;
@@ -43,23 +41,16 @@
 .tabs {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 40px;
-    background: #111;
-    padding: 5px;
-    border-radius: 50px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid #222;
 }
 
 .tab {
-    background: transparent;
-    border: none;
+    background: #181818;
+    border: 1px solid #333;
     color: #888;
-    padding: 12px 30px;
-    border-radius: 40px;
+    padding: 12px 24px;
+    border-radius: 12px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -70,22 +61,23 @@
 }
 
 .tab:hover {
+    border-color: #666;
     color: #fff;
-    background: rgba(255, 255, 255, 0.05);
 }
 
 .activeTab {
     background: #1db954;
-    color: black;
-    box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+    border-color: #1db954;
+    color: #000;
 }
 
 .activeTab:hover {
     background: #1ed760;
-    color: black;
+    border-color: #1ed760;
+    color: #000;
 }
 
-/* Card Principal do Formulário */
+/* Upload Card */
 .uploadCard {
     background: #121212;
     border-radius: 20px;
@@ -94,16 +86,46 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     display: flex;
     gap: 40px;
-    /* Coluna da Capa e Coluna dos Inputs */
+    position: relative;
+    overflow: hidden;
+    /* For Drag Overlay */
 }
 
-/* Coluna da Esquerda: Capa */
+/* Drag Overlay */
+.dragOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(18, 18, 18, 0.95);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    border: 3px dashed #1db954;
+    border-radius: 20px;
+}
+
+.dragContent {
+    text-align: center;
+    color: #fff;
+}
+
+.dragContent h3 {
+    margin: 20px 0 10px;
+    font-size: 1.5rem;
+}
+
+.dragContent p {
+    color: #888;
+}
+
+/* Layout Columns */
 .coverSection {
     flex: 1;
     max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
 }
 
 .coverUploadLabel {
@@ -111,15 +133,14 @@
     aspect-ratio: 1;
     background: #1a1a1a;
     border: 2px dashed #333;
-    border-radius: 15px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.2s;
     overflow: hidden;
-    position: relative;
     color: #666;
 }
 
@@ -140,18 +161,9 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.coverHint {
-    font-size: 0.8rem;
-    color: #555;
     text-align: center;
-    margin-top: 5px;
 }
 
-/* Coluna da Direita: Inputs */
 .formSection {
     flex: 2;
     display: flex;
@@ -159,110 +171,149 @@
     gap: 20px;
 }
 
-.inputGroup {
+.inputGrid {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+}
+
+.inputGrid>* {
+    flex: 1;
 }
 
 .inputField {
     width: 100%;
     background: #0a0a0a;
     border: 1px solid #333;
-    padding: 15px 20px;
-    border-radius: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
     color: white;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-family: inherit;
-    transition: border-color 0.3s;
+    transition: all 0.2s;
 }
 
 .inputField:focus {
     outline: none;
-    border-color: #1ed760;
+    border-color: #1db954;
+    background: #0f0f0f;
 }
 
-.fileDropZone {
-    border: 2px dashed #333;
-    border-radius: 15px;
-    padding: 30px;
-    text-align: center;
-    background: #161616;
+/* Advanced Options */
+.extraSection h4 {
+    font-size: 0.9rem;
+    color: #888;
     cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.extraSection h4:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.advancedOptions {
+    display: none;
     flex-direction: column;
+    gap: 15px;
+}
+
+.show {
+    display: flex;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkboxLabel {
+    display: flex;
     align-items: center;
     gap: 10px;
+    color: #ccc;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* File Drop Zone (Inner) */
+.fileDropZone {
+    border: 2px dashed #333;
+    background: #161616;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: block;
 }
 
 .fileDropZone:hover,
-.dragActive {
-    border-color: #1ed760;
-    background: rgba(29, 185, 84, 0.05);
+.fileDropZone.hasFile {
+    background: #1a1a1a;
+    border-color: #555;
 }
 
-.dropIcon {
-    font-size: 3rem;
-    color: #444;
+.hasFile {
+    border-style: solid;
+    border-color: #333;
+}
+
+.fileInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.dropText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #888;
 }
 
 .dropText strong {
     color: #fff;
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1.1rem;
 }
 
-.dropText span {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.selectedFile {
-    background: #222;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #333;
-}
-
-.fileName {
-    font-weight: 600;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
+/* Actions */
 .actionBtn {
     background: #1db954;
-    color: black;
+    color: #000;
     border: none;
-    padding: 18px;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    text-transform: uppercase;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    transition: all 0.2s;
     margin-top: 10px;
 }
 
 .actionBtn:hover {
+    transform: scale(1.02);
     background: #1ed760;
-    transform: translateY(-2px);
 }
 
 .actionBtn:disabled {
-    background: #333;
-    color: #666;
+    opacity: 0.6;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Responsividade */
+/* Responsive */
 @media (max-width: 768px) {
     .uploadCard {
         flex-direction: column;
@@ -271,10 +322,10 @@
 
     .coverSection {
         max-width: 100%;
+        margin-bottom: 20px;
     }
 
-    .inputGroup {
+    .inputGrid {
         flex-direction: column;
-        gap: 15px;
     }
 }

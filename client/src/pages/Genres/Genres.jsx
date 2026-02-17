@@ -1,5 +1,4 @@
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './Genres.module.css';

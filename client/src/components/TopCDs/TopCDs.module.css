@@ -262,14 +262,27 @@
         padding-bottom: 10px;
     }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 per row */
-        gap: 12px;
-        overflow-x: hidden;
-        padding-bottom: 0;
+    .sectionContainer {
+        padding-left: 16px;
+        /* Align title with rest of app */
     }
+
+    .grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 12px;
+        padding-bottom: 15px;
+        padding-right: 16px;
+        /* End padding */
+        margin-right: -16px;
+        /* Pull scroll to right edge */
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        /* Hide scrollbar Firefox */
+        overscroll-behavior-x: contain;
+        /* Prevent sway when hitting edge */
+    }
+
 
     .grid::-webkit-scrollbar {
         display: none;
@@ -277,10 +290,11 @@
 
     /* Target the card specifically */
     .card {
-        width: 100%;
-        min-width: 0;
-        flex: unset;
-        scroll-snap-align: none;
+        min-width: 110px;
+        /* Smaller width for more density */
+        width: 110px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
     }
 
     .navArrows {

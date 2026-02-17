@@ -1,0 +1,30 @@
+.container {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chartWrapper {
+    flex: 1;
+    min-height: 200px;
+}
+
+.insight {
+    background: rgba(29, 185, 84, 0.1);
+    border-left: 3px solid #1db954;
+    padding: 12px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 10px;
+}
+
+.insight strong {
+    color: #1db954;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.insight p {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin: 0;
+}

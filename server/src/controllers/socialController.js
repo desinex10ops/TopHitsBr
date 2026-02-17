@@ -130,6 +130,27 @@ exports.unlikePlaylist = async (req, res) => {
     }
 };
 
+exports.checkLikeStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.id;
+
+        const hasLiked = await User.count({
+            where: { id: userId },
+            include: [{
+                model: Track,
+                where: { id },
+                required: true
+            }]
+        });
+
+        res.json({ liked: hasLiked > 0 });
+    } catch (error) {
+        console.error('Erro ao verificar like:', error);
+        res.status(500).json({ error: 'Erro ao verificar like.' });
+    }
+};
+
 exports.getSocialStatus = async (req, res) => {
     try {
         const userId = req.user.id;

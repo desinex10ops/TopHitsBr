@@ -53,8 +53,17 @@ exports.requestWithdrawal = async (req, res) => {
             return res.status(404).json({ error: 'Carteira não encontrada.' });
         }
 
-        if (parseFloat(amount) > parseFloat(wallet.balance)) {
-            return res.status(400).json({ error: 'Saldo insuficiente.' });
+        const currentBalance = parseFloat(wallet.balance) || 0;
+        const currentPending = parseFloat(wallet.pending_balance) || 0;
+        const totalAvailable = currentBalance + currentPending;
+
+        // Precision handling to avoid floating point errors (e.g. 30.0000000004 > 30)
+        // Using a small epsilon or rounding to 2 decimal places for comparison
+        if (parseFloat(amount) > parseFloat(totalAvailable.toFixed(2))) {
+            return res.status(400).json({
+                error: 'Saldo insuficiente.',
+                details: { amount, totalAvailable, currentBalance, currentPending }
+            });
         }
 
         // Create Withdrawal Request
@@ -66,9 +75,21 @@ exports.requestWithdrawal = async (req, res) => {
             status: 'pending'
         });
 
-        // Deduct from Balance immediately to prevent double spending
-        // In a real ACID transaction, we should use sequelize transaction here.
-        wallet.balance = parseFloat(wallet.balance) - parseFloat(amount);
+        // Deduct logic: Try pending first, then balance
+        let remainingToDeduct = parseFloat(amount);
+
+        if (currentPending >= remainingToDeduct) {
+            wallet.pending_balance = currentPending - remainingToDeduct;
+            remainingToDeduct = 0;
+        } else {
+            wallet.pending_balance = 0;
+            remainingToDeduct -= currentPending;
+        }
+
+        if (remainingToDeduct > 0) {
+            wallet.balance = currentBalance - remainingToDeduct;
+        }
+
         await wallet.save();
 
         // Log Transaction (Debit)
@@ -82,6 +103,13 @@ exports.requestWithdrawal = async (req, res) => {
             description: `Solicitação de Saque #${withdrawal.id}`,
             paymentMethod: 'pix'
         });
+
+        const NotificationService = require('../services/NotificationService');
+        await NotificationService.notifyFinance(
+            'Novo Pedido de Saque',
+            `O usuário #${userId} solicitou um saque de R$ ${amount}.`,
+            `/admin/credits`
+        );
 
         res.status(201).json(withdrawal);
     } catch (error) {

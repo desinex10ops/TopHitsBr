@@ -1,0 +1,1809 @@
+.shopOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #050505;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease-out;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.shopContainer {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100%;
+}
+
+.closeShop {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: #0a0a0a;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebarHeader {
+    margin-bottom: 30px;
+}
+
+.shopLogo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.logoIcon {
+    color: #a109ff;
+}
+
+.navMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.navItem {
+    background: transparent;
+    border: none;
+    color: #666;
+    padding: 12px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    text-align: left;
+}
+
+.navItem:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.navActive {
+    color: #fff;
+    background: rgba(161, 9, 255, 0.1) !important;
+}
+
+.activeIndicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    background: #a109ff;
+    border-radius: 0 4px 4px 0;
+}
+
+.userBalance {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.balanceInfo .label {
+    display: block;
+    font-size: 0.6rem;
+    color: #444;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.coinsDisplay {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #ffcc00;
+}
+
+.addCoinsBtn {
+    width: 100%;
+    margin-top: 10px;
+    background: #1ed760;
+    border: none;
+    color: #000;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+/* MAIN CONTENT */
+.mainContent {
+    padding: 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.headerTitle h1 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.headerTitle p {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.searchBar {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 220px;
+}
+
+.searchBar input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    flex: 1;
+    font-size: 0.8rem;
+}
+
+.contentScroll {
+    flex: 1;
+}
+
+/* LIVE PREVIEW */
+.livePreviewBar {
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preTitle {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: #a109ff;
+    margin-bottom: 5px;
+}
+
+.previewNick {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin: 0;
+}
+
+.buyMainBtn {
+    background: #a109ff;
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+/* GRIDS */
+.itemsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.itemCard {
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.itemActive {
+    border-color: #a109ff;
+    background: rgba(161, 9, 255, 0.05);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceTag {
+    color: #ffcc00;
+    font-weight: 800;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.itemDesc {
+    font-size: 0.75rem;
+    color: #555;
+    height: 35px;
+}
+
+.cardActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.testBtn {
+    background: #222;
+    border: none;
+    color: #888;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.7rem;
+}
+
+.buyBtn {
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.7rem;
+}
+
+/* PACKS AREA */
+.packsArea {
+    animation: fadeIn 0.5s ease-out;
+    padding-top: 20px;
+}
+
+.promoHeader {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.promoHeader h2 {
+    font-size: 2.5rem;
+    font-weight: 950;
+    letter-spacing: -1px;
+    background: linear-gradient(to right, #fff, #1ed760);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+.promoHeader p {
+    color: #888;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.packsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding-bottom: 40px;
+}
+
+.packCard {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.packCard:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.packCard::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.packCard:hover::after {
+    opacity: 1;
+}
+
+.packCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--accent);
+}
+
+.packBadge {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 6px 15px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.packIcon {
+    font-size: 4.5rem;
+    margin: 20px 0;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+}
+
+.packCard h3 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.packItems {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.compactItems {
+    gap: 8px !important;
+}
+
+.packItems li {
+    font-size: 0.95rem;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.starIcon {
+    color: #ffcc00;
+    font-size: 0.9rem;
+    filter: drop-shadow(0 0 5px #ffcc00);
+}
+
+.packFooter {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.packPrice {
+    font-size: 2.2rem;
+    font-weight: 950;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.buyPackBtn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 18px;
+    border-radius: 20px;
+    font-weight: 950;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.buyPackBtn:hover {
+    background: #a109ff;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(161, 9, 255, 0.5);
+}
+
+/* VIP CLUB AREA */
+.vipArea {
+    animation: fadeIn 0.6s ease-out;
+    padding: 20px 0;
+}
+
+.vipHero {
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+    border: 1px solid rgba(255, 204, 0, 0.1);
+    border-radius: 40px;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+}
+
+.vipHero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+    animation: rotate 10s linear infinite;
+}
+
+.vipBigIcon {
+    font-size: 5rem;
+    color: #ffcc00;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.4));
+    animation: float 4s ease-in-out infinite;
+}
+
+.vipHero h2 {
+    font-size: 3rem;
+    font-weight: 950;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #fff, #ffcc00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.vipHero p {
+    color: #888;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.vipPlans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.vipCard {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 35px;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    transition: 0.4s;
+}
+
+.vipCard:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 204, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.vipRecommended {
+    border: 2px solid #ffcc00 !important;
+    background: linear-gradient(135deg, #0d0d0d 0%, #151515 100%);
+}
+
+.vipRecommended:hover {
+    box-shadow: 0 25px 60px rgba(255, 204, 0, 0.15);
+}
+
+.recommendedBadge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffcc00;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 900;
+    padding: 6px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
+}
+
+.planHeader {
+    text-align: center;
+}
+
+.planHeader h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.planPrice {
+    font-size: 2.8rem;
+    font-weight: 950;
+    color: #fff;
+}
+
+.planPrice span {
+    font-size: 1.1rem;
+    color: #555;
+    margin-left: 5px;
+}
+
+.savings {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #1ed760;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.vipBenefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.vipBenefits li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.95rem;
+    color: #bbb;
+    font-weight: 600;
+}
+
+.buyVipBtn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: 950;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.vipRecommended .buyVipBtn {
+    background: #ffcc00;
+}
+
+.buyVipBtn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shine {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.shineEffect {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 200% 100%;
+    animation: shine 2s infinite linear;
+}
+
+/* Animations from previous session */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* PROMO BANNER */
+.promoBanner {
+    background: #0a0a0a;
+    border: 1px solid rgba(161, 9, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge {
+    background: #a109ff;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 4px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.bannerContent h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.bannerContent p {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.bannerActions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.buyNowBtn {
+    background: #fff;
+    color: #000;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 900;
+    font-size: 0.8rem;
+    border: none;
+}
+
+.timer {
+    color: #a109ff;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.holoShield {
+    font-size: 4rem;
+    color: #a109ff;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* GIFTS & COINS */
+.giftsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.giftCard {
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.giftIcon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.giftBuyBtn {
+    width: 100%;
+    padding: 8px;
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    font-weight: 800;
+    border: none;
+    font-size: 0.75rem;
+}
+
+.coinsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.coinCard {
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.bonusBadge {
+    position: absolute;
+    top: 15px;
+    right: -25px;
+    background: #1ed760;
+    color: #000;
+    font-size: 0.5rem;
+    font-weight: 900;
+    padding: 4px 30px;
+    transform: rotate(45deg);
+}
+
+.coinMainIcon {
+    font-size: 2rem;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+.rechargeBtn {
+    width: 100%;
+    padding: 12px;
+    background: #a109ff;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 900;
+    border: none;
+    font-size: 0.8rem;
+}
+
+/* NICK EFFECTS */
+.nickEffect_neon {
+    color: #fff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+}
+
+.nickEffect_fire {
+    background: linear-gradient(to bottom, #ffcc00, #ff6600, #cc0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nickEffect_electric {
+    color: #00ffff;
+    text-shadow: 0 0 5px #fff;
+    animation: zap 0.1s infinite;
+}
+
+.nickEffect_rgb {
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: rgbFlow 3s linear infinite;
+}
+
+.nickEffect_gold {
+    background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: rgbFlow 3s linear infinite;
+}
+
+/* HIGHLIGHTS (DESTAQUES) AREA */
+.highlightsArea {
+    animation: fadeIn 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.promoBanner {
+    background: linear-gradient(135deg, #1a1a1a 0%, #050505 100%);
+    border: 1px solid rgba(161, 9, 255, 0.2);
+    border-radius: 30px;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.promoBanner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(161, 9, 255, 0.15) 0%, transparent 70%);
+    filter: blur(50px);
+    animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+.bannerContent {
+    position: relative;
+    z-index: 2;
+    max-width: 60%;
+}
+
+.badge {
+    background: #a109ff;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 6px 15px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(161, 9, 255, 0.3);
+}
+
+.bannerContent h2 {
+    font-size: 3rem;
+    font-weight: 950;
+    margin-bottom: 15px;
+    line-height: 1.1;
+    background: linear-gradient(to right, #fff, #a109ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bannerContent p {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.bannerActions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.buyNowBtn {
+    background: #fff;
+    color: #000;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 950;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.buyNowBtn:hover {
+    background: #a109ff;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(161, 9, 255, 0.5);
+}
+
+.timer {
+    color: #a109ff;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 0.85rem;
+    background: rgba(161, 9, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(161, 9, 255, 0.2);
+}
+
+.bannerImage {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.holoShield {
+    font-size: 8rem;
+    color: #a109ff;
+    filter: drop-shadow(0 0 30px rgba(161, 9, 255, 0.6));
+    animation: bannerFloat 4s ease-in-out infinite;
+}
+
+.highlightsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.highlightsSection h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.highlightsSection h3::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: #1ed760;
+    border-radius: 2px;
+}
+
+.highlightsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.miniCard {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: 0.3s;
+    position: relative;
+}
+
+.miniCard:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.1);
+    background: #111;
+}
+
+.miniIcon {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.miniContent h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.miniContent p {
+    font-size: 0.7rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.miniFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.miniPrice {
+    color: #ffcc00;
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.miniBuyBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.miniBuyBtn:hover {
+    background: #a109ff;
+    transform: scale(1.1);
+}
+
+.newBadge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #1ed760;
+    color: #000;
+    font-size: 0.55rem;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+@keyframes glowPulse {
+    from {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes bannerFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+.nickEffect_ice {
+    color: #fff;
+    text-shadow: 0 0 10px #00ccff;
+}
+
+.nickEffect_galaxy {
+    background: linear-gradient(to right, #240b36, #c31432, #240b36);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: rgbFlow 10s linear infinite;
+}
+
+/* INVENTORY & RANKINGS */
+.inventoryHeader {
+    margin-bottom: 30px;
+}
+
+.invStats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.statBox {
+    background: #111;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.activePill {
+    background: #1ed760;
+    color: #000;
+    font-size: 0.5rem;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.secondaryBtn {
+    background: #111;
+    color: #ff4444;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 800;
+    border: none;
+    font-size: 0.7rem;
+}
+
+.rankTabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.rankTabs button {
+    background: #111;
+    border: none;
+    color: #555;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 0.75rem;
+}
+
+.rankTabActive {
+    background: #a109ff !important;
+    color: #fff !important;
+}
+
+.rankRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.rankRow span {
+    font-weight: 800;
+}
+
+.rankValue {
+    color: #ffcc00;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes rgbFlow {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@keyframes zap {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+
+/* =============================================
+   PREMIUM FRAMES (01-100)
+   ============================================= */
+.framePreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 40px;
+    border-radius: 20px;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.framePreviewSmall {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #444;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.frameThumb {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+/* SAKURA (01-10) */
+.frame_01 {
+    border: 1px solid #ffb6c1 !important;
+    box-shadow: 0 0 10px #ffb6c1, inset 0 0 5px #ffb6c1;
+}
+
+.frame_02 {
+    border: 1px dashed #ff69b4 !important;
+    background: rgba(255, 105, 180, 0.1);
+}
+
+.frame_03 {
+    border: 1px solid #ff1493 !important;
+    box-shadow: 0 0 15px #ff1493;
+}
+
+.frame_04 {
+    border: 2px solid #db7093 !important;
+}
+
+.frame_05 {
+    border: 1px solid #ffb6c1 !important;
+    animation: float 3s infinite;
+}
+
+.frame_06 {
+    border: 1px solid #ff69b4 !important;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+}
+
+.frame_07 {
+    border: 1px solid #ffc0cb !important;
+    border-radius: 20px;
+}
+
+.frame_08 {
+    border: 1px solid #ff69b4 !important;
+    clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+}
+
+.frame_09 {
+    border: 1px solid #ffb6c1 !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 182, 193, 0.2), transparent);
+}
+
+.frame_10 {
+    border: 2px solid #ff1493 !important;
+    box-shadow: 0 0 25px #ff1493;
+}
+
+/* NINJA/SAMURAI (11-20) */
+.frame_11 {
+    border: 1px solid #333 !important;
+    background: #111;
+    border-left: 4px solid #ff0000 !important;
+}
+
+.frame_12 {
+    border: 1px solid #444 !important;
+    border-right: 4px solid #00ff00 !important;
+}
+
+.frame_13 {
+    border: 1px solid #00ffff !important;
+    box-shadow: -5px 0 10px #00ffff;
+}
+
+.frame_14 {
+    border: 1px solid #1ed760 !important;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+
+.frame_15 {
+    border: 1px solid #666 !important;
+    filter: grayscale(1);
+}
+
+.frame_16 {
+    border: 1px solid #ffff00 !important;
+    text-shadow: 0 0 10px #ffff00;
+}
+
+.frame_17 {
+    border: 1px solid #ff4500 !important;
+    border-top: 3px solid #ff4500 !important;
+}
+
+.frame_18 {
+    border: 1px solid #a109ff !important;
+    border-bottom: 3px solid #a109ff !important;
+}
+
+.frame_19 {
+    border: 1px solid #8b0000 !important;
+    box-shadow: inset 0 0 10px #8b0000;
+}
+
+.frame_20 {
+    border: 1px solid #2f4f4f !important;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* DRAGON (21-30) */
+.frame_21 {
+    border: 1px solid #ff6600 !important;
+    box-shadow: 0 0 10px #ff6d00, 0 0 20px #ff6d00;
+}
+
+.frame_22 {
+    border: 1px solid #00ccff !important;
+    box-shadow: 0 0 15px #00ccff;
+}
+
+.frame_23 {
+    border: 1px solid #ffcc00 !important;
+    animation: zap 0.2s infinite;
+}
+
+.frame_24 {
+    border: 1px solid #a109ff !important;
+    background: rgba(161, 9, 255, 0.05);
+}
+
+.frame_25 {
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 30px #ff0000;
+}
+
+.frame_26 {
+    border: 1px solid #800000 !important;
+    border-radius: 0;
+}
+
+.frame_27 {
+    border: 1px solid #ff4444 !important;
+    border-style: double;
+}
+
+.frame_28 {
+    border: 1px solid #4b0082 !important;
+    box-shadow: 0 0 20px #4b0082;
+}
+
+.frame_29 {
+    border: 2px solid #ff00ff !important;
+}
+
+.frame_30 {
+    border: 1px solid #00008b !important;
+    box-shadow: inset 0 0 20px #0000ff;
+}
+
+/* CHAOS/VOID (31-40) */
+.frame_31 {
+    border: 1px solid #ff0000 !important;
+    filter: contrast(2);
+}
+
+.frame_32 {
+    border: 1px solid #ff4500 !important;
+    box-shadow: 0 0 40px #ff4500;
+}
+
+.frame_33 {
+    border: 1px solid #333 !important;
+    background: radial-gradient(circle, #222, #000);
+}
+
+.frame_34 {
+    border: 1px solid #00ff00 !important;
+    animation: rgbFlow 2s linear infinite;
+}
+
+.frame_35 {
+    border: 1px solid #fff !important;
+    box-shadow: 0 0 50px #fff;
+}
+
+.frame_36 {
+    border: 1px dashed #ff0000 !important;
+    animation: pulse 1s infinite;
+}
+
+.frame_37 {
+    border: 1px solid #800080 !important;
+    border-radius: 50px;
+}
+
+.frame_38 {
+    border: 3px solid #ffcc00 !important;
+}
+
+.frame_39 {
+    border: 1px solid #000 !important;
+    box-shadow: 0 0 20px #ff0000;
+}
+
+.frame_40 {
+    border: 1px dotted #00ffcc !important;
+}
+
+/* EYES/SIGHT (41-50) */
+.frame_41 {
+    border: 1px solid #ff0000 !important;
+    border-radius: 50%;
+    padding: 2px 15px;
+}
+
+.frame_42 {
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+.frame_43 {
+    border: 1px solid #a109ff !important;
+    box-shadow: inset 0 0 15px #a109ff;
+}
+
+.frame_44 {
+    border: 3px double #ff0000 !important;
+}
+
+.frame_45 {
+    border: 1px solid #fff !important;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.frame_46 {
+    border: 1px solid #666 !important;
+    opacity: 0.8;
+}
+
+.frame_47 {
+    border: 1px solid #111 !important;
+    box-shadow: 0 0 30px #000;
+}
+
+.frame_48 {
+    border: 1px solid #ff00ff !important;
+    text-shadow: 0 0 5px #ff00ff;
+}
+
+.frame_49 {
+    border: 2px solid #00ffff !important;
+}
+
+.frame_50 {
+    border: 1px solid #1ed760 !important;
+    box-shadow: 0 0 10px #1ed760;
+}
+
+/* SIGHT/LIGHT (51-60) */
+.frame_51 {
+    border: 1px solid #00ccff !important;
+    box-shadow: 0 0 10px #00ccff;
+    filter: brightness(1.5);
+}
+
+.frame_52 {
+    border: 1px solid #ffcc00 !important;
+    animation: zap 0.1s infinite;
+}
+
+.frame_53 {
+    border: 1px solid #fff !important;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.frame_54 {
+    border: 1px solid #ff0000 !important;
+    border-bottom: 5px solid #ff0000 !important;
+}
+
+.frame_55 {
+    border: 1px solid #00ffcc !important;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+}
+
+.frame_56 {
+    border: 1px solid #444 !important;
+    box-shadow: 5px 5px 0px #222;
+}
+
+.frame_57 {
+    border: 1px solid #ffa500 !important;
+    text-shadow: 0 0 10px #ffa500;
+}
+
+.frame_58 {
+    border: 1px solid #a109ff !important;
+    border-style: groove;
+}
+
+.frame_59 {
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 20px #fff;
+}
+
+.frame_60 {
+    border: 1px solid #000 !important;
+    background: #fff;
+    color: #000 !important;
+}
+
+/* SPACE/NEBULA (61-70) */
+.frame_61 {
+    border: 1px solid #240b36 !important;
+    background: linear-gradient(45deg, #240b36, #c31432);
+}
+
+.frame_62 {
+    border: 1px solid #00008b !important;
+    box-shadow: 0 0 20px #00008b, inset 0 0 10px #0000ff;
+}
+
+.frame_63 {
+    border: 1px solid #4b0082 !important;
+    animation: rgbFlow 5s linear infinite;
+}
+
+.frame_64 {
+    border: 1px solid #fff !important;
+    border-radius: 50%;
+}
+
+.frame_65 {
+    border: 1px solid #ffcc00 !important;
+    box-shadow: 0 0 30px #ffcc00;
+}
+
+.frame_66 {
+    border: 1px solid #333 !important;
+    background: #000;
+    overflow: hidden;
+}
+
+.frame_67 {
+    border: 2px solid #6a0dad !important;
+}
+
+.frame_68 {
+    border: 1px solid #000 !important;
+    box-shadow: 0 0 40px #6a0dad;
+}
+
+.frame_69 {
+    border: 1px solid #fff !important;
+    animation: pulse 1.5s infinite;
+}
+
+.frame_70 {
+    border: 2px solid #a109ff !important;
+    clip-path: inset(0 0 0 0 round 10px);
+}
+
+/* COSMOS/QUANTUM (71-80) */
+.frame_71 {
+    border: 1px solid #00ffff !important;
+    border-style: double;
+}
+
+.frame_72 {
+    border: 1px solid #000 !important;
+    box-shadow: 0 0 50px #000, inset 0 0 20px #333;
+}
+
+.frame_73 {
+    border: 1px solid #fff !important;
+    border-top: 5px solid #ffcc00 !important;
+}
+
+.frame_74 {
+    border: 1px solid #483d8b !important;
+    background: rgba(72, 61, 139, 0.2);
+}
+
+.frame_75 {
+    border: 1px solid #ff00ff !important;
+    animation: zap 0.3s infinite alternate;
+}
+
+.frame_76 {
+    border: 2px solid #00bfff !important;
+    box-shadow: 0 0 20px #00bfff;
+}
+
+.frame_77 {
+    border: 2px solid #ffd700 !important;
+    border-radius: 15px;
+}
+
+.frame_78 {
+    border: 1px solid #8a2be2 !important;
+    box-shadow: 0 0 30px #8a2be2;
+}
+
+.frame_79 {
+    border: 1px solid #fff !important;
+    border-left: 10px solid #fff !important;
+}
+
+.frame_80 {
+    border: 4px solid #fff !important;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+}
+
+/* BEAST/ANIMAL (81-90) */
+.frame_81 {
+    border: 1.5px solid #ff6600 !important;
+}
+
+.frame_82 {
+    border: 1px solid #ff00ff !important;
+    background: rgba(255, 0, 255, 0.05);
+}
+
+.frame_83 {
+    border: 1px solid #c0c0c0 !important;
+    box-shadow: 0 0 10px #c0c0c0;
+}
+
+.frame_84 {
+    border: 1px solid #222 !important;
+    background: #000;
+    border-top: 3px solid #666 !important;
+}
+
+.frame_85 {
+    border: 1px solid #ff4500 !important;
+    border-radius: 0 15px 0 15px;
+}
+
+.frame_86 {
+    border: 1px solid #ffcc00 !important;
+    border-left: 5px solid #ffcc00 !important;
+}
+
+.frame_87 {
+    border: 1px solid #00bfff !important;
+    animation: float 2s infinite ease-in-out;
+}
+
+.frame_88 {
+    border: 1px solid #4b0082 !important;
+    box-shadow: -10px 0 20px #4b0082;
+}
+
+.frame_89 {
+    border: 1px solid #008000 !important;
+    background: linear-gradient(to right, #004b00, #008000);
+}
+
+.frame_90 {
+    border: 1px solid #ffa500 !important;
+    filter: drop-shadow(0 0 5px #ff4500);
+}
+
+/* DIVINE/LEGENDARY (91-100) */
+.frame_91 {
+    border: 2px solid #ffd700 !important;
+    background: linear-gradient(45deg, #ffd700, #fff);
+    color: #000 !important;
+}
+
+.frame_92 {
+    border: 3px solid #ffd700 !important;
+    box-shadow: 0 0 20px #ffd700;
+}
+
+.frame_93 {
+    border: 1px solid #fff !important;
+    box-shadow: 0 0 40px #fff, inset 0 0 20px #fff;
+}
+
+.frame_94 {
+    border: 2px solid #b8860b !important;
+    background: rgba(184, 134, 11, 0.1);
+}
+
+.frame_95 {
+    border: 1px solid #ffd700 !important;
+    animation: rgbFlow 3s linear infinite;
+}
+
+.frame_96 {
+    border-radius: 50% !important;
+    border: 2px solid #ffd700 !important;
+    box-shadow: 0 0 30px #ffd700;
+}
+
+.frame_97 {
+    border: 4px double #ffd700 !important;
+}
+
+.frame_98 {
+    border: 1px solid #ffd700 !important;
+    background: #000;
+}
+
+.frame_99 {
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 50px skyblue;
+}
+
+.frame_100 {
+    border: 5px solid #ffd700 !important;
+    box-shadow: 0 0 60px #ffd700, inset 0 0 30px #ffd700;
+    animation: pulse 0.5s infinite;
+}
+
+@media (max-width: 1024px) {
+    .shopContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}

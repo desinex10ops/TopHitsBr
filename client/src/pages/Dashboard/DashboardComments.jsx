@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FiMessageSquare, FiTrash, FiExternalLink } from 'react-icons/fi';
 import styles from './Dashboard.module.css';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 

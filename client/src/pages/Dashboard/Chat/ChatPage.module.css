@@ -1,0 +1,128 @@
+.chatContainer {
+    display: flex;
+    height: calc(100vh - 100px);
+    /* Adjust based on your header height */
+    background: #121212;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.chatSidebar {
+    width: 320px;
+    background: #181818;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarHeader {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebarHeader h2 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 0;
+}
+
+.newChatBtn {
+    background: #1db954;
+    border: none;
+    color: #000;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.newChatBtn:hover {
+    background: #1ed760;
+}
+
+.conversationList {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.conversationItem {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #222;
+    transition: background 0.2s;
+}
+
+.conversationItem:hover,
+.conversationItem.active {
+    background: #282828;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.avatar svg {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.conversationInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.lastMessage {
+    font-size: 0.85rem;
+    color: #aaa;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.emptyState {
+    padding: 30px;
+    text-align: center;
+    color: #666;
+}
+
+.emptyState button {
+    margin-top: 10px;
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}

@@ -1,0 +1,213 @@
+.container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header h2 {
+    margin: 0 0 10px 0;
+}
+
+.exportBtn {
+    background: #1DB954;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.exportBtn:hover {
+    background: #1ed760;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 5px 15px;
+    width: 300px;
+    color: #b3b3b3;
+}
+
+.searchBox input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    width: 100%;
+    outline: none;
+    margin-left: 10px;
+}
+
+.tableWrapper {
+    background: #181818;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #b3b3b3;
+    font-size: 0.9rem;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.table th {
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #333;
+}
+
+.userName {
+    display: block;
+    color: #fff;
+    font-weight: 500;
+}
+
+.userEmail {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badgeAdmin {
+    background: rgba(29, 185, 84, 0.2);
+    color: #1db954;
+}
+
+.badgeProducer {
+    background: rgba(153, 102, 255, 0.2);
+    color: #9966ff;
+}
+
+.badgeArtist {
+    background: rgba(54, 162, 235, 0.2);
+    color: #36a2eb;
+}
+
+.badgeListener {
+    background: rgba(100, 100, 100, 0.2);
+    color: #eee;
+}
+
+.statusActive {
+    color: #1db954;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.statusBanned {
+    color: #ff4d4d;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btnIcon {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.btnIcon:hover {
+    color: #fff;
+}
+
+.btnBan:hover {
+    color: #ff4d4d;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    color: #b3b3b3;
+}
+
+.pageBtn {
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pageBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pageInfo {
+    font-weight: 500;
+}
+
+.loading {
+    padding: 50px;
+    text-align: center;
+    color: #b3b3b3;
+}

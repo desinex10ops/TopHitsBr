@@ -1,0 +1,80 @@
+/* MobileTabBar.module.css */
+.tabBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    /* Fixed height for touch */
+    background: rgba(18, 18, 18, 0.85);
+    /* Glass base */
+    backdrop-filter: blur(12px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: env(safe-area-inset-bottom);
+    /* iPhone X safety */
+}
+
+.tabItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #b3b3b3;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.iconWrapper {
+    font-size: 1.4rem;
+    margin-bottom: 2px;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+/* Active State */
+.active {
+    color: #ffffff;
+}
+
+.active .iconWrapper {
+    color: #ffffff;
+    transform: translateY(-2px);
+    /* Slight bounce up */
+}
+
+.active .label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Active Indicator Dot (Optional sophisticated touch) */
+.active::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    width: 4px;
+    height: 4px;
+    background-color: #1ed760;
+    /* Brand Green */
+    border-radius: 50%;
+    box-shadow: 0 0 8px #1ed760;
+}
+
+/* Touch Feedback */
+.tabItem:active .iconWrapper {
+    transform: scale(0.9);
+}

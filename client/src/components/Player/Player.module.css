@@ -12,6 +12,45 @@
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
 }
 
+.wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.miniWrapper {
+    width: 100%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.miniWrapper.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+@media (min-width: 1024px) {
+    .wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 90px;
+        background: #000;
+        z-index: 1000;
+    }
+
+    .miniWrapper {
+        height: 100%;
+    }
+}
+
+.fullScreenPlayer {
+    display: none;
+}
+
 .visualizerContainer {
     position: absolute;
     top: -30px;
@@ -88,13 +127,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 12px;
 }
 
 .buttons {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-bottom: 4px;
+    z-index: 10;
+    /* Ensure buttons are above potential input overlays */
 }
 
 .carModeBtn {
@@ -186,6 +228,8 @@
     accent-color: var(--accent-color);
     height: 4px;
     transition: height 0.1s;
+    margin: 0;
+    /* Default appearance with accent-color */
 }
 
 .progressBar:hover {
@@ -233,5 +277,289 @@
     .playBtn {
         width: 40px;
         height: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .playerContainer {
+        bottom: 60px;
+        /* Above MobileTabBar */
+        left: 8px;
+        right: 8px;
+        width: auto;
+        border-radius: 8px;
+        background-color: rgba(24, 24, 24, 0.95);
+        /* Slightly transparent */
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 4px 8px;
+        /* Compact padding */
+        height: 64px;
+        /* Fixed mini height */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .visualizerContainer {
+        display: none;
+        /* Hide visualizer in mini mode for clean look */
+    }
+
+    .extraControls {
+        display: none;
+    }
+
+    .trackInfo {
+        width: auto;
+        flex: 1;
+        gap: 10px;
+    }
+
+    .cover {
+        width: 48px;
+        height: 48px;
+    }
+
+    .placeholder {
+        width: 48px;
+        height: 48px;
+    }
+
+    .details {
+        max-width: 160px;
+        /* Prevent text overflow */
+    }
+
+    .title {
+        font-size: 0.85rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .artist {
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Simplified Mobile Controls */
+    .controls {
+        flex: 0;
+        width: auto;
+    }
+
+    .buttons {
+        gap: 12px;
+    }
+
+    /* Hide non-essential buttons on mini player */
+    .buttons button:not(.playBtn) {
+        display: none;
+    }
+
+    /* Show Play Button specially */
+    .playBtn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .progressContainer {
+        display: block;
+        position: absolute;
+        bottom: -1px;
+        left: 8px;
+        right: 8px;
+        height: 2px;
+        width: auto;
+        max-width: none;
+    }
+
+    .progressBar {
+        height: 2px;
+        margin: 0;
+        width: 100%;
+        display: block;
+    }
+
+    .time {
+        display: none;
+    }
+
+    /* FULL SCREEN PLAYER STYLES */
+    .fullScreenPlayer {
+        position: fixed;
+        top: 100vh;
+        /* Start off-screen */
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(180deg, #333 0%, #121212 100%);
+        z-index: 5000;
+        /* Highest */
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fullScreenPlayer.expanded {
+        top: 0;
+        /* Slide up */
+    }
+
+    .fullScreenHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .collapseBtn,
+    .lyricsBtn {
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .headerTitle {
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .fullScreenCover {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .fullScreenCover img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .placeholderBig {
+        width: 100%;
+        aspect-ratio: 1/1;
+        background: #222;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+    }
+
+    .fullScreenInfo {
+        margin-bottom: 40px;
+    }
+
+    .infoRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .fullTitle {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 4px;
+    }
+
+    .fullArtist {
+        font-size: 1rem;
+        color: #b3b3b3;
+    }
+
+    .bigLikeBtn {
+        font-size: 1.8rem;
+    }
+
+    .fullProgress {
+        margin-bottom: 20px;
+    }
+
+    .bigProgressBar {
+        width: 100%;
+        height: 6px;
+        accent-color: #fff;
+    }
+
+    .timeRow {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: #b3b3b3;
+        margin-top: 8px;
+    }
+
+    .fullControls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .bigControlBtn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.8rem;
+    }
+
+    .bigControlBtn.active {
+        color: var(--accent-color);
+        position: relative;
+    }
+
+    .bigControlBtn.active::after {
+        content: '•';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--accent-color);
+    }
+
+    .hugePlayBtn {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        border: none;
+    }
+
+    .fullActions {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .fullActions button {
+        background: none;
+        border: none;
+        color: #b3b3b3;
+        font-size: 1.4rem;
     }
 }

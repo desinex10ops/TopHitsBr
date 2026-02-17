@@ -24,15 +24,11 @@ const Orders = () => {
 
     const fetchOrders = async () => {
         try {
-            // Placeholder: functionality to be added to backend
-            // const response = await api.get('/shop/orders');
-            // setOrders(response.data);
-            setOrders([
-                { id: 1, date: '2026-02-10', customer: 'João Silva', product: 'Alok Remix Pack', price: 49.90, status: 'completed' },
-                { id: 2, date: '2026-02-09', customer: 'Maria Souza', product: 'Deep House 2026', price: 29.90, status: 'completed' }
-            ]);
+            const response = await api.get('/shop/sales');
+            setOrders(response.data);
         } catch (error) {
-            console.error(error);
+            console.error("Erro ao buscar vendas:", error);
+            // Fallback for demo if empty? No, show empty.
         } finally {
             setLoading(false);
         }
@@ -51,6 +47,37 @@ const Orders = () => {
                         onChange={e => setSearchTerm(e.target.value)}
                     />
                 </div>
+            </div>
+
+            {/* Mobile List View */}
+            <div className={styles.mobileList}>
+                {orders.map(order => (
+                    <div key={order.id} className={styles.orderCard}>
+                        <div className={styles.cardHeader}>
+                            <span className={styles.orderId}>#{order.id}</span>
+                            <span className={styles.orderDate}>{order.date}</span>
+                        </div>
+                        <div className={styles.cardBody}>
+                            <div className={styles.cardRow}>
+                                <span className={styles.label}>Cliente:</span>
+                                <span className={styles.value}>{order.customer}</span>
+                            </div>
+                            <div className={styles.cardRow}>
+                                <span className={styles.label}>Produto:</span>
+                                <span className={styles.value}>{order.product}</span>
+                            </div>
+                            <div className={styles.cardRow}>
+                                <span className={styles.label}>Total:</span>
+                                <span className={styles.valueHighlight}>R$ {order.price.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <span className={`${styles.status} ${styles[order.status]}`}>
+                                {order.status === 'completed' && <FiCheckCircle />} {order.status}
+                            </span>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             <div className={styles.tableContainer}>

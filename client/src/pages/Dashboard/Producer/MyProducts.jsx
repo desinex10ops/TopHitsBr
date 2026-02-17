@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../../services/api';
 import styles from './MyProducts.module.css';
 import { FiPlus, FiTrash2, FiEdit2, FiEye } from 'react-icons/fi';
-import { useToast } from '../../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import NewProductModal from './NewProductModal';
 import { getStorageUrl } from '../../../utils/urlUtils';
 
@@ -49,6 +49,50 @@ const MyProducts = () => {
                 <button className={styles.createBtn} onClick={() => setIsModalOpen(true)}>
                     <FiPlus /> Novo Produto
                 </button>
+            </div>
+
+            {/* Mobile List View */}
+            <div className={styles.mobileList}>
+                {products.length === 0 ? (
+                    <div className={styles.empty}>Você ainda não tem produtos à venda.</div>
+                ) : (
+                    products.map(product => (
+                        <div key={product.id} className={styles.productCard}>
+                            <div className={styles.cardHeader}>
+                                <img
+                                    src={product.coverPath ? getStorageUrl(product.coverPath) : '/default_cover.jpg'}
+                                    alt=""
+                                    className={styles.cardCover}
+                                />
+                                <div className={styles.cardInfo}>
+                                    <span className={styles.cardTitle}>{product.title}</span>
+                                    <span className={styles.cardType}>{product.type}</span>
+                                </div>
+                                <div className={styles.cardPrice}>
+                                    R$ {parseFloat(product.price).toFixed(2).replace('.', ',')}
+                                </div>
+                            </div>
+
+                            <div className={styles.cardStats}>
+                                <div className={styles.statItem}>
+                                    <span className={styles.statLabel}>Vendas</span>
+                                    <span className={styles.statValue}>{product.salesCount}</span>
+                                </div>
+                                <div className={styles.statItem}>
+                                    <span className={styles.statLabel}>Status</span>
+                                    <span className={`${styles.status} ${styles[product.status]}`}>
+                                        {product.status}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className={styles.cardActions}>
+                                <button className={styles.actionBtnMobile}><FiEdit2 /> Editar</button>
+                                <button className={`${styles.actionBtnMobile} ${styles.delete}`} onClick={() => handleDelete(product.id)}><FiTrash2 /> Excluir</button>
+                            </div>
+                        </div>
+                    ))
+                )}
             </div>
 
             {loading ? (

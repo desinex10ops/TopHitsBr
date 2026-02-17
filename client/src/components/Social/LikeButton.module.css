@@ -1,0 +1,25 @@
+.likeBtn {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    padding: 5px;
+}
+
+.likeBtn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.active {
+    color: #1db954;
+}
+
+.active:hover {
+    color: #1ed760;
+}

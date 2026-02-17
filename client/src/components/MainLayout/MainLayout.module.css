@@ -1,0 +1,102 @@
+/* MainLayout.module.css */
+
+/* Base App Container */
+.appContainer {
+    display: flex;
+    width: 100%;
+    min-height: 100dvh;
+    background-color: #0a0a0a;
+    color: var(--text-primary);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Content Area */
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow-y: auto;
+    /* Internal scroll */
+    overflow-x: hidden;
+    position: relative;
+
+    /* Desktop Adjustment for Sidebar */
+    margin-left: 260px;
+
+    /* Scroll Behavior */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pageContent {
+    flex: 1;
+    padding-top: 80px;
+    /* Header space */
+    padding-bottom: 100px;
+    /* Player space */
+}
+
+/* Desktop Sidebar Wrapper */
+.desktopOnly {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    z-index: 50;
+    display: block;
+}
+
+/* Mobile Tab Bar Wrapper */
+.mobileOnly {
+    display: none;
+}
+
+.fullContent {
+    width: 100%;
+    min-height: 100dvh;
+}
+
+.mobileSpacer {
+    display: none;
+}
+
+/* MOBILE STYLES (App Shell) */
+@media (max-width: 1024px) {
+    .appContainer {
+        flex-direction: column;
+    }
+
+    .desktopOnly {
+        display: none;
+    }
+
+    .mainContent {
+        margin-left: 0;
+        padding-bottom: 0;
+    }
+
+    .pageContent {
+        padding-top: 70px;
+        /* Slightly smaller header */
+        padding-bottom: 160px;
+        /* Space for Player (60px) + TabBar (60px) + Safety */
+    }
+
+    .mobileOnly {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 900;
+    }
+
+    .mobileSpacer {
+        display: block;
+        height: 140px;
+        /* Push content up from bottom bars */
+    }
+}

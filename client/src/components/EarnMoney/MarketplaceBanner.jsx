@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { FiDollarSign, FiMusic, FiDownload, FiArrowRight } from 'react-icons/fi';
-import styles from './EarnMoney.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const MarketplaceBanner = () => {
+    const navigate = useNavigate();
+
     return (
         <div className={styles.bannerContainer}>
             {/* Background Image Layer */}
             <div className={styles.bannerBackground}></div>
 
-            <div className={styles.overlay}></div> // Dark gradient overlay
+            <div className={styles.overlay}></div>
 
             <div className={styles.bannerContent}>
                 <div className={styles.textContent}>
@@ -34,10 +34,16 @@ const MarketplaceBanner = () => {
                     </div>
 
                     <div className={styles.actions}>
-                        <button className={`${styles.btn} ${styles.btnPrimary}`}>
+                        <button
+                            className={`${styles.btn} ${styles.btnPrimary}`}
+                            onClick={() => navigate('/dashboard/producer')}
+                        >
                             VENDER MEU PACK
                         </button>
-                        <button className={`${styles.btn} ${styles.btnSecondary}`}>
+                        <button
+                            className={`${styles.btn} ${styles.btnSecondary}`}
+                            onClick={() => navigate('/shop')}
+                        >
                             EXPLORAR PACKS
                         </button>
                     </div>

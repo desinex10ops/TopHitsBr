@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../../services/api';
 import styles from './Financial.module.css';
 import { FiDollarSign, FiClock, FiArrowUpRight, FiArrowDownLeft, FiDownload } from 'react-icons/fi';
-import { useToast } from '../../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 
 const Financial = () => {
     const [wallet, setWallet] = useState(null);
@@ -47,7 +47,8 @@ const Financial = () => {
             fetchData(); // Refresh balance
         } catch (error) {
             console.error(error);
-            addToast(error.response?.data?.error || 'Erro ao solicitar saque.', 'error');
+            const msg = error.response?.data?.error || 'Erro ao solicitar saque. Verifique se o saldo é suficiente.';
+            addToast(msg, 'error');
         }
     };
 
@@ -61,13 +62,13 @@ const Financial = () => {
             <div className={styles.cardsGrid}>
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
-                        <span>Saldo Disponível</span>
+                        <span>Saldo Disponível + Pendente</span>
                         <FiDollarSign className={styles.iconGreen} />
                     </div>
                     <div className={styles.amount}>
-                        R$ {parseFloat(wallet?.balance || 0).toFixed(2).replace('.', ',')}
+                        R$ {((parseFloat(wallet?.balance || 0) + parseFloat(wallet?.pending_balance || 0))).toFixed(2).replace('.', ',')}
                     </div>
-                    <div className={styles.subtext}>Pronto para saque</div>
+                    <div className={styles.subtext}>Liberado para saque imediato</div>
                 </div>
 
                 <div className={styles.card}>
@@ -119,7 +120,11 @@ const Financial = () => {
                                 onChange={(e) => setPixKey(e.target.value)}
                             />
                         </div>
-                        <button type="submit" className={styles.withdrawBtn} disabled={!wallet || wallet.balance <= 0}>
+                        <button
+                            type="submit"
+                            className={styles.withdrawBtn}
+                            disabled={!wallet || (parseFloat(wallet.balance || 0) + parseFloat(wallet.pending_balance || 0)) <= 0}
+                        >
                             Solicitar Transferência
                         </button>
                     </form>

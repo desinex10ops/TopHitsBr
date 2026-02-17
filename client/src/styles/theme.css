@@ -1,24 +1,41 @@
 :root {
-  /* Paleta de Cores - Tema Escuro Moderno (Netflix/Spotify vibes) */
-  --bg-primary: #141414;
-  --bg-secondary: #1f1f1f;
-  --bg-card: #282828;
-  --bg-hover: #3e3e3e;
+  /* Paleta de Cores - Tema Escuro Moderno */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0f0f0f;
+  --bg-card: #141414;
+  --bg-hover: #1e1e1e;
 
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
   --text-muted: #808080;
 
-  --accent-color: #e50914;
-  /* Vermelho Netflix/Destaque */
-  --accent-hover: #f40612;
-  --link-color: #3ea6ff;
+  --accent-color: #1ed760;
+  /* Alterado para Verde Spotify por padrão */
+  --accent-hover: #1ed760;
+  --link-color: #1ed760;
 
-  --border-radius: 4px;
+  --border-radius: 8px;
   --transition-speed: 0.3s;
 
   --header-height: 70px;
   --player-height: 90px;
+  --border-color: #282828;
+}
+
+.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f4;
+  --bg-card: #ffffff;
+  --bg-hover: #f0f0f0;
+
+  --text-primary: #121212;
+  --text-secondary: #535353;
+  --text-muted: #727272;
+
+  --border-color: #e0e0e0;
+  --accent-color: #1db954;
+  --accent-hover: #1ed760;
+  --link-color: #000000;
 }
 
 * {

@@ -154,6 +154,48 @@ exports.getProducerStore = async (req, res) => {
     }
 };
 
+exports.getProducerSales = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Find OrderItems where Product.producerId = userId
+        // And include Order info (Buyer, Date)
+        const sales = await OrderItem.findAll({
+            include: [
+                {
+                    model: Product,
+                    where: { producerId: userId },
+                    attributes: ['title', 'price', 'coverPath']
+                },
+                {
+                    model: Order,
+                    include: [{ model: User, as: 'Buyer', attributes: ['name', 'email'] }],
+                    where: { status: 'paid' }, // Only completed sales
+                    attributes: ['id', 'createdAt', 'status']
+                }
+            ],
+            order: [['createdAt', 'DESC']]
+        });
+
+        // Format for frontend
+        const formattedSales = sales.map(item => ({
+            id: item.Order.id,
+            date: item.Order.createdAt,
+            customer: item.Order.Buyer ? item.Order.Buyer.name : 'Desconhecido',
+            product: item.Product.title,
+            price: parseFloat(item.price), // stored price snapshot
+            status: item.Order.status === 'paid' ? 'completed' : item.Order.status,
+            commissionRate: item.commissionRate,
+            producerAmount: item.producerAmount
+        }));
+
+        res.json(formattedSales);
+    } catch (error) {
+        console.error("Error fetching producer sales:", error);
+        res.status(500).json({ error: "Erro ao buscar vendas." });
+    }
+};
+
 exports.getProductById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -164,6 +206,29 @@ exports.getProductById = async (req, res) => {
         res.json(product);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar produto.' });
+    }
+};
+
+exports.checkPurchase = async (req, res) => {
+    try {
+        const { productId } = req.params;
+        const userId = req.user.id;
+
+        const hasPurchased = await Order.findOne({
+            where: {
+                buyerId: userId,
+                status: 'paid'
+            },
+            include: [{
+                model: OrderItem,
+                where: { ProductId: productId }
+            }]
+        });
+
+        res.json({ hasPurchased: !!hasPurchased });
+    } catch (error) {
+        console.error("Erro ao verificar compra:", error);
+        res.status(500).json({ error: 'Erro ao verificar compra.' });
     }
 };
 
@@ -211,31 +276,51 @@ exports.getDashboardStats = async (req, res) => {
         // Easier: Query OrderItems directly including Product where producerId matches.
 
         const salesItems = await OrderItem.findAll({
-            include: [{
-                model: Product,
-                where: { producerId },
-                attributes: ['id', 'title', 'price']
-            }]
+            include: [
+                {
+                    model: Product,
+                    where: { producerId },
+                    attributes: ['id', 'title', 'price']
+                },
+                {
+                    model: Order,
+                    where: { status: 'paid' },
+                    attributes: ['createdAt']
+                }
+            ]
         });
 
         let totalRevenue = 0;
+        let totalProfit = 0;
+        let totalCommission = 0;
         let totalSales = salesItems.length;
 
-        // Calculate revenue based on item price at time of purchase (if we stored it)
-        // For now using product price, but OrderItem should have 'price' field ideally.
-        // Assuming OrderItem has 'price' (it should).
-        // Let's check OrderItem model... It wasn't explicitly defined with price in my task, 
-        // but it usually has. If not, use Product price.
+        // 2. Chart Data (Last 30 Days)
+        const last30Days = {};
+        for (let i = 29; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const dateStr = date.toISOString().split('T')[0];
+            last30Days[dateStr] = { name: date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }), revenue: 0, sales: 0 };
+        }
 
         salesItems.forEach(item => {
-            // specific logic if OrderItem has price, otherwise Product price
-            totalRevenue += parseFloat(item.Product.price);
+            const amount = parseFloat(item.price);
+            const profit = parseFloat(item.producerAmount);
+            const commission = amount - profit;
+
+            totalRevenue += amount;
+            totalProfit += profit;
+            totalCommission += commission;
+
+            const saleDate = item.Order.createdAt.toISOString().split('T')[0];
+            if (last30Days[saleDate]) {
+                last30Days[saleDate].revenue += amount;
+                last30Days[saleDate].sales += 1;
+            }
         });
 
-        // 2. Monthly Graphic Data (Last 30 days)
-        // Group salesItems by date
-        const chartData = [];
-        // ... logic to group by day ...
+        const chartData = Object.values(last30Days);
 
         // 3. Top Products
         const topProducts = await Product.findAll({
@@ -245,21 +330,18 @@ exports.getDashboardStats = async (req, res) => {
             attributes: ['id', 'title', 'salesCount', 'coverPath']
         });
 
+        // 4. Pending Balance (Wallet)
+        const wallet = await req.user.getWallet();
+        const pendingBalance = wallet ? parseFloat(wallet.balance) : 0;
+
         res.json({
             revenue: totalRevenue,
             sales: totalSales,
-            profit: totalRevenue * 0.8, // 80% to producer (20% commission)
-            commission: totalRevenue * 0.2,
+            profit: totalProfit,
+            commission: totalCommission,
+            pendingBalance, // [ADDED]
             topProducts,
-            chartData: [ // Mock data for now until we have real orders
-                { name: 'Seg', uv: 400, pv: 2400, amt: 2400 },
-                { name: 'Ter', uv: 300, pv: 1398, amt: 2210 },
-                { name: 'Qua', uv: 200, pv: 9800, amt: 2290 },
-                { name: 'Qui', uv: 278, pv: 3908, amt: 2000 },
-                { name: 'Sex', uv: 189, pv: 4800, amt: 2181 },
-                { name: 'Sab', uv: 239, pv: 3800, amt: 2500 },
-                { name: 'Dom', uv: 349, pv: 4300, amt: 2100 },
-            ]
+            chartData
         });
 
     } catch (error) {

@@ -1,9 +1,8 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import styles from './BoostModal.module.css';
 import api from '../../services/api';
 import { FiTrendingUp, FiCheckCircle, FiX, FiActivity, FiStar, FiZap, FiTarget } from 'react-icons/fi';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 
 // Tier Definitions for UI
 const TIERS = [
@@ -121,7 +120,7 @@ const BoostModal = ({ item, type, onClose, onSuccess }) => {
                             {TIERS.map(tier => (
                                 <div
                                     key={tier.id}
-                                    className={`${styles.tierCard} ${selectedTier === tier.id ? styles.active : ''}`}
+                                    className={`${styles.tierCard} ${styles[tier.id]} ${selectedTier === tier.id ? styles.active : ''}`}
                                     onClick={() => setSelectedTier(tier.id)}
                                 >
                                     <div className={styles.menuIcon}>{tier.icon}</div>
@@ -136,11 +135,26 @@ const BoostModal = ({ item, type, onClose, onSuccess }) => {
                             ))}
                         </div>
 
+                        {/* REACH METER (Visual Gauge) */}
+                        <div className={styles.reachSection}>
+                            <div className={styles.reachHeader}>
+                                <span>Alcance Estimado</span>
+                                <span className={styles.reachValue}>~{estimatedReach.toLocaleString()} visualizações</span>
+                            </div>
+                            <div className={styles.reachMetterContainer}>
+                                <div
+                                    className={`${styles.reachFill} ${styles[selectedTier]}`}
+                                    style={{ width: `${Math.min((estimatedReach / 20000) * 100, 100)}%` }}
+                                ></div>
+                            </div>
+                            <p className={styles.reachSubtitle}>O alcance real depende do engajamento orgânico do seu conteúdo.</p>
+                        </div>
+
                         {/* DURATION SELECTION */}
                         <div className={styles.durationSection}>
                             <div className={styles.sectionTitle}>
                                 <span>Duração da Campanha</span>
-                                <span><FiTarget /> Alcance Est.: ~{estimatedReach.toLocaleString()}</span>
+                                <span><FiTarget /> {duration} dias selecionados</span>
                             </div>
                             <div className={styles.daysGrid}>
                                 {[3, 7, 15, 30].map(d => (

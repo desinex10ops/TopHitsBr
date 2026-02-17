@@ -1,31 +1,31 @@
-import { createContext, useState, useEffect, useContext, useRef } from 'react';
-import { useToast } from './ToastContext';
+import * as React from 'react';
+import { useToast } from '@/contexts/ToastContext';
 import { getStorageUrl } from '../utils/urlUtils';
 
-const PlayerContext = createContext();
+const PlayerContext = React.createContext();
 
-export const usePlayer = () => useContext(PlayerContext);
+export const usePlayer = () => React.useContext(PlayerContext);
 
 export const PlayerProvider = ({ children }) => {
     console.log("Rendering PlayerProvider");
-    const [currentTrack, setCurrentTrack] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [playlist, setPlaylist] = useState([]);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const [volume, setVolume] = useState(1);
-    const [carMode, setCarMode] = useState(false); // Novo estado
-    const [pendriveItems, setPendriveItems] = useState([]);
+    const [currentTrack, setCurrentTrack] = React.useState(null);
+    const [isPlaying, setIsPlaying] = React.useState(false);
+    const [playlist, setPlaylist] = React.useState([]);
+    const [currentTime, setCurrentTime] = React.useState(0);
+    const [duration, setDuration] = React.useState(0);
+    const [volume, setVolume] = React.useState(1);
+    const [carMode, setCarMode] = React.useState(false); // Novo estado
+    const [pendriveItems, setPendriveItems] = React.useState([]);
 
     // Advanced State
-    const [shuffle, setShuffle] = useState(false);
-    const [repeatMode, setRepeatMode] = useState('off'); // 'off', 'all', 'one'
-    const [originalPlaylist, setOriginalPlaylist] = useState([]);
+    const [shuffle, setShuffle] = React.useState(false);
+    const [repeatMode, setRepeatMode] = React.useState('off'); // 'off', 'all', 'one'
+    const [originalPlaylist, setOriginalPlaylist] = React.useState([]);
 
-    const audioRef = useRef(null);
-    const audioContextRef = useRef(null);
-    const analyserRef = useRef(null);
-    const sourceRef = useRef(null);
+    const audioRef = React.useRef(null);
+    const audioContextRef = React.useRef(null);
+    const analyserRef = React.useRef(null);
+    const sourceRef = React.useRef(null);
 
     // Inicializar Contexto de Áudio (User Interaction required usually)
     const initAudioContext = () => {
@@ -54,17 +54,17 @@ export const PlayerProvider = ({ children }) => {
         }
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         // Carregar do localStorage se existir
         const saved = localStorage.getItem('topHitsPenDrive');
         if (saved) setPendriveItems(JSON.parse(saved));
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         localStorage.setItem('topHitsPenDrive', JSON.stringify(pendriveItems));
     }, [pendriveItems]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const audio = audioRef.current;
         if (!audio) return;
 
@@ -87,16 +87,18 @@ export const PlayerProvider = ({ children }) => {
     }, []);
 
     // Theme Colors
-    const [themeColors, setThemeColors] = useState({
+    const [themeColors, setThemeColors] = React.useState({
         primary: '#121212',
         secondary: '#282828',
         accent: '#1db954',
         text: '#ffffff'
     });
 
-    const { addToast } = useToast(); // Move up context hook
+    const { addToast } = useToast();
 
-    useEffect(() => {
+    React.useEffect(() => {
+
+
         if (currentTrack) {
             // Extract Colors from Cover
             if (currentTrack.coverpath) {

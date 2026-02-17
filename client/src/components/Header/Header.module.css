@@ -1,22 +1,22 @@
 .header {
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(12px);
+    background-color: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     height: 80px;
     display: flex;
     align-items: center;
     position: fixed;
     top: 0;
-    left: 240px;
-    /* Aligned with Sidebar */
+    left: 260px;
     right: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: background-color 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header.scrolled {
-    background-color: rgba(0, 0, 0, 0.95);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background-color: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid #1a1a1a;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .container {
@@ -24,18 +24,15 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 24px;
+    max-width: 100%;
+    padding: 0 32px;
     height: 100%;
 }
 
-/* Responsividade para Header */
 @media (max-width: 768px) {
     .header {
         left: 0;
-        /* Mobile has no sidebar or it's overlay */
-        height: 60px;
+        height: 70px;
         padding: 0 16px;
     }
 }
@@ -44,27 +41,12 @@
 .leftSection {
     display: flex;
     align-items: center;
-    gap: 40px;
     flex: 1;
-}
-
-.logo {
-    font-size: 1.8rem;
-    color: #fff;
-    font-weight: 800;
-    letter-spacing: -1px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.logo span {
-    color: var(--accent-color);
 }
 
 .mainNav {
     display: flex;
-    gap: 24px;
+    gap: 8px;
 }
 
 .navLink {
@@ -75,24 +57,27 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: color 0.2s;
-    padding: 8px 12px;
-    border-radius: 4px;
+    transition: all 0.2s;
+    padding: 10px 20px;
+    border-radius: 50px;
 }
 
 .navLink:hover {
     color: #fff;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-
+.navLink.active {
+    background-color: #1ed760;
+    color: #000;
+}
 
 /* CENTER SECTION (Search) */
 .centerSection {
     flex: 2;
     display: flex;
     justify-content: center;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .searchBar {
@@ -104,178 +89,123 @@
 
 .searchIcon {
     position: absolute;
-    left: 20px;
-    color: #fff;
-    font-size: 1.4rem;
+    left: 18px;
+    color: #555;
+    font-size: 1.2rem;
     pointer-events: none;
-    /* Let clicks pass through to input/form if needed, or make it a button */
     z-index: 10;
 }
 
 .searchBar input {
     width: 100%;
-    padding: 14px 20px 14px 55px;
-    border-radius: 8px;
-    /* Slightly less rounded for a more modern tech feel, or keep 50px */
-    border: 1px solid transparent;
-    background-color: rgba(255, 255, 255, 0.08);
+    padding: 12px 12px 12px 50px;
+    border-radius: 50px;
+    border: 1px solid #222;
+    background-color: rgba(255, 255, 255, 0.05);
     color: #fff;
     outline: none;
-    font-size: 1rem;
-    transition: all 0.2s;
+    font-size: 0.9rem;
+    transition: all 0.3s;
 }
 
 .searchBar input:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #1ed760;
+    box-shadow: 0 0 15px rgba(30, 215, 96, 0.1);
 }
 
 .searchBar input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: #444;
 }
 
 /* RIGHT SECTION */
 .rightSection {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
     flex: 1;
     justify-content: flex-end;
-}
-
-.miniPlayer {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-right: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 6px 12px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.trackInfo {
-    display: flex;
-    flex-direction: column;
-    max-width: 120px;
-}
-
-.trackName {
-    font-size: 0.8rem;
-    color: #fff;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.artistName {
-    font-size: 0.7rem;
-    color: #b3b3b3;
-}
-
-.playerControls {
-    display: flex;
-    gap: 8px;
-}
-
-.playerControls button {
-    background: none;
-    border: none;
-    color: #b3b3b3;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.2s;
-}
-
-.playerControls button:hover {
-    color: #fff;
-}
-
-.playPauseBtn {
-    background: #fff !important;
-    color: #000 !important;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
 }
 
 .actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
 }
 
 .actionBtn {
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     color: #b3b3b3;
     text-decoration: none;
     font-size: 1.2rem;
     position: relative;
-    transition: color 0.2s;
+    transition: all 0.2s;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    border: 1px solid transparent;
 }
 
 .actionBtn:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.actionBtn[title="Upload"],
+.actionBtn[title="Dashboard"] {
+    width: auto;
+    padding: 0 20px;
+    gap: 10px;
 }
 
 .actionLabel {
-    font-size: 0.9rem;
-    font-weight: 600;
-    display: none;
-    /* Show only icon on smaller screens or to save space */
-}
-
-.actionBtn[title="Upload"] .actionLabel,
-.actionBtn[title="Dashboard"] .actionLabel {
-    display: block;
-    /* Important actions */
+    font-size: 0.85rem;
+    font-weight: 700;
 }
 
 .badge {
     position: absolute;
-    top: -5px;
-    right: -8px;
-    background: var(--accent-color);
+    top: -2px;
+    right: -2px;
+    background: #ff4757;
     color: white;
-    font-size: 0.6rem;
-    min-width: 16px;
-    height: 16px;
-    border-radius: 8px;
+    font-size: 0.65rem;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    padding: 0 4px;
+    font-weight: 800;
+    border: 2px solid #0a0a0a;
 }
 
 /* Profile Dropdown */
 .profileWrapper {
     position: relative;
+    margin-left: 8px;
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #333;
+    width: 44px;
+    height: 44px;
+    border-radius: 50px;
+    background: #111;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     overflow: hidden;
-    border: 2px solid transparent;
-    transition: border-color 0.2s;
+    border: 1px solid #222;
+    transition: all 0.2s;
 }
 
 .avatar:hover {
-    border-color: #fff;
+    border-color: #1ed760;
 }
 
 .avatar img {
@@ -286,21 +216,23 @@
 
 .dropdown {
     position: absolute;
-    top: 50px;
+    top: 55px;
     right: 0;
-    width: 220px;
-    background: #282828;
-    border-radius: 4px;
-    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.5);
-    padding: 4px;
+    width: 240px;
+    background: #0f0f0f;
+    border: 1px solid #1a1a1a;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    padding: 8px;
     z-index: 1100;
-    animation: fadeIn 0.1s ease-out;
+    animation: slideDown 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .dropdownHeader {
-    padding: 12px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 .dropdownHeader strong {
@@ -309,26 +241,27 @@
 }
 
 .dropdownHeader span {
-    color: #b3b3b3;
+    color: #555;
     font-size: 0.8rem;
 }
 
 .dropdownDivider {
     height: 1px;
-    background: #3e3e3e;
-    margin: 4px 0;
+    background: #1a1a1a;
+    margin: 8px;
 }
 
 .dropdownItem {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 12px;
-    color: #e0e0e0;
+    padding: 12px 16px;
+    color: #b3b3b3;
     text-decoration: none;
     font-size: 0.9rem;
-    border-radius: 2px;
-    transition: background 0.2s;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.2s;
     background: none;
     border: none;
     width: 100%;
@@ -337,11 +270,16 @@
 }
 
 .dropdownItem:hover {
-    background: #3e3e3e;
+    background: rgba(255, 255, 255, 0.05);
     color: #fff;
 }
 
-@keyframes fadeIn {
+.logoutBtn:hover {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+}
+
+@keyframes slideDown {
     from {
         opacity: 0;
         transform: translateY(-10px);
@@ -353,39 +291,36 @@
     }
 }
 
+/* Mini Player (Hidden on redesign for cleaner look) */
+.miniPlayer {
+    display: none;
+}
+
 /* Responsive */
+@media (max-width: 1200px) {
+    .actionLabel {
+        display: none !important;
+    }
+
+    .actionBtn[title="Upload"],
+    .actionBtn[title="Dashboard"] {
+        width: 44px;
+        padding: 0;
+    }
+}
+
 @media (max-width: 1024px) {
     .linkText {
         display: none;
     }
-
-    .miniPlayer {
-        display: none;
-        /* Hide mini player on menu to save space */
-    }
-
-    .logo span {
-        display: none;
-        /* Optional: simpler logo */
-    }
 }
 
 @media (max-width: 768px) {
-    .header {
-        height: 60px;
-        padding: 0 16px;
-    }
-
     .mainNav {
         display: none;
-        /* Move to bottom nav or hamburger */
     }
 
     .centerSection {
-        margin: 0 10px;
-    }
-
-    .actionLabel {
-        display: none;
+        max-width: none;
     }
 }

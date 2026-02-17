@@ -1,0 +1,138 @@
+.container {
+    padding: 20px 0;
+    color: #fff;
+    max-width: 800px;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.commentForm {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.inputWrapper {
+    flex: 1;
+}
+
+.input {
+    width: 100%;
+    background: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff;
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #1db954;
+}
+
+.submitBtn {
+    margin-top: 10px;
+    background: #1db954;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s;
+    float: right;
+}
+
+.submitBtn:hover {
+    transform: scale(1.05);
+    background: #1ed760;
+}
+
+.submitBtn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* List */
+.commentList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.commentItem {
+    display: flex;
+    gap: 15px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.commentContent {
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.userName {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+.time {
+    font-size: 0.8rem;
+    color: #b3b3b3;
+}
+
+.text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    white-space: pre-wrap;
+}
+
+.deleteBtn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: auto;
+    padding: 5px;
+}
+
+.deleteBtn:hover {
+    color: #e50914;
+}

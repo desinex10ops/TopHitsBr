@@ -48,8 +48,9 @@
     background: transparent;
 }
 
+
 /* Responsividade Mobile */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .main-content {
         margin-left: 0;
         padding-bottom: 140px;

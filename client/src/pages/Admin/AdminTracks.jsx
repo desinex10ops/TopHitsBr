@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './Admin.module.css'; // Reusing styles for now
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 const AdminTracks = () => {

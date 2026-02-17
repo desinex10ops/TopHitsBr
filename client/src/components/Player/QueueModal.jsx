@@ -1,8 +1,7 @@
-import * as React from 'react';
-const { useRef, useEffect } = React;
+import React, { useRef, useEffect } from 'react';
 import styles from './QueueModal.module.css';
 import { FiX } from 'react-icons/fi';
-import { usePlayer } from '../../contexts/PlayerContext';
+import { usePlayer } from '@/contexts/PlayerContext';
 
 const QueueModal = ({ onClose }) => {
     const { playlist, currentTrack, playTrack } = usePlayer();

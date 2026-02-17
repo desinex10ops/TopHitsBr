@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../../../services/api';
 import styles from './NewProductModal.module.css';
 import { FiX, FiUploadCloud } from 'react-icons/fi';
-import { useToast } from '../../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 
 const NewProductModal = ({ onClose, onSuccess }) => {
     const [activeTab, setActiveTab] = useState('details'); // details, metadata, files

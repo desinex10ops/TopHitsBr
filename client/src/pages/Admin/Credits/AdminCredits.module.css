@@ -1,27 +1,27 @@
 .container {
-    padding: 2rem;
-    color: #fff;
-    max-width: 1000px;
+    padding: 20px 0;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 1rem;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.title h1 {
-    font-size: 2rem;
+.header h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
 }
 
 .tabs {
     display: flex;
-    gap: 1rem;
-    background: #222;
-    padding: 0.5rem;
+    gap: 10px;
+    background: #181818;
+    padding: 5px;
     border-radius: 8px;
 }
 
@@ -29,13 +29,13 @@
     background: transparent;
     border: none;
     color: #888;
-    padding: 0.5rem 1rem;
+    padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    font-size: 0.9rem;
     transition: all 0.2s;
 }
 
@@ -44,217 +44,337 @@
 }
 
 .tab.active {
-    background: #333;
-    color: #00ff88;
+    background: #282828;
+    color: #fff;
+}
+
+.content {
+    margin-top: 20px;
 }
 
 /* Packages Grid */
+.actionRow {
+    margin-bottom: 20px;
+}
+
+.addBtn {
+    background: #1db954;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
 }
 
 .card {
-    background: #1a1a1a;
+    background: #181818;
     border: 1px solid #333;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
 .cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
 }
 
 .cardHeader h3 {
     margin: 0;
-    font-size: 1.2rem;
+    color: #fff;
+    font-size: 1.1rem;
 }
 
 .credits {
-    background: #00ff8822;
-    color: #00ff88;
-    padding: 2px 8px;
+    background: rgba(29, 185, 84, 0.1);
+    color: #1db954;
+    padding: 4px 10px;
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: 700;
 }
 
-.cardBody {
-    flex-grow: 1;
+.price {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    display: block;
-    margin-bottom: 0.5rem;
+.cardBody p {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
 }
 
 .cardFooter {
+    margin-top: auto;
     display: flex;
     justify-content: flex-end;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    gap: 10px;
     border-top: 1px solid #333;
-    padding-top: 1rem;
+    padding-top: 15px;
 }
 
 .cardFooter button {
-    background: #333;
+    background: transparent;
     border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    color: #fff;
+    color: #888;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
+    font-size: 1.1rem;
+    transition: color 0.2s;
 }
 
 .cardFooter button:hover {
-    background: #444;
-}
-
-.cardFooter .deleteBtn:hover {
-    background: #ff4444;
-}
-
-/* Form */
-.form {
-    background: #222;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    border: 1px solid #444;
-}
-
-.form h3 {
-    margin-bottom: 1rem;
-}
-
-.formGroup {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.formGroup label {
-    margin-bottom: 0.5rem;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.formGroup input {
-    background: #111;
-    border: 1px solid #333;
-    padding: 0.8rem;
-    border-radius: 6px;
     color: #fff;
 }
 
-.row {
-    display: flex;
-    gap: 1rem;
+.cardFooter .deleteBtn:hover {
+    color: #ff4d4d;
 }
 
-.row .formGroup {
-    flex: 1;
+/* Form Styles */
+.form {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+.form h3 {
+    margin: 0 0 20px 0;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    color: #888;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.formGroup input {
+    width: 100%;
+    background: #282828;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
 .formActions {
     display: flex;
     justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .formActions button {
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
+    background: transparent;
     border: none;
+    color: #888;
     cursor: pointer;
-    font-weight: 600;
 }
 
 .saveBtn {
-    background: #00ff88;
-    color: #000;
-}
-
-.addBtn {
-    background: #00ff88;
-    color: #000;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    background: #1db954 !important;
+    color: #fff !important;
+    padding: 8px 24px !important;
+    border-radius: 20px !important;
+    font-weight: 600;
 }
 
 /* Settings */
 .settingsContainer {
-    background: #1a1a1a;
-    padding: 2rem;
+    max-width: 600px;
+    background: #181818;
+    padding: 30px;
     border-radius: 12px;
-    max-width: 500px;
-}
-
-.settingsContainer h3 {
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 1rem;
+    border: 1px solid #333;
 }
 
 .settingItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #282828;
 }
 
 .settingItem label {
-    font-size: 1.1rem;
+    color: #ccc;
 }
 
 .settingItem input {
-    background: #111;
-    border: 1px solid #333;
-    padding: 0.8rem;
-    border-radius: 6px;
+    width: 80px;
+    background: #282828;
+    border: 1px solid #444;
     color: #fff;
-    width: 100px;
+    padding: 8px;
+    border-radius: 4px;
     text-align: center;
-    font-size: 1.1rem;
 }
 
 .saveSettingsBtn {
     width: 100%;
-    background: #2563eb;
-    color: #fff;
+    background: #1db954;
     border: none;
-    padding: 1rem;
+    color: #fff;
+    padding: 12px;
     border-radius: 8px;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.saveSettingsBtn:hover {
-    background: #1d4ed8;
+/* Table Styles (Withdrawals/Sales) */
+.tableContainer {
+    background: #181818;
+    border-top: 1px solid #333;
+    border-radius: 12px;
+    border: 1px solid #333;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #282828;
+}
+
+.table th {
+    color: #888;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.table td {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.statusBadge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.statusBadge.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.statusBadge.paid {
+    background: rgba(29, 185, 84, 0.1);
+    color: #1db954;
+}
+
+.statusBadge.rejected {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.approveBtn,
+.rejectBtn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.approveBtn {
+    background: #1db954;
+    color: #fff;
+}
+
+.rejectBtn {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+/* Finance Summary */
+.summaryCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.summaryCard {
+    background: #181818;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+
+.summaryCard h4 {
+    margin: 0;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.summaryCard .value {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tabs {
+        width: 100%;
+        overflow-x: auto;
+    }
 }

@@ -1,6 +1,5 @@
-import * as React from 'react';
-const { useEffect, useRef, useState } = React;
-import { usePlayer } from '../../contexts/PlayerContext';
+import React, { useEffect, useRef, useState } from 'react';
+import { usePlayer } from '@/contexts/PlayerContext';
 import styles from './LyricsView.module.css';
 
 const LyricsView = () => {

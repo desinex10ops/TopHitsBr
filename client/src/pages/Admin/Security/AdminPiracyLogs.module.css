@@ -1,41 +1,46 @@
 .container {
-    padding: 2rem;
-    color: #fff;
+    padding: 20px 0;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 25px;
 }
 
 .title {
-    font-size: 1.8rem;
-    border-left: 4px solid var(--primary-color);
-    padding-left: 1rem;
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
 }
 
 .refreshBtn {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    background: #282828;
+    border: 1px solid #333;
+    color: #ccc;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    transition: all 0.2s;
 }
 
 .refreshBtn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: #333;
+    color: #fff;
+    border-color: #1db954;
 }
 
 .tableContainer {
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    overflow-x: auto;
+    background: #181818;
+    border-radius: 12px;
+    border: 1px solid #333;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .table {
@@ -43,63 +48,85 @@
     border-collapse: collapse;
 }
 
-.table th,
-.table td {
-    padding: 1rem;
+.table th {
+    background: #222;
+    padding: 15px;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    color: #888;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-.table th {
-    background: rgba(0, 0, 0, 0.2);
-    font-weight: 600;
-    color: var(--text-secondary);
+.table td {
+    padding: 16px 15px;
+    border-bottom: 1px solid #282828;
+    color: #ccc;
+    font-size: 0.9rem;
+    vertical-align: middle;
 }
 
 .statusCol {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-}
-
-.userName {
-    font-weight: bold;
-}
-
-.userEmail {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    gap: 8px;
+    font-weight: 600;
 }
 
 .success {
-    color: #4caf50;
+    color: #1db954;
 }
 
 .blocked {
-    color: #f44336;
+    color: #ff4d4d;
 }
 
 .expired {
-    color: #ff9800;
+    color: #ffa000;
 }
 
 .failed {
-    color: #9e9e9e;
+    color: #888;
+}
+
+.userName {
+    color: #fff;
+    font-weight: 500;
+}
+
+.userEmail {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.productTitle {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.loading,
+.empty {
+    text-align: center;
+    padding: 50px !important;
+    color: #888;
 }
 
 .pagination {
     display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1rem;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .pagination button {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 0.5rem 1rem;
+    background: #282828;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 6px 15px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -107,4 +134,15 @@
 .pagination button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.pagination span {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .tableContainer {
+        overflow-x: auto;
+    }
 }

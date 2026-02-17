@@ -134,6 +134,33 @@
     padding: 30px;
 }
 
+.messageBtn {
+    margin-top: 15px;
+    padding: 10px 24px;
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    width: fit-content;
+}
+
+.messageBtn:hover {
+    background: #2a2a2a;
+    border-color: #ff4757;
+    color: #ff4757;
+}
+
+.messageBtn svg {
+    font-size: 1.1rem;
+}
+
 .sectionTitle {
     font-size: 1.5rem;
     font-weight: 700;

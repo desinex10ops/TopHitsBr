@@ -1,0 +1,164 @@
+.container {
+    padding-bottom: 80px;
+    background-color: #121212;
+    min-height: 100vh;
+}
+
+.coverHeader {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -75px;
+    padding: 0 20px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #121212;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.username {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 15px 0 5px;
+    color: #fff;
+}
+
+.userType {
+    background: #333;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stats {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.statItem {
+    text-align: center;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: block;
+    color: #fff;
+}
+
+.statLabel {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.followBtn {
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    background: transparent;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+.followBtn.following {
+    background: transparent;
+    border-color: #fff;
+}
+
+.followBtn.notFollowing {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.followBtn:hover {
+    transform: scale(1.05);
+}
+
+.messageBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid #aaa;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.messageBtn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 40px 20px 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+    padding: 0 20px;
+}
+
+/* Reusing card styles roughly or defining new ones */
+.card {
+    background: #181818;
+    padding: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+}
+
+.card:hover {
+    background: #282828;
+}
+
+.cardTitle {
+    color: #fff;
+    font-weight: 600;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardSub {
+    color: #aaa;
+    font-size: 0.9rem;
+}

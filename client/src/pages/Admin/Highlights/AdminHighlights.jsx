@@ -1,7 +1,6 @@
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from 'react';
 import api from '../../../services/api';
-import { useToast } from '../../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import { getStorageUrl } from '../../../utils/urlUtils';
 
 // Helper Styles

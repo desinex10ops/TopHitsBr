@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FiHome, FiSearch, FiDisc, FiUser } from 'react-icons/fi';
+import { FiHome, FiSearch, FiDisc, FiUser, FiList } from 'react-icons/fi';
 import styles from './MobileMenu.module.css';
 
 const MobileMenu = () => {
@@ -17,6 +17,10 @@ const MobileMenu = () => {
             <NavLink to="/genres" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
                 <FiDisc className={styles.icon} />
                 <span>Gêneros</span>
+            </NavLink>
+            <NavLink to="/playlists" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                <FiList className={styles.icon} />
+                <span>Biblio</span>
             </NavLink>
             <NavLink to="/dashboard" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
                 <FiUser className={styles.icon} />

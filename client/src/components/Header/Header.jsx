@@ -1,9 +1,8 @@
-import * as React from 'react';
-const { useState, useRef, useEffect } = React;
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useAuth } from '../../contexts/AuthContext';
-import { useCart } from '../../contexts/CartContext';
+import React, { useState, useRef, useEffect } from 'react';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useCart } from '@/contexts/CartContext';
 import styles from './Header.module.css';
 import {
     FiHome, FiCompass, FiTrendingUp, FiList, FiSave, FiUpload,
@@ -11,10 +10,14 @@ import {
     FiPlay, FiPause, FiSkipForward, FiSkipBack, FiX, FiShoppingCart, FiGrid
 } from 'react-icons/fi';
 
+import NotificationBell from '../Notifications/NotificationBell';
+import { useNotifications } from '@/contexts/NotificationContext';
+
 const Header = () => {
     const { pendriveItems } = usePlayer();
     const { user, logout } = useAuth();
     const { cart } = useCart();
+    // const { unreadCount } = useNotifications(); // Handled inside NotificationBell now
     const [searchTerm, setSearchTerm] = useState('');
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -64,8 +67,13 @@ const Header = () => {
                 {/* LEFT: Logo & Nav */}
                 <div className={styles.leftSection}>
                     <nav className={styles.mainNav}>
-                        <Link to="/" className={styles.navLink} title="Início"><FiHome /> <span className={styles.linkText}>Início</span></Link>
-                        <Link to="/genres" className={styles.navLink} title="Explorar"><FiCompass /> <span className={styles.linkText}>Explorar</span></Link>
+                        <NavLink to="/" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} title="Início">
+                            <FiHome /> <span className={styles.linkText}>Início</span>
+                        </NavLink>
+                        <NavLink to="/genres" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} title="Explorar">
+                            <FiCompass /> <span className={styles.linkText}>Explorar</span>
+                        </NavLink>
+                        <NavLink to="/chat-online" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} title="Chat Online"><span className={styles.linkText} style={{ color: '#1ed760' }}>💬 Chat Online</span></NavLink>
                     </nav>
                 </div>
 
@@ -95,6 +103,9 @@ const Header = () => {
                                 {cart.length > 0 && <span className={styles.badge}>{cart.length}</span>}
                             </Link>
                         )}
+
+                        {/* NOTIFICATION BELL */}
+                        {user && <NotificationBell />}
 
                         <Link to="/upload" className={styles.actionBtn} onClick={handleUploadClick} title="Upload">
                             <FiUpload />
@@ -131,11 +142,11 @@ const Header = () => {
                                                 <span>{user.email}</span>
                                             </div>
                                             <div className={styles.dropdownDivider}></div>
-                                            <Link to="/profile" className={styles.dropdownItem}><FiUser /> Meu Perfil</Link>
-                                            <Link to="/playlists" className={styles.dropdownItem}><FiList /> Minhas Playlists</Link>
+                                            <Link to="/dashboard/profile" className={styles.dropdownItem}><FiUser /> Meu Perfil</Link>
+                                            <Link to="/dashboard/playlists" className={styles.dropdownItem}><FiList /> Minhas Playlists</Link>
                                             <Link to="/pen-drive" className={styles.dropdownItem}><FiSave /> Meu Pen Drive</Link>
                                             <div className={styles.dropdownDivider}></div>
-                                            <Link to="/settings" className={styles.dropdownItem}><FiSettings /> Configurações</Link>
+                                            <Link to="/dashboard/settings" className={styles.dropdownItem}><FiSettings /> Configurações</Link>
                                             <button onClick={logout} className={`${styles.dropdownItem} ${styles.logoutBtn}`}>
                                                 <FiLogOut /> Sair
                                             </button>

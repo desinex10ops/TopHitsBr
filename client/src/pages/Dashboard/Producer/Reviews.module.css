@@ -1,0 +1,137 @@
+.container {
+    color: #fff;
+    padding: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.statItem {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.statValue {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff9d;
+}
+
+.statLabel {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    margin-top: 2rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding-right: 1rem;
+}
+
+.cover {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.productTitle {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ddd;
+}
+
+.reviewContent {
+    flex: 1;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.date {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.comment {
+    color: #eee;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .card {
+        grid-template-columns: 1fr;
+    }
+
+    .productInfo {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 1rem;
+        padding-right: 0;
+        text-align: left;
+    }
+}

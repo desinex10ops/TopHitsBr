@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const walletController = require('../controllers/walletController');
+const financeController = require('../controllers/financeController');
 const boostController = require('../controllers/boostController');
 const adminCreditController = require('../controllers/adminCreditController');
 const authMiddleware = require('../middleware/auth');
 
 // Wallet Routes
-router.get('/wallet', authMiddleware, walletController.getBalance);
-router.get('/wallet/transactions', authMiddleware, walletController.getTransactions);
-router.post('/wallet/buy', authMiddleware, walletController.buyPackage);
+router.get('/wallet', authMiddleware, financeController.getWallet);
+router.get('/wallet/transactions', authMiddleware, financeController.getTransactions);
+const paymentController = require('../controllers/paymentController');
+router.post('/buy', authMiddleware, paymentController.createCreditPreference);
 
 // Boost Routes
 router.post('/boost', authMiddleware, boostController.createBoost);

@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         },
         producerId: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
             // Foreign key defined in database.js
         },
         productId: {

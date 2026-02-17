@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { useCart } from '../../contexts/CartContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/contexts/ToastContext';
 import styles from './Checkout.module.css';
-import { FiLock, FiCheckCircle } from 'react-icons/fi';
+import { FiLock } from 'react-icons/fi';
 import api from '../../services/api';
 
 const Checkout = () => {
-    const { cart, total, clearCart } = useCart();
+    const { cart, total, clearCart, coupon } = useCart();
     const { user } = useAuth();
     const navigate = useNavigate();
+    const { addToast } = useToast();
     const [loading, setLoading] = useState(false);
-    const [orderId, setOrderId] = useState(null);
-    const [success, setSuccess] = useState(false);
 
     const handlePayment = async () => {
         if (!user) {
@@ -23,52 +23,35 @@ const Checkout = () => {
         setLoading(true);
         try {
             // 1. Create Preference (Order)
-            const items = cart.map(item => ({ id: item.id, quantity: 1 })); // Assuming qty 1 for now
+            const items = cart.map(item => ({ id: item.id, quantity: 1 }));
             const response = await api.post('/payment/checkout', {
                 items,
-                buyerId: user.id
+                buyerId: user.id,
+                couponCode: coupon?.code
             });
 
-            const { id, init_point } = response.data;
-            setOrderId(id);
+            const { init_point } = response.data;
 
             // Redirect to Real Mercado Pago Checkout
             if (init_point) {
                 window.location.href = init_point;
             } else {
-                alert("Erro ao gerar link de pagamento.");
+                addToast("Erro ao gerar link de pagamento.", "error");
                 setLoading(false);
             }
 
-            // Mock Simulation Removed
-
         } catch (error) {
             console.error("Checkout error:", error);
-            alert("Erro ao processar checkout.");
+            addToast("Erro ao processar checkout.", "error");
             setLoading(false);
         }
     };
-
-    if (success) {
-        return (
-            <div className={styles.container}>
-                <div className={styles.successCard}>
-                    <FiCheckCircle className={styles.successIcon} />
-                    <h1>Pagamento Aprovado!</h1>
-                    <p>Seus produtos já estão liberados para download.</p>
-                    <button onClick={() => navigate('/dashboard/purchases')} className={styles.button}>
-                        Meus Pedidos
-                    </button>
-                </div>
-            </div>
-        );
-    }
 
     if (cart.length === 0) {
         return (
             <div className={styles.container}>
                 <h2>Seu carrinho está vazio.</h2>
-                <button onClick={() => navigate('/shop')}>Voltar para Loja</button>
+                <button onClick={() => navigate('/shop')} className={styles.button}>Voltar para Loja</button>
             </div>
         );
     }
@@ -87,6 +70,12 @@ const Checkout = () => {
                             </div>
                         ))}
                     </div>
+                    {coupon && (
+                        <div className={styles.itemRow} style={{ color: '#1db954' }}>
+                            <span>Cupom: {coupon.code}</span>
+                            <span>-{coupon.discountPercentage}%</span>
+                        </div>
+                    )}
                     <div className={styles.totalRow}>
                         <span>Total</span>
                         <span>R$ {total.toFixed(2).replace('.', ',')}</span>
@@ -100,12 +89,11 @@ const Checkout = () => {
 
                     <div className={styles.methods}>
                         <div className={`${styles.methodCard} ${styles.active}`}>
-                            <img src="/pix-logo.png" alt="PIX" className={styles.methodIcon} /> {/* Placeholder */}
-                            <span>PIX (Aprovação Imediata)</span>
-                        </div>
-                        {/* Future: Credit Card */}
-                        <div className={`${styles.methodCard} ${styles.disabled}`}>
-                            <span>Cartão de Crédito (Em breve)</span>
+                            <img src="https://img.icons8.com/color/48/mercadopago.png" alt="MP" className={styles.methodIcon} style={{ width: 32 }} />
+                            <div>
+                                <span style={{ display: 'block', fontWeight: 'bold' }}>Mercado Pago</span>
+                                <span style={{ fontSize: '0.8rem', color: '#888' }}>Pix, Cartão de Crédito, Boleto</span>
+                            </div>
                         </div>
                     </div>
 
@@ -116,7 +104,9 @@ const Checkout = () => {
                     >
                         {loading ? 'Processando...' : `Pagar R$ ${total.toFixed(2).replace('.', ',')}`}
                     </button>
-                    {loading && <p className={styles.loadingText}>Simulando pagamento no banco...</p>}
+                    <p className={styles.loadingText} style={{ fontSize: '0.8rem', marginTop: 15 }}>
+                        Você será redirecionado para o Mercado Pago para finalizar.
+                    </p>
                 </div>
             </div>
         </div>

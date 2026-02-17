@@ -1,11 +1,10 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FiHome, FiSearch, FiDisc, FiPlusSquare, FiHeart, FiUser, FiLogIn, FiMusic, FiCreditCard, FiShoppingBag, FiDollarSign, FiTrendingUp } from 'react-icons/fi';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import styles from './Sidebar.module.css';
 import api from '../../services/api';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import logoImg from '../../assets/logo_tophits.png';
 
 
@@ -71,26 +70,22 @@ const Sidebar = () => {
                 )}
 
                 {/* Links para Produtores */}
-                {user && user.type === 'artist' && (
+                {user && (user.type === 'artist' || user.type === 'admin') && (
                     <>
                         <div className={styles.divider}></div>
-                        <div className={styles.producerDropdown}>
-                            <div className={styles.sectionTitle}>ÁREA DO PRODUTOR</div>
-                            <div className={styles.producerLinks}>
-                                <NavLink to="/dashboard/products" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
-                                    <FiDisc className={styles.icon} />
-                                    <span>Meus Produtos</span>
-                                </NavLink>
-                                <NavLink to="/dashboard/finance" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
-                                    <FiDollarSign className={styles.icon} />
-                                    <span>Financeiro</span>
-                                </NavLink>
-                                <NavLink to="/dashboard/marketing" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
-                                    <FiTrendingUp className={styles.icon} />
-                                    <span>Marketing</span>
-                                </NavLink>
-                            </div>
-                        </div>
+                        <div className={styles.sectionTitle}>ÁREA DO PRODUTOR</div>
+                        <NavLink to="/dashboard/products" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                            <FiDisc className={styles.icon} />
+                            <span>Meus Produtos</span>
+                        </NavLink>
+                        <NavLink to="/dashboard/finance" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                            <FiDollarSign className={styles.icon} />
+                            <span>Financeiro</span>
+                        </NavLink>
+                        <NavLink to="/dashboard/marketing" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                            <FiTrendingUp className={styles.icon} />
+                            <span>Marketing</span>
+                        </NavLink>
                     </>
                 )}
             </nav>
@@ -106,8 +101,8 @@ const Sidebar = () => {
                     <span>Músicas Curtidas</span>
                 </NavLink>
 
-                <NavLink to="/karaoke" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active} ${styles.karaokeLink}` : `${styles.navItem} ${styles.karaokeLink}`}>
-                    <span className={styles.karaokeIcon}>🎤</span>
+                <NavLink to="/karaoke" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                    <span className={styles.icon} style={{ fontSize: '1.2rem' }}>🎤</span>
                     <span>Karaokê</span>
                     <span className={styles.badgeNew}>NOVO</span>
                 </NavLink>

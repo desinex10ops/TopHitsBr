@@ -1,8 +1,7 @@
-import * as React from 'react';
-const { useState } = React;
+import React, { useState } from 'react';
 import styles from './BoostBlock.module.css';
 import { FiTrendingUp, FiDownload, FiStar, FiMusic, FiUsers, FiX, FiCheckCircle } from 'react-icons/fi';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 
 const BoostBlock = () => {
     const [showModal, setShowModal] = useState(false);

@@ -1,7 +1,6 @@
-import * as React from 'react';
-const { useState } = React;
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import styles from './Auth.module.css';
 
 const Register = () => {

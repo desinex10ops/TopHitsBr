@@ -15,6 +15,14 @@ module.exports = (sequelize) => {
             type: DataTypes.ENUM('pending', 'paid', 'failed', 'refunded'),
             defaultValue: 'pending'
         },
+        orderType: {
+            type: DataTypes.ENUM('shop', 'credits'),
+            defaultValue: 'shop'
+        },
+        packageId: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
         paymentMethod: {
             type: DataTypes.STRING, // 'pix', 'credit_card', etc.
             allowNull: true

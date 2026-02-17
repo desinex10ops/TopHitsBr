@@ -1,7 +1,6 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import styles from './Wallet.module.css';
 import { FiCreditCard, FiClock, FiActivity, FiTrendingUp } from 'react-icons/fi';
 

@@ -3,7 +3,7 @@ import api from '../../../services/api';
 import styles from './Overview.module.css';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { FiDollarSign, FiShoppingBag, FiTrendingUp, FiActivity } from 'react-icons/fi';
-import { useToast } from '../../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import { getStorageUrl } from '../../../utils/urlUtils';
 
 const Overview = () => {

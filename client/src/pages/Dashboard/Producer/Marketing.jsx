@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../services/api';
 import styles from './Marketing.module.css';
-import { FiTag, FiTrash2, FiPlus } from 'react-icons/fi';
-import { useToast } from '../../../contexts/ToastContext';
+import { FiTag, FiTrash2, FiPlus, FiActivity } from 'react-icons/fi';
+import { useToast } from '@/contexts/ToastContext';
 
 const Marketing = () => {
     const [coupons, setCoupons] = useState([]);
@@ -96,6 +96,56 @@ const Marketing = () => {
                 ))}
 
                 {coupons.length === 0 && <p className={styles.empty}>Nenhum cupom ativo.</p>}
+            </div>
+
+            <div className={styles.header} style={{ marginTop: '40px' }}>
+                <h1 className={styles.title}>Rastreamento & Conversão</h1>
+            </div>
+
+            <div className={styles.pixelGrid}>
+                <div className={styles.pixelCard}>
+                    <div className={styles.pixelHeader}>
+                        <div className={styles.pixelIcon} style={{ color: '#1877F2' }}>
+                            <FiActivity />
+                        </div>
+                        <h3>Meta Pixel (Facebook/Instagram)</h3>
+                    </div>
+                    <p className={styles.pixelDesc}>Rastreie visualizações e compras vindo do Facebook e Instagram Ads.</p>
+                    <input
+                        type="text"
+                        placeholder="ID do Pixel (ex: 1234567890)"
+                        className={styles.pixelInput}
+                    />
+                    <button className={styles.savePixelBtn}>Salvar Pixel</button>
+                </div>
+
+                <div className={styles.pixelCard}>
+                    <div className={styles.pixelIcon} style={{ color: '#000000', backgroundColor: '#fff', borderRadius: '50%', padding: '4px' }}>
+                        <FiActivity />
+                    </div>
+                    <h3>TikTok Pixel</h3>
+                    <p className={styles.pixelDesc}>Otimize suas campanhas no TikTok Ads rastreando eventos de compra.</p>
+                    <input
+                        type="text"
+                        placeholder="ID do Pixel (ex: C123456789)"
+                        className={styles.pixelInput}
+                    />
+                    <button className={styles.savePixelBtn}>Salvar Pixel</button>
+                </div>
+
+                <div className={styles.pixelCard}>
+                    <div className={styles.pixelIcon} style={{ color: '#F4B400' }}>
+                        <FiActivity />
+                    </div>
+                    <h3>Google Analytics 4</h3>
+                    <p className={styles.pixelDesc}>Acompanhe o tráfego detalhado da sua loja e origem dos visitantes.</p>
+                    <input
+                        type="text"
+                        placeholder="ID de Medida (ex: G-XXXXXXXX)"
+                        className={styles.pixelInput}
+                    />
+                    <button className={styles.savePixelBtn}>Salvar ID</button>
+                </div>
             </div>
 
             {showModal && (

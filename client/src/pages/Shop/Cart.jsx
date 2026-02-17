@@ -1,12 +1,19 @@
-import React from 'react';
-import { useCart } from '../../contexts/CartContext';
+import React, { useState } from 'react';
+import { useCart } from '@/contexts/CartContext';
 import styles from './Cart.module.css';
 import { FiTrash2, FiShoppingBag, FiArrowLeft } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-    const { cart, removeFromCart, total, clearCart } = useCart();
+    const { cart, removeFromCart, total, discount, coupon, applyCoupon, removeCoupon, clearCart } = useCart();
     const navigate = useNavigate();
+    const [couponCode, setCouponCode] = useState('');
+
+    const handleApplyCoupon = async () => {
+        if (!couponCode) return;
+        const success = await applyCoupon(couponCode);
+        if (success) setCouponCode('');
+    };
 
     return (
         <div className={styles.container}>
@@ -43,10 +50,43 @@ const Cart = () => {
 
                     <div className={styles.summary}>
                         <h2>Resumo</h2>
+
+                        <div className={styles.couponSection}>
+                            <label>Cupom de Desconto</label>
+                            <div className={styles.couponInput}>
+                                <input
+                                    type="text"
+                                    placeholder="Código"
+                                    value={couponCode}
+                                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                                    disabled={!!coupon}
+                                />
+                                {coupon ? (
+                                    <button onClick={removeCoupon} className={styles.removeCouponBtn}>Remover</button>
+                                ) : (
+                                    <button onClick={handleApplyCoupon}>Aplicar</button>
+                                )}
+                            </div>
+                            {coupon && <p className={styles.couponSuccess}>Cupom {coupon.code} aplicado: {coupon.discountPercentage}% OFF</p>}
+                        </div>
+
                         <div className={styles.totalRow}>
+                            <span>Subtotal</span>
+                            <span>R$ {(total + discount).toFixed(2).replace('.', ',')}</span>
+                        </div>
+
+                        {discount > 0 && (
+                            <div className={`${styles.totalRow} ${styles.discountRow}`}>
+                                <span>Desconto</span>
+                                <span>- R$ {discount.toFixed(2).replace('.', ',')}</span>
+                            </div>
+                        )}
+
+                        <div className={`${styles.totalRow} ${styles.finalTotal}`}>
                             <span>Total</span>
                             <span className={styles.totalPrice}>R$ {total.toFixed(2).replace('.', ',')}</span>
                         </div>
+
                         <button className={styles.checkoutBtn} onClick={() => navigate('/checkout')}>
                             Finalizar Compra
                         </button>

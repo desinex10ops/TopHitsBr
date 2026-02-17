@@ -1,0 +1,66 @@
+.mobileNav {
+    display: none;
+    /* Hidden by default (Desktop) */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    /* Standard mobile tab bar height */
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 0.7rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    height: 100%;
+    gap: 4px;
+}
+
+.navItem svg {
+    font-size: 1.4rem;
+    transition: transform 0.2s;
+}
+
+.navItem.active,
+.navItem:active {
+    color: #1DB954;
+}
+
+.navItem.active svg {
+    transform: translateY(-2px);
+}
+
+.avatarIcon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.navItem:active .avatarIcon {
+    border-color: #1DB954;
+}
+
+@media (max-width: 1024px) {
+    .mobileNav {
+        display: flex;
+    }
+}

@@ -28,7 +28,8 @@ const Track = sequelize.define('Track', {
     // Campos Karaokê
     hasKaraoke: { type: DataTypes.BOOLEAN, defaultValue: false },
     karaokeFile: { type: DataTypes.STRING }, // Caminho do instrumental
-    lyrics: { type: DataTypes.TEXT } // JSON ou LRC
+    lyrics: { type: DataTypes.TEXT }, // JSON ou LRC
+    featured: { type: DataTypes.BOOLEAN, defaultValue: false }
 });
 
 // Modelo: Playlist
@@ -53,12 +54,14 @@ const User = sequelize.define('User', {
     banner: { type: DataTypes.STRING }, // URL ou caminho
     bannerVideo: { type: DataTypes.STRING }, // [NEW] URL ou caminho do vídeo
     instagram: { type: DataTypes.STRING },
+    whatsapp: { type: DataTypes.STRING }, // [NEW]
     youtube: { type: DataTypes.STRING },
     tiktok: { type: DataTypes.STRING },
     city: { type: DataTypes.STRING },
     state: { type: DataTypes.STRING },
     stats: { type: DataTypes.JSON, defaultValue: { plays: 0, downloads: 0, followers: 0 } },
     preferences: { type: DataTypes.JSON, defaultValue: { notifications: true, darkMode: true } }, // [NEW]
+    isSeller: { type: DataTypes.BOOLEAN, defaultValue: false }, // [NEW] Phase 6
     active: { type: DataTypes.BOOLEAN, defaultValue: true } // Para banimento
 });
 
@@ -116,6 +119,13 @@ const ArtistNews = sequelize.define('ArtistNews', {
     date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 });
 
+// Modelo: Galeria do Artista [NEW]
+const ArtistImage = sequelize.define('ArtistImage', {
+    url: { type: DataTypes.STRING, allowNull: false }, // URL ou path relativo
+    caption: { type: DataTypes.STRING },
+    order: { type: DataTypes.INTEGER, defaultValue: 0 }
+});
+
 // --- Início Sistema de Créditos ---
 const WalletModel = require('./models/Wallet');
 const CreditTransactionModel = require('./models/CreditTransaction');
@@ -141,15 +151,18 @@ User.hasMany(Boost);
 Boost.belongsTo(User);
 
 // Associações Album [NEW]
-User.hasMany(Album);
-Album.belongsTo(User);
+User.hasMany(Album, { foreignKey: 'UserId' });
+Album.belongsTo(User, { as: 'Artist', foreignKey: 'UserId' });
 
 Album.hasMany(Track);
 Track.belongsTo(Album);
 
-// Associações News
+// Associações News & Gallery
 User.hasMany(ArtistNews);
 ArtistNews.belongsTo(User);
+
+User.hasMany(ArtistImage);
+ArtistImage.belongsTo(User);
 
 // Modelo: PlayHistory (Termômetro Musical)
 const PlayHistory = sequelize.define('PlayHistory', {
@@ -173,6 +186,7 @@ const TransactionModel = require('./models/Transaction'); // [NEW]
 const CommissionSettingModel = require('./models/CommissionSetting'); // [NEW]
 const CouponModel = require('./models/Coupon');
 const ReviewModel = require('./models/Review');
+const NotificationModel = require('./models/Notification');
 
 const Product = ProductModel(sequelize);
 const Order = OrderModel(sequelize);
@@ -182,6 +196,7 @@ const Transaction = TransactionModel(sequelize); // [NEW]
 const CommissionSetting = CommissionSettingModel(sequelize); // [NEW]
 const Coupon = CouponModel(sequelize);
 const Review = ReviewModel(sequelize);
+const Notification = NotificationModel(sequelize);
 
 // Associações Shop
 // User (Producer) has many Products
@@ -206,6 +221,10 @@ Order.belongsTo(User, { foreignKey: 'buyerId', as: 'Buyer' });
 // Order has many OrderItems
 Order.hasMany(OrderItem);
 OrderItem.belongsTo(Order);
+
+// Order belongs to CreditPackage (for credit purchases)
+Order.belongsTo(CreditPackage, { foreignKey: 'packageId' });
+CreditPackage.hasMany(Order, { foreignKey: 'packageId' });
 
 // OrderItem belongs to Product
 Product.hasMany(OrderItem);
@@ -240,7 +259,38 @@ DownloadLink.belongsTo(Order);
 DownloadLog.belongsTo(DownloadLink);
 DownloadLog.belongsTo(User); // Quem tentou baixar
 
+// Associações Notificações
+User.hasMany(Notification, { foreignKey: 'userId' });
+Notification.belongsTo(User, { foreignKey: 'userId' });
+
 // --- Fim Sistema de Créditos / Shop ---
+
+// --- Chat System ---
+const ConversationModel = require('./models/Conversation');
+const MessageModel = require('./models/Message');
+
+const Conversation = ConversationModel(sequelize);
+const Message = MessageModel(sequelize);
+
+// Chat Associations
+Conversation.belongsTo(User, { as: 'User1', foreignKey: 'user1Id' });
+Conversation.belongsTo(User, { as: 'User2', foreignKey: 'user2Id' });
+
+Conversation.hasMany(Message);
+Message.belongsTo(Conversation);
+
+Message.belongsTo(User, { as: 'Sender', foreignKey: 'senderId' });
+// -------------------
+
+// Modelo: ExportHistory (Pen Drive 2.0)
+const ExportHistoryModel = require('./models/ExportHistory');
+const ExportHistory = ExportHistoryModel(sequelize);
+
+User.hasMany(ExportHistory, { foreignKey: 'userId' });
+ExportHistory.belongsTo(User, { foreignKey: 'userId' });
+
+Track.hasMany(ExportHistory, { foreignKey: 'trackId' });
+ExportHistory.belongsTo(Track, { foreignKey: 'trackId' });
 
 // Modelo: Comentários
 const Comment = sequelize.define('Comment', {
@@ -258,6 +308,9 @@ Comment.belongsTo(Track);
 Playlist.hasMany(Comment);
 Comment.belongsTo(Playlist);
 
+Album.hasMany(Comment);
+Comment.belongsTo(Album);
+
 // Relações N:M (Playlist Likes)
 User.belongsToMany(Playlist, { as: 'LikedPlaylists', through: 'UserPlaylistLikes' });
 Playlist.belongsToMany(User, { as: 'Likers', through: 'UserPlaylistLikes' });
@@ -269,13 +322,15 @@ const initDb = async () => {
 
         // Sync models
         try {
-            await User.sync({ alter: true }); // [UPDATED] to add bannerVideo
+            // Fix for SQLite "Users_backup" error: Drop backup tables that might be lingering
+            await sequelize.query("DROP TABLE IF EXISTS Users_backup;");
+            await User.sync({ alter: true }); // [UPDATED] to add bannerVideo and whatsapp
         } catch (e) {
             console.log("User sync error (ignored):", e.message);
         }
-        await Album.sync(); // [NEW]
+        await Album.sync({ alter: true }); // [NEW]
         try {
-            await Track.sync(); // Needs AlbumId
+            await Track.sync({ alter: true }); // Needs AlbumId
         } catch (e) {
             console.log("Track sync error (ignored):", e.message);
         }
@@ -288,10 +343,16 @@ const initDb = async () => {
 
         await SystemSetting.sync();
         await ArtistNews.sync();
+        await ArtistImage.sync(); // [NEW]
         await Comment.sync({ alter: true }); // Alter to add PlaylistId
 
         // Sync Credit System
-        await Wallet.sync();
+        try {
+            await sequelize.query("ALTER TABLE Wallets ADD COLUMN pending_balance DECIMAL(10, 2) DEFAULT 0.00;");
+        } catch (e) {
+            // Ignore if column already exists
+        }
+        await Wallet.sync({ alter: true });
         await CreditTransaction.sync();
         await CreditPackage.sync();
         await CreditPackage.sync();
@@ -299,7 +360,7 @@ const initDb = async () => {
 
         // Sync Shop
         await Product.sync({ alter: true }); // Phase 2: Added fields
-        await Order.sync();
+        await Order.sync({ alter: true }); // Support orderType and packageId
         await OrderItem.sync();
         await Withdrawal.sync();
         await Transaction.sync(); // [NEW]
@@ -308,69 +369,29 @@ const initDb = async () => {
         await Review.sync(); // [NEW] Phase 2
 
         // Sync Anti-Piracy
+        try {
+            await sequelize.query("ALTER TABLE DownloadLogs ADD COLUMN UserId INTEGER;");
+        } catch (e) {
+            // Ignore if column already exists
+        }
         await DownloadLink.sync();
         await DownloadLog.sync();
+        await AdminNotification.sync();
 
-        // Sync Trending
+        // Sync Chat
+        await Conversation.sync();
+        await Message.sync();
+        await Notification.sync();
+        await ExportHistory.sync(); // [NEW]
+
+        console.log("Database & Models synchronized.");
         // Internally requiring to ensure scope or just depend on definition
         // Actually, better to just access it if it was defined in scope.
         // User, Track etc are defined in scope. PlayHistory is too.
         await sequelize.models.PlayHistory.sync(); // Access via sequelize.models to be safe
 
-        // --- MIGRATION: TRACKS TO ALBUMS ---
-        try {
-            const tracksWithoutAlbumId = await Track.findAll({ where: { AlbumId: null } });
-            if (tracksWithoutAlbumId.length > 0) {
-                console.log("Starting Album Migration...");
-                let migratedCount = 0;
-
-                // Group by User + AlbumName
-                // Map: UserId -> { AlbumName -> { cover, genre, tracks: [] } }
-                const userAlbums = {};
-
-                for (const track of tracksWithoutAlbumId) {
-                    if (!track.album || !track.UserId) continue;
-
-                    if (!userAlbums[track.UserId]) userAlbums[track.UserId] = {};
-                    if (!userAlbums[track.UserId][track.album]) {
-                        userAlbums[track.UserId][track.album] = {
-                            cover: track.coverpath,
-                            genre: track.genre,
-                            tracks: []
-                        };
-                    }
-                    userAlbums[track.UserId][track.album].tracks.push(track);
-                }
-
-                for (const userId in userAlbums) {
-                    for (const albumName in userAlbums[userId]) {
-                        const data = userAlbums[userId][albumName];
-
-                        // Find or Create Album
-                        const [album, created] = await Album.findOrCreate({
-                            where: {
-                                title: albumName,
-                                UserId: userId
-                            },
-                            defaults: {
-                                cover: data.cover,
-                                genre: data.genre
-                            }
-                        });
-
-                        // Update Tracks
-                        for (const track of data.tracks) {
-                            track.AlbumId = album.id;
-                            await track.save();
-                            migratedCount++;
-                        }
-                    }
-                }
-                console.log(`Album migration completed. Migrated ${migratedCount} tracks.`);
-            }
-        } catch (migErr) {
-            console.error("Migration Error:", migErr);
-        }
+        // --- MIGRATION: REMOVED FOR PERFORMANCE ---
+        // Migration of Tracks to Albums should be done via specific script, not on every startup.
         // -----------------------------------
 
         console.log('Database synced.');
@@ -378,6 +399,34 @@ const initDb = async () => {
         console.error('Unable to connect to the database:', error);
     }
 };
+
+const AdminNotification = sequelize.define('AdminNotification', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    type: {
+        type: DataTypes.ENUM('info', 'warning', 'danger', 'success'),
+        defaultValue: 'info'
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    message: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    link: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    isRead: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
+});
 
 module.exports = {
     sequelize,
@@ -391,6 +440,7 @@ module.exports = {
     CreditPackage,
     Boost,
     ArtistNews,
+    ArtistImage, // [NEW]
     PlayHistory, // Exporting new model
     Album, // [NEW]
     Comment, // [NEW]
@@ -404,5 +454,10 @@ module.exports = {
     Review,
     DownloadLink,
     DownloadLog,
+    DownloadLog,
+    Conversation,
+    Message,
+    Notification,
+    ExportHistory, // [NEW]
     initDb
 };

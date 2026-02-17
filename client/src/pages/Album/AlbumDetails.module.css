@@ -1,118 +1,107 @@
-/* AlbumDetails.module.css */
+/* Spotify Style Redesign */
 .container {
     position: relative;
     color: white;
     min-height: 100vh;
     padding-bottom: 120px;
-    /* Space for player */
-    overflow: hidden;
     font-family: 'Inter', sans-serif;
+    background-color: #121212;
+    /* Base dark background */
 }
 
-/* Glassmorphism Background */
+/* Header Section with Gradient */
 .glassBackground {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 60vh;
+    height: 340px;
+    /* Reduced height, typical header size */
+    background: linear-gradient(to bottom, #535353, #121212);
+    /* Fallback gradient */
     z-index: 0;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .backgroundImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(60px) brightness(0.6);
-    transform: scale(1.1);
-    /* Avoid white edges from blur */
+    display: none;
+    /* Hide blurred bg image, use solid gradient for cleaner look */
 }
 
-/* Content Wrapper */
+/* Content Layout */
 .content {
     position: relative;
     z-index: 1;
-    padding: 30px 40px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #121212 40%);
+    padding: 0 32px;
+    /* Standard Spotify padding */
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0%, #121212 100%);
 }
 
-/* Header */
+/* Header Info */
 .header {
     display: flex;
     align-items: flex-end;
-    gap: 30px;
-    padding: 60px 0 40px;
+    gap: 24px;
+    padding: 80px 32px 24px;
+    /* Top padding for navbar space */
+    position: relative;
+    z-index: 1;
 }
 
 .coverWrapper {
-    width: 260px;
-    height: 260px;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    width: 232px;
+    height: 232px;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    /* Deep shadow */
     flex-shrink: 0;
-    position: relative;
     transition: transform 0.3s ease;
 }
 
 .coverWrapper:hover {
-    transform: scale(1.02) translateY(-5px);
+    transform: scale(1.02);
 }
 
 .cover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-}
-
-.coverPlaceholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-    color: #555;
-    border-radius: 8px;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
 }
 
 .info {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 10px;
+    padding-bottom: 2px;
 }
 
 .type {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    /* ~12px */
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    opacity: 0.9;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+    opacity: 1;
 }
 
 .title {
-    font-size: 4.5rem;
-    /* Massive title */
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    /* Responsive big title */
     font-weight: 900;
-    margin: 0;
-    line-height: 1.1;
-    margin-bottom: 25px;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    letter-spacing: -2px;
+    margin: 0 0 12px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #fff;
 }
 
 .meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    gap: 4px;
+    font-size: 0.875rem;
+    /* ~14px */
+    color: rgba(255, 255, 255, 0.7);
     font-weight: 500;
 }
 
@@ -120,57 +109,64 @@
     color: white;
     font-weight: 700;
     text-decoration: none;
-    transition: text-decoration 0.2s;
 }
 
 .artistLink:hover {
     text-decoration: underline;
 }
 
+.artistAvatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 4px;
+    object-fit: cover;
+}
+
 .dot {
+    margin: 0 4px;
     font-size: 0.5rem;
-    opacity: 0.6;
 }
 
 /* Actions Bar */
 .actions {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 40px;
-    margin-top: 20px;
+    gap: 32px;
+    padding: 24px 0;
+    margin-bottom: 10px;
 }
 
 .playBtn {
-    width: 65px;
-    height: 65px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background-color: #1ed760;
-    /* Brand Green */
+    /* Spotify Green */
     border: none;
     color: black;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
 .playBtn:hover {
     transform: scale(1.05);
-    background-color: #24eb69;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    background-color: #1fdf64;
+    /* Lighter green on hover */
 }
 
 .actionBtn {
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 2.2rem;
+    color: #b3b3b3;
+    font-size: 2rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,179 +174,161 @@
 
 .actionBtn:hover {
     color: white;
-    transform: scale(1.1);
 }
 
-/* Track List */
+/* Track List Table */
 .trackList {
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.2);
-    /* Subtle background for tracklist container */
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    padding: 0 20px 20px;
+    padding: 0;
+    /* Align with content padding */
 }
 
 .trackHeader {
     display: grid;
-    grid-template-columns: 50px 1fr 100px 80px;
-    /* Index, Title, Date(?)/Album, Duration */
-    padding: 15px 20px;
+    grid-template-columns: 40px 1fr 100px;
+    /* #, Title, Duration */
+    padding: 0 16px;
+    height: 36px;
+    align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: #b3b3b3;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    /* ~12px uppercase */
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
     position: sticky;
-    top: 60px;
-    /* Sticky header below main header */
+    top: 64px;
+    /* Below navbar */
+    background: #121212;
+    /* Solid bg for sticky header */
     z-index: 10;
+}
+
+.colIndex {
+    text-align: center;
+    justify-self: center;
+}
+
+.colTitle {
+    padding-left: 10px;
+}
+
+.trackActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.colDuration {
+    text-align: right;
+    justify-self: end;
+    margin-right: 18px;
+    /* Align with typical clock icon position */
 }
 
 .trackItem {
     display: grid;
-    grid-template-columns: 50px 1fr 100px 80px;
+    grid-template-columns: 40px 1fr 100px;
     align-items: center;
-    padding: 12px 20px;
-    border-radius: 6px;
+    padding: 8px 16px;
+    border-radius: 4px;
     transition: background-color 0.2s;
     color: #b3b3b3;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
+    /* ~14px */
     cursor: default;
-    border: 1px solid transparent;
-    /* Prevent layout shift on hover border */
+    height: 56px;
+    /* Comfortable touch target */
 }
 
 .trackItem:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    color: white;
 }
 
 .trackItem.active {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #1ed760;
-}
-
-.trackIndex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    font-variant-numeric: tabular-nums;
-    position: relative;
-}
-
-/* Hover effect on index: Show play icon */
-.trackIndex .indexNum {
-    display: block;
-}
-
-.trackIndex .playIcon {
-    display: none;
-    font-size: 1.2rem;
-    color: white;
-}
-
-.trackItem:hover .trackIndex .indexNum {
-    display: none;
-}
-
-.trackItem:hover .trackIndex .playIcon {
-    display: block;
-}
-
-/* If active track, show equalizer or pause icon */
-
-.trackInfo {
-    display: flex;
-    flex-direction: column;
-}
-
-.trackName {
-    color: white;
-    font-weight: 500;
-    font-size: 1.05rem;
-    margin-bottom: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .trackItem.active .trackName {
     color: #1ed760;
 }
 
-.trackArtist {
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-.trackActions {
+.trackIndex {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    opacity: 0;
-    transition: opacity 0.2s;
+    justify-content: center;
+    font-size: 1rem;
+    color: #b3b3b3;
 }
 
-.trackItem:hover .trackActions {
-    opacity: 1;
+/* Show Play Icon on Hover Logic */
+/* Note: Need to verify JSX structure for this logic */
+/* Assuming .colIndex handles this content switching or we rely on simpler CSS for now */
+
+.trackName {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.trackDuration {
-    text-align: right;
-    font-feature-settings: "tnum";
-    font-variant-numeric: tabular-nums;
+.trackArtist {
+    display: block;
+    font-size: 0.85rem;
+    color: #b3b3b3;
+}
+
+.trackItem:hover .trackArtist {
+    color: #fff;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-    .container {
-        padding: 0;
-    }
-
-    .content {
-        padding: 20px;
-    }
-
+@media (max-width: 768px) {
     .header {
         flex-direction: column;
         align-items: center;
         text-align: center;
         padding-top: 40px;
-        gap: 20px;
-    }
-
-    .glassBackground {
-        height: 50vh;
+        gap: 16px;
     }
 
     .coverWrapper {
-        width: 200px;
-        height: 200px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        width: 190px;
+        height: 190px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .info {
+        align-items: center;
+        padding-bottom: 0;
     }
 
     .title {
-        font-size: 2.2rem;
+        font-size: 2rem;
         /* Smaller on mobile */
+        margin-bottom: 8px;
+    }
+
+    .meta {
+        justify-content: center;
+        font-size: 0.8rem;
     }
 
     .actions {
         justify-content: center;
-        gap: 40px;
     }
 
-    .trackHeader {
-        display: none;
-        /* Hide header on mobile */
+    .content {
+        padding: 0 16px;
     }
-
-    .trackItem {
-        grid-template-columns: 40px 1fr 50px;
-        /* Simplified grid */
-        gap: 10px;
-        padding: 12px 10px;
-    }
-
-    /* Hide extra columns on mobile if needed */
 }

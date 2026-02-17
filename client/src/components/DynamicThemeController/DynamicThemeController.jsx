@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { usePlayer } from '../../contexts/PlayerContext';
+import React from 'react';
+import { usePlayer } from '@/contexts/PlayerContext';
 
 const DynamicThemeController = () => {
     const { themeColors } = usePlayer();

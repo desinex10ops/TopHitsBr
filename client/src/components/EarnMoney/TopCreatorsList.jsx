@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FiUserCheck, FiTrendingUp } from 'react-icons/fi';
 import styles from './EarnMoney.module.css';
 

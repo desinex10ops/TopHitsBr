@@ -32,10 +32,11 @@ export const getStorageUrl = (path) => {
     // Detectar ambiente de desenvolvimento (Localhost ou IP de rede local)
     const isDev = hostname === 'localhost' || hostname.startsWith('192.168.') || hostname.startsWith('10.');
 
+    // FORCE Absolute URL in Dev
     if (isDev) {
-        return `${protocol}//${hostname}:${PORT}/storage/${encodeURI(normalizedPath)}`;
+        return `http://${hostname}:3000/storage/${normalizedPath}`;
     }
 
     // Produção (O Nginx deve servir /storage na mesma origem do frontend)
-    return `/storage/${encodeURI(normalizedPath)}`;
+    return `/storage/${normalizedPath}`;
 };

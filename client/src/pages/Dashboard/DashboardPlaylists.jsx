@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FiPlus, FiPlay, FiTrash, FiMusic } from 'react-icons/fi';
 import styles from './Dashboard.module.css';
-import { useAuth } from '../../contexts/AuthContext';
-import { usePlayer } from '../../contexts/PlayerContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { usePlayer } from '@/contexts/PlayerContext';
 import { Link } from 'react-router-dom';
 
 const DashboardPlaylists = () => {

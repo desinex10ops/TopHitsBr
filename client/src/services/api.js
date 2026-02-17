@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 const getBaseUrl = () => {
+    if (import.meta.env.VITE_API_URL) {
+        return import.meta.env.VITE_API_URL;
+    }
     const { hostname } = window.location;
     // Se estiver rodando localmente (localhost ou IP local), assume porta 3000
     if (hostname === 'localhost' || hostname.startsWith('192.168.') || hostname.startsWith('10.')) {

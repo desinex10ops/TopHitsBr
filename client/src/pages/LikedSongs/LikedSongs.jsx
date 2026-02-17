@@ -1,8 +1,7 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
 import styles from '../Album/AlbumDetails.module.css'; // Reusing premium styles
 import { FiPlay, FiHeart, FiClock, FiDownload, FiMoreHorizontal } from 'react-icons/fi';
 import { getStorageUrl } from '../../utils/urlUtils';

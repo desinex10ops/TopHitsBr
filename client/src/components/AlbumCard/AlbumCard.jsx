@@ -1,5 +1,5 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
+import React from 'react';
 import styles from './AlbumCard.module.css';
 import ImageWithFade from '../ImageWithFade/ImageWithFade';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,12 @@ const AlbumCard = ({ album }) => {
     // Removed getCoverUrl function
 
     const handleClick = () => {
-        navigate(`/album/${encodeURIComponent(album.artist)}/${encodeURIComponent(album.album)}`);
+        const albumId = album.AlbumId || album.id;
+        if (albumId) {
+            navigate(`/album/${albumId}`);
+        } else {
+            navigate(`/album/${encodeURIComponent(album.artist)}/${encodeURIComponent(album.album)}`);
+        }
     };
 
     return (

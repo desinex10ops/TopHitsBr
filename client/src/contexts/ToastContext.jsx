@@ -1,10 +1,18 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import * as React from 'react';
+import { useCallback } from 'react';
 import ToastContainer from '../components/Toast/ToastContainer';
 
-const ToastContext = createContext();
+if (!window.__TOAST_INSTANCES__) window.__TOAST_INSTANCES__ = [];
+console.log("!!! ToastContext.jsx module LOADED !!! Instance count:", window.__TOAST_INSTANCES__.length + 1);
+
+const ToastContext = React.createContext();
+window.__TOAST_INSTANCES__.push(ToastContext);
 
 export const ToastProvider = ({ children }) => {
-    const [toast, setToast] = useState(null);
+
+    const [toast, setToast] = React.useState(null);
+
+
 
     const showToast = useCallback((message, type = 'success') => {
         setToast({ message, type });
@@ -35,4 +43,4 @@ export const ToastProvider = ({ children }) => {
     );
 };
 
-export const useToast = () => useContext(ToastContext);
+export const useToast = () => React.useContext(ToastContext);

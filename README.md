@@ -28,9 +28,9 @@ Plataforma profissional de streaming local, gerenciamento de músicas e criaçã
 - Node.js instalado (v14+)
 
 ### Como Rodar (Windows)
-A maneira mais fácil é usar o script automático na raiz:
+A maneira mais fácil é usar o script automático na pasta `maintenance`:
 
-1. Dê dois cliques no arquivo `iniciar_tudo_v2.bat`.
+1. Navegue até a pasta `maintenance` e dê dois cliques no arquivo `iniciar_tudo_v2.bat`.
    - Isso abrirá duas janelas: uma para o Servidor (Porta 3000) e uma para o Site (Porta 5173).
 
 ---

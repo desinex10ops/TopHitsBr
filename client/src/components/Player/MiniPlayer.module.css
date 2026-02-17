@@ -1,0 +1,211 @@
+.container {
+    height: 64px;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 8px 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    animation: slideUp 0.3s ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container:active {
+    transform: scale(0.98);
+    background: rgba(18, 18, 18, 0.95);
+}
+
+.progressBarWrapper {
+    height: 2px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progressFill {
+    height: 100%;
+    transition: width 0.1s linear;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.trackInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.coverWrapper {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.placeholderCover {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background: #282828;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 1.2rem;
+}
+
+.miniVisualizer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artist {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.controlBtn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, opacity 0.2s, color 0.2s;
+    padding: 4px;
+}
+
+.controlBtn.active {
+    color: var(--player-accent, #1db954);
+}
+
+.controlBtn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.controlBtn:not(:disabled):active {
+    transform: scale(0.9);
+}
+
+.desktopActions {
+    display: none;
+}
+
+.actionBtn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s;
+}
+
+.actionBtn:hover {
+    color: #fff;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Desktop sizing adjustments */
+@media (min-width: 1024px) {
+    .container {
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        height: 90px;
+        background: #000;
+        border-top: 1px solid #282828;
+    }
+
+    .coverWrapper {
+        width: 56px;
+        height: 56px;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .artist {
+        font-size: 0.85rem;
+    }
+
+    .desktopActions {
+        display: block;
+        flex: 1;
+        text-align: right;
+    }
+
+    .controls {
+        flex: 1;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .trackInfo {
+        flex: 1;
+    }
+}

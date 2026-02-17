@@ -1,72 +1,32 @@
-const { User } = require('../database');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const AuthService = require('../services/AuthService');
+const UserRepository = require('../repositories/UserRepository');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'tophitsbr_secret_key_123'; // Em prod usar .env
-
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
     try {
-        const { name, email, password, type, artisticName } = req.body;
-
-        // Verificar se usuário já existe
-        const existingUser = await User.findOne({ where: { email } });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Email já cadastrado.' });
-        }
-
-        // Hash da senha
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        // Criar usuário
-        const newUser = await User.create({
-            name,
-            email,
-            password: hashedPassword,
-            type: type || 'listener',
-            artisticName: type === 'artist' || type === 'admin' ? artisticName : null
-        });
-
-        // Gerar Token
-        const token = jwt.sign({ id: newUser.id, type: newUser.type }, JWT_SECRET, { expiresIn: '7d' });
+        const { user, token } = await AuthService.register(req.body);
 
         res.status(201).json({
             message: 'Usuário criado com sucesso!',
             token,
             user: {
-                id: newUser.id,
-                name: newUser.name,
-                email: newUser.email,
-                type: newUser.type,
-                artisticName: newUser.artisticName,
-                avatar: newUser.avatar
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                type: user.type,
+                artisticName: user.artisticName,
+                avatar: user.avatar,
+                isSeller: user.isSeller
             }
         });
-
     } catch (error) {
-        console.error('Erro no Registro:', error);
-        res.status(500).json({ error: 'Erro ao criar conta.' });
+        next(error);
     }
 };
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-
-        // Buscar usuário
-        const user = await User.findOne({ where: { email } });
-        if (!user) {
-            return res.status(400).json({ error: 'Credenciais inválidas.' });
-        }
-
-        // Verificar senha
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ error: 'Credenciais inválidas.' });
-        }
-
-        // Gerar Token
-        const token = jwt.sign({ id: user.id, type: user.type }, JWT_SECRET, { expiresIn: '7d' });
+        const { user, token } = await AuthService.login(email, password);
 
         res.json({
             message: 'Login realizado com sucesso!',
@@ -78,20 +38,20 @@ exports.login = async (req, res) => {
                 type: user.type,
                 artisticName: user.artisticName,
                 avatar: user.avatar,
-                banner: user.banner
+                banner: user.banner,
+                isSeller: user.isSeller
             }
         });
 
     } catch (error) {
-        console.error('Erro no Login:', error);
-        res.status(500).json({ error: 'Erro ao fazer login.' });
+        next(error);
     }
 };
 
-exports.getMe = async (req, res) => {
+exports.getMe = async (req, res, next) => {
     try {
-        // req.user vem do middleware
-        const user = await User.findByPk(req.user.id, {
+        // req.user comes from authMiddleware
+        const user = await UserRepository.findById(req.user.id, {
             attributes: { exclude: ['password'] }
         });
 
@@ -101,12 +61,11 @@ exports.getMe = async (req, res) => {
 
         res.json(user);
     } catch (error) {
-        console.error('Erro getMe:', error);
-        res.status(500).json({ error: 'Erro ao buscar dados do usuário.' });
+        next(error);
     }
 };
 
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (req, res, next) => {
     try {
         const userId = req.user.id;
         const { name, artisticName, bio, instagram, youtube, tiktok, city, state } = req.body;
@@ -117,10 +76,13 @@ exports.updateProfile = async (req, res) => {
         const fs = require('fs');
         const path = require('path');
 
-        const user = await User.findByPk(userId);
+        // Logic here is mixed (File System + DB). Ideally FileService handles files.
+        // For now, let's just use UserRepository to fetch.
+        const user = await UserRepository.findById(userId);
         if (!user) return res.status(404).json({ error: 'Usuário não encontrado.' });
 
-        // Atualizar campos de texto
+        // Update fields
+        // In a real scenario, use a specific Service method: UserService.updateProfile(userId, data, files)
         if (name) user.name = name;
         if (user.type !== 'listener' && artisticName) user.artisticName = artisticName;
         if (bio !== undefined) user.bio = bio;
@@ -130,85 +92,62 @@ exports.updateProfile = async (req, res) => {
         if (city !== undefined) user.city = city;
         if (state !== undefined) user.state = state;
 
-        // Atualizar Avatar
-        if (avatarFile) {
-            // Deletar antigo se existir e não for externo
-            if (user.avatar && !user.avatar.startsWith('http')) {
-                const oldPath = path.join(__dirname, '../../storage', user.avatar);
-                if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+        // File handling (Legacy logic preserved but cleaner)
+        const updateFile = (field, file) => {
+            if (user[field] && !user[field].startsWith('http')) {
+                const oldPath = path.join(__dirname, '../../storage', user[field]);
+                if (fs.existsSync(oldPath)) {
+                    try { fs.unlinkSync(oldPath); } catch (e) { console.error(`Failed to delete old ${field}`, e); }
+                }
             }
-            user.avatar = path.relative(path.join(__dirname, '../../storage'), avatarFile.path).replace(/\\/g, '/');
-        }
+            user[field] = path.relative(path.join(__dirname, '../../storage'), file.path).replace(/\\/g, '/');
+        };
 
-        // Atualizar Banner
-        if (bannerFile) {
-            // Deletar antigo se existir e não for externo
-            if (user.banner && !user.banner.startsWith('http')) {
-                const oldPath = path.join(__dirname, '../../storage', user.banner);
-                if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-            }
-            user.banner = path.relative(path.join(__dirname, '../../storage'), bannerFile.path).replace(/\\/g, '/');
-        }
-
-        // Atualizar Banner Video
-        if (bannerVideoFile) {
-            if (user.bannerVideo && !user.bannerVideo.startsWith('http')) {
-                const oldPath = path.join(__dirname, '../../storage', user.bannerVideo);
-                if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-            }
-            user.bannerVideo = path.relative(path.join(__dirname, '../../storage'), bannerVideoFile.path).replace(/\\/g, '/');
-        }
+        if (avatarFile) updateFile('avatar', avatarFile);
+        if (bannerFile) updateFile('banner', bannerFile);
+        if (bannerVideoFile) updateFile('bannerVideo', bannerVideoFile);
 
         await user.save();
 
         res.json({ message: 'Perfil atualizado!', user });
-
     } catch (error) {
-        console.error('Erro updateProfile:', error);
-        res.status(500).json({ error: 'Erro ao atualizar perfil: ' + error.message });
+        next(error);
     }
 };
 
-exports.changePassword = async (req, res) => {
+exports.changePassword = async (req, res, next) => {
     try {
-        const userId = req.user.id;
-        const { currentPassword, newPassword } = req.body;
-
-        const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json({ error: 'Usuário não encontrado.' });
-
-        // Verificar senha atual
-        const isMatch = await bcrypt.compare(currentPassword, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ error: 'Senha atual incorreta.' });
-        }
-
-        // Hash nova senha
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(newPassword, salt);
-        await user.save();
-
+        await AuthService.changePassword(req.user.id, req.body.currentPassword, req.body.newPassword);
         res.json({ message: 'Senha alterada com sucesso!' });
     } catch (error) {
-        console.error('Erro ao mudar senha:', error);
-        res.status(500).json({ error: 'Erro ao mudar senha.' });
+        next(error);
     }
 };
 
-exports.updatePreferences = async (req, res) => {
+exports.updatePreferences = async (req, res, next) => {
+    try {
+        const preferences = await AuthService.updatePreferences(req.user.id, req.body);
+        res.json({ message: 'Preferências atualizadas!', preferences });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.becomeSeller = async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const { notifications, darkMode } = req.body;
+        const { artisticName } = req.body;
 
-        const user = await User.findByPk(userId);
+        const user = await UserRepository.findById(userId);
         if (!user) return res.status(404).json({ error: 'Usuário não encontrado.' });
 
-        user.preferences = { notifications, darkMode };
+        user.isSeller = true;
+        if (artisticName) user.artisticName = artisticName;
+
         await user.save();
 
-        res.json({ message: 'Preferências atualizadas!', preferences: user.preferences });
+        res.json({ message: 'Agora você é um vendedor!', user: { id: user.id, isSeller: user.isSeller, artisticName: user.artisticName } });
     } catch (error) {
-        console.error('Erro ao atualizar preferências:', error);
-        res.status(500).json({ error: 'Erro ao atualizar preferências.' });
+        next(error);
     }
 };

@@ -1,12 +1,11 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 import { FiTrendingUp, FiPlay, FiUser, FiPlusSquare, FiDownload, FiList, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './BoostedSlider.module.css';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
 
 const BoostedSlider = () => {
     const [boosts, setBoosts] = useState([]);
@@ -137,7 +136,12 @@ const BoostedSlider = () => {
     };
 
     const handleCardClick = (item) => {
-        navigate(`/album/${encodeURIComponent(item.artist)}/${encodeURIComponent(item.album)}`);
+        const albumId = item.AlbumId || item.id;
+        if (albumId) {
+            navigate(`/album/${albumId}`);
+        } else {
+            navigate(`/album/${encodeURIComponent(item.artist)}/${encodeURIComponent(item.album)}`);
+        }
     };
 
     return (
@@ -158,6 +162,7 @@ const BoostedSlider = () => {
                                 src={getStorageUrl(item.coverpath)}
                                 alt={item.title}
                                 className={styles.cover}
+                                crossOrigin="anonymous"
                             />
 
                             {/* Actions Overlay */}
@@ -186,6 +191,14 @@ const BoostedSlider = () => {
                             </div>
 
                             <div className={styles.badge}>#{index + 1}</div>
+
+                            {/* Smart Boost Indicator */}
+                            {(item.smartBoostActive || index === 0) && (
+                                <div className={styles.smartBadge}>
+                                    <div className={styles.pulseDot}></div>
+                                    🚀 Smart Boost
+                                </div>
+                            )}
                         </div>
                         <div className={styles.info}>
                             <h3 className={styles.itemTitle}>{item.title}</h3>

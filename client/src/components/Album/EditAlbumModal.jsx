@@ -1,9 +1,8 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useState } = React;
+import React, { useState } from 'react';
 import { FiX, FiUpload, FiFilm, FiImage, FiSave } from 'react-icons/fi';
 import api from '../../services/api';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import styles from './EditAlbumModal.module.css'; // We'll create this
 
 const EditAlbumModal = ({ album, onClose, onSuccess }) => {

@@ -37,7 +37,124 @@
 .tableWrapper {
     background: #181818;
     border-radius: 8px;
+    border-radius: 8px;
     overflow-x: auto;
+}
+
+.mobileList {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.productCard {
+    background: #181818;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cardHeader {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border-bottom: 1px solid #2a2a2a;
+    padding-bottom: 12px;
+}
+
+.cardCover {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.cardInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardTitle {
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+}
+
+.cardType {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.cardPrice {
+    font-weight: bold;
+    color: #1DB954;
+    font-size: 1.1rem;
+}
+
+.cardStats {
+    display: flex;
+    justify-content: space-between;
+    background: #222;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.statValue {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.cardActions {
+    display: flex;
+    gap: 10px;
+}
+
+.actionBtnMobile {
+    flex: 1;
+    background: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.actionBtnMobile.delete {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+}
+
+@media (max-width: 768px) {
+    .tableWrapper {
+        display: none;
+    }
+
+    .mobileList {
+        display: flex;
+    }
 }
 
 .table {

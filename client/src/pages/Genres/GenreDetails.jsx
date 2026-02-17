@@ -1,10 +1,9 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
 import styles from '../Home/Home.module.css'; // Reutilizando estilos da Home
-import { usePlayer } from '../../contexts/PlayerContext';
+import { usePlayer } from '@/contexts/PlayerContext';
 import SkeletonCard from '../../components/SkeletonCard/SkeletonCard';
 import ImageWithFade from '../../components/ImageWithFade/ImageWithFade';
 

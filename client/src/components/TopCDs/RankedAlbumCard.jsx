@@ -1,17 +1,25 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
+import React from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import styles from './TopCDs.module.css';
 
+import { Link } from 'react-router-dom';
+
 const RankedAlbumCard = ({ album, rank }) => {
+    // Generate valid ID
+    const albumId = album.AlbumId || album.id;
+    // Fallback URL if no ID (should rely on ID though)
+    const linkTo = albumId ? `/album/${albumId}` : '#';
+
     return (
-        <div className={styles.card}>
+        <Link to={linkTo} className={styles.card} style={{ textDecoration: 'none' }}>
             <div className={styles.coverWrapper}>
                 <div className={styles.rankBadge}>{rank}</div>
                 <img
                     src={getStorageUrl(album.cover) || getStorageUrl('covers/default_cover.jpg')}
                     alt={album.title}
                     className={styles.cover}
+                    crossOrigin="anonymous"
                 />
             </div>
 
@@ -30,7 +38,7 @@ const RankedAlbumCard = ({ album, rank }) => {
                     <span className={styles.statLabel}> | TOTAL {album.downloads || 0}M</span>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

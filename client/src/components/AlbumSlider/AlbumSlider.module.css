@@ -188,6 +188,16 @@
 }
 
 @media (max-width: 768px) {
+    .sliderContainer {
+        padding: 0;
+        margin-bottom: 25px;
+    }
+
+    .title {
+        font-size: 1.25rem;
+        padding-left: 16px;
+        margin-bottom: 15px;
+    }
 
     .left,
     .right {
@@ -195,6 +205,25 @@
     }
 
     .slider {
-        padding-bottom: 20px;
+        padding: 0 16px 20px 16px;
+        gap: 12px;
+        scroll-snap-type: x mandatory;
+    }
+
+    .slide {
+        width: 140px;
+        scroll-snap-align: start;
+    }
+
+    .slide:hover {
+        transform: none;
+    }
+
+    .albumTitle {
+        font-size: 0.85rem;
+    }
+
+    .artistName {
+        font-size: 0.75rem;
     }
 }

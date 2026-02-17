@@ -1,9 +1,8 @@
-import * as React from 'react';
-const { useEffect, useState, useRef } = React;
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './Home.module.css';
-import { usePlayer } from '../../contexts/PlayerContext';
+import { usePlayer } from '@/contexts/PlayerContext';
 import SkeletonCard from '../../components/SkeletonCard/SkeletonCard';
 import ImageWithFade from '../../components/ImageWithFade/ImageWithFade';
 import PenDriveWidget from '../../components/PenDriveWidget/PenDriveWidget';
@@ -15,6 +14,9 @@ import BoostedSlider from '../../components/BoostedSlider/BoostedSlider';
 import FeaturedArtists from '../../components/FeaturedArtists/FeaturedArtists';
 import StickyMenu from '../../components/StickyMenu/StickyMenu.jsx';
 import TopCDsSection from '../../components/TopCDs/TopCDsSection';
+import Stories from '../../components/Stories/Stories';
+import HomeHero from '../../components/HomeHero/HomeHero';
+import SectionHeader from '../../components/SectionHeader/SectionHeader';
 import { getStorageUrl } from '../../utils/urlUtils';
 
 const Home = () => {
@@ -25,6 +27,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     const [featuredTrack, setFeaturedTrack] = useState(null);
+    const [featuredAlbums, setFeaturedAlbums] = useState([]); // [NEW]
     const [playlists, setPlaylists] = useState([]);
     const [trending, setTrending] = useState([]);
     const [topPlaylists, setTopPlaylists] = useState([]);
@@ -44,9 +47,19 @@ const Home = () => {
         if (!search) {
             fetchTrending();
             fetchTopPlaylists();
+            fetchFeaturedAlbums(); // [NEW]
             api.get('/music/playlists').then(res => setPlaylists(res.data)).catch(console.error);
         }
     }, [searchParams]);
+
+    const fetchFeaturedAlbums = async () => {
+        try {
+            const res = await api.get('/music/albums/featured');
+            setFeaturedAlbums(res.data);
+        } catch (error) {
+            console.error("Erro ao carregar álbuns em destaque:", error);
+        }
+    };
 
     const fetchTrending = async () => {
         try {
@@ -57,16 +70,35 @@ const Home = () => {
         }
     };
 
+    const [searchTracks, setSearchTracks] = useState([]);
+    const [searchArtists, setSearchArtists] = useState([]);
+    const [searchPlaylists, setSearchPlaylists] = useState([]);
+
     const fetchTracks = async (searchTerm = '') => {
         try {
             setLoading(true);
-            const response = await api.get('/music', {
-                params: { search: searchTerm }
-            });
-            setTracks(response.data);
-            if (!searchTerm && response.data.length > 0) {
-                setFeaturedTrack(response.data[0]);
+
+            if (searchTerm) {
+                // Parallel search requests
+                const [trackRes, artistRes, playlistRes] = await Promise.all([
+                    api.get('/music', { params: { search: searchTerm } }),
+                    api.get('/music/artists/search', { params: { search: searchTerm } }),
+                    api.get('/music/playlists/search', { params: { search: searchTerm } })
+                ]);
+
+                setTracks(trackRes.data); // Albums/Tracks mix from original endpoint
+                setSearchTracks(trackRes.data.filter(t => !t.album || t.album === 'Singles').slice(0, 5)); // Just songs
+                setSearchArtists(artistRes.data);
+                setSearchPlaylists(playlistRes.data);
+            } else {
+                // Default Home Behavior
+                const response = await api.get('/music');
+                setTracks(response.data);
+                if (response.data.length > 0) {
+                    setFeaturedTrack(response.data[0]);
+                }
             }
+
         } catch (error) {
             console.error('Erro ao buscar músicas:', error);
         } finally {
@@ -89,16 +121,26 @@ const Home = () => {
         return `linear-gradient(135deg, hsl(${hue}, 70%, 50%), hsl(${hue + 40}, 80%, 30%))`;
     };
 
-    const handleAlbumClick = (album) => {
-        navigate(`/album/${encodeURIComponent(album.artist)}/${encodeURIComponent(album.album)}`);
-    };
-
-    const uniqueAlbums = Object.values(tracks.reduce((acc, track) => {
-        if (!acc[track.album]) {
-            acc[track.album] = track;
+    const handleAlbumClick = useCallback((album) => {
+        const albumId = album.AlbumId || album.id;
+        if (albumId) {
+            navigate(`/album/${albumId}`);
+        } else {
+            console.warn("Album ID missing for navigation", album);
+            // Fallback to name if ID is somehow missing, but we should aim for ID
+            navigate(`/album/${encodeURIComponent(album.artist)}/${encodeURIComponent(album.album)}`);
         }
-        return acc;
-    }, {}));
+    }, [navigate]);
+
+    const uniqueAlbums = useMemo(() => {
+        if (!Array.isArray(tracks)) return [];
+        return Object.values(tracks.reduce((acc, track) => {
+            if (track && track.album && !acc[track.album]) {
+                acc[track.album] = track;
+            }
+            return acc;
+        }, {}));
+    }, [tracks]);
 
     return (
         <div className="container">
@@ -113,19 +155,39 @@ const Home = () => {
 
                         <StickyMenu />
 
-                        <MainBanner />
+                        {/* Mobile Greeting */}
+                        <div className={styles.mobileGreeting}>
+                            {(() => {
+                                const hour = new Date().getHours();
+                                const greeting = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite';
+                                return `${greeting}, ouvinte!`;
+                            })()}
+                        </div>
 
-                        <FeaturedArtists />
+                        <div className={styles.mobileOnly}>
+                            <Stories />
+                            <HomeHero />
+                        </div>
 
-                        <div id="boosted-section">
+                        <div className={`${styles.desktopOnly} ${styles.mobileHidden}`}>
+                            <MainBanner />
+                        </div>
+
+                        <div className={styles.featuredArtistsWrapper}>
+                            <FeaturedArtists />
+                        </div>
+
+                        <div id="boosted-section" className={styles.boostedWrapper}>
                             <BoostedSlider />
                         </div>
 
-                        <AlbumSlider
-                            title="Álbuns em Destaque"
-                            albums={uniqueAlbums}
-                            onAlbumClick={handleAlbumClick}
-                        />
+                        <div className={styles.featuredAlbumsWrapper}>
+                            <AlbumSlider
+                                title="Álbuns em Destaque"
+                                albums={featuredAlbums.length > 0 ? featuredAlbums : uniqueAlbums}
+                                onAlbumClick={handleAlbumClick}
+                            />
+                        </div>
 
                         <div id="top-cds-section">
                             <TopCDsSection albums={uniqueAlbums} />
@@ -133,7 +195,7 @@ const Home = () => {
 
                         {topPlaylists.length > 0 && (
                             <section className={styles.section}>
-                                <h2 className={styles.sectionTitle}>🏆 Playlists Mais Tocadas</h2>
+                                <SectionHeader title="🏆 Playlists Mais Tocadas" to="/playlists" />
                                 <div className={styles.grid}>
                                     {topPlaylists.map(pl => (
                                         <Link to={`/playlist/${pl.id}`} key={pl.id} className={styles.card} style={{ textDecoration: 'none', background: '#1a1a1a' }}>
@@ -181,17 +243,15 @@ const Home = () => {
                             <div className={styles.penDriveWidgetWrapper}>
                                 <PenDriveWidget />
                             </div>
-                            <div className={styles.mobileWarning}>
-                                <h3>🖥️ Apenas no Computador</h3>
-                                <p>O recurso de Atualizar Pen Drive está disponível apenas na versão para computador (Desktop).</p>
-                            </div>
                         </div>
 
-                        <RecommendedAlbums />
+                        <div className={styles.mobileHidden}>
+                            <RecommendedAlbums />
+                        </div>
 
                         {playlists.length > 0 && (
                             <section className={styles.section}>
-                                <h2 className={styles.sectionTitle}>Feito para Você</h2>
+                                <SectionHeader title="Feito para Você" subtitle="Baseado no seu gosto" />
                                 <div className={styles.grid} style={{ marginBottom: '40px' }}>
                                     {playlists.map(pl => (
                                         <Link to={`/playlist/${pl.id}`} key={pl.id} className={styles.card} style={{ textDecoration: 'none', background: '#222' }}>
@@ -216,7 +276,7 @@ const Home = () => {
                         )}
 
                         <section id="recent-releases-section" className={styles.section}>
-                            <h2 className={styles.sectionTitle}>Lançamentos Recentes</h2>
+                            <SectionHeader title="Lançamentos Recentes" to="/releases" />
                             {loading ? (
                                 <div className={styles.grid}>
                                     {[...Array(10)].map((_, i) => (
@@ -236,32 +296,119 @@ const Home = () => {
             ) : (
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>
-                        Álbuns encontrados para "{searchParams.get('search')}"
+                        Resultados para "{searchParams.get('search')}"
                     </h2>
 
                     {loading ? (
                         <div className={styles.grid}>
-                            {[...Array(10)].map((_, i) => (
-                                <SkeletonCard key={i} />
-                            ))}
+                            {[...Array(10)].map((_, i) => <SkeletonCard key={i} />)}
                         </div>
                     ) : (
-                        <div className={styles.grid}>
-                            {uniqueAlbums.length > 0 ? (
-                                uniqueAlbums.map((album, index) => (
-                                    <AlbumCard
-                                        key={`${album.album}-${index}`}
-                                        album={album}
-                                        onClick={() => handleAlbumClick(album)}
-                                    />
-                                ))
-                            ) : (
-                                <div style={{ color: '#aaa', padding: '20px' }}>Nenhum álbum encontrado.</div>
+                        <>
+                            {/* ARTISTS SECTION */}
+                            {searchArtists.length > 0 && (
+                                <div className={styles.searchSection}>
+                                    <h3 className={styles.subTitle}>Artistas</h3>
+                                    <div className={styles.artistGrid}>
+                                        {searchArtists.map(artist => (
+                                            <Link to={`/artist/${artist.id}`} key={artist.id} className={styles.artistCard}>
+                                                <img
+                                                    src={getStorageUrl(artist.avatar)}
+                                                    alt={artist.artisticName}
+                                                    className={styles.artistAvatar}
+                                                    onError={(e) => e.target.src = 'https://via.placeholder.com/150'}
+                                                />
+                                                <span className={styles.artistNameLabel}>{artist.artisticName || artist.name}</span>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
                             )}
-                        </div>
-                    )}
 
-                    <BoostedSlider />
+                            {/* SONGS SECTION */}
+                            {searchTracks.length > 0 && (
+                                <div className={styles.searchSection}>
+                                    <h3 className={styles.subTitle}>Músicas</h3>
+                                    <div className={styles.trackList}>
+                                        {searchTracks.map(track => (
+                                            <div key={track.id} className={styles.trackItem} onClick={() => playTrack(track, searchTracks)}>
+                                                <img src={getStorageUrl(track.coverpath)} className={styles.trackCover} />
+                                                <div className={styles.trackInfo}>
+                                                    <span className={styles.trackName}>{track.title}</span>
+                                                    <span className={styles.trackArtist}>{track.artist}</span>
+                                                </div>
+                                                <button className={styles.playMiniBtn}>▶</button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* ALBUMS SECTION (Existing) */}
+                            {uniqueAlbums.length > 0 && (
+                                <div className={styles.searchSection}>
+                                    <h3 className={styles.subTitle}>Álbuns</h3>
+                                    <div className={styles.grid}>
+                                        {uniqueAlbums.map((album, index) => (
+                                            <AlbumCard
+                                                key={`${album.album}-${index}`}
+                                                album={album}
+                                                onClick={() => handleAlbumClick(album)}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* PLAYLISTS SECTION */}
+                            {searchPlaylists.length > 0 && (
+                                <div className={styles.searchSection}>
+                                    <h3 className={styles.subTitle}>Playlists</h3>
+                                    <div className={styles.grid}>
+                                        {searchPlaylists.map(pl => (
+                                            <Link to={`/playlist/${pl.id}`} key={pl.id} className={styles.card} style={{ textDecoration: 'none', background: '#1a1a1a' }}>
+                                                <div style={{
+                                                    height: '180px',
+                                                    background: pl.cover && pl.cover !== 'default' ? 'none' : getGradient(pl.name),
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: '3rem',
+                                                    color: '#fff',
+                                                    borderRadius: '6px',
+                                                    marginBottom: '24px',
+                                                    position: 'relative',
+                                                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+                                                }}>
+                                                    {pl.cover && pl.cover !== 'default' ? (
+                                                        <img src={getStorageUrl(pl.cover)} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '6px' }} />
+                                                    ) : (
+                                                        <span style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)', fontWeight: 'bold' }}>
+                                                            {pl.name.substring(0, 2).toUpperCase()}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <div className={styles.info}>
+                                                    <h3 className={styles.trackTitle} style={{ fontSize: '1.1rem' }}>{pl.name}</h3>
+                                                    <p className={styles.artistName} style={{ color: '#aaa', fontSize: '0.9rem' }}>
+                                                        {pl.User ? (pl.User.artisticName || pl.User.name) : 'Usuário'}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* NO RESULTS */}
+                            {uniqueAlbums.length === 0 && searchArtists.length === 0 && searchTracks.length === 0 && searchPlaylists.length === 0 && (
+                                <div style={{ color: '#aaa', padding: '20px', textAlign: 'center' }}>
+                                    <h3>Nenhum resultado encontrado.</h3>
+                                    <p>Tente buscar por outro termo.</p>
+                                </div>
+                            )}
+                        </>
+                    )}
                 </section>
             )}
         </div>

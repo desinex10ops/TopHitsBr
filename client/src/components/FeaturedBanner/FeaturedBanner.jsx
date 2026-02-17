@@ -1,7 +1,6 @@
 import { getStorageUrl } from '../../utils/urlUtils';
-import * as React from 'react';
-const { useEffect, useState } = React;
-import { usePlayer } from '../../contexts/PlayerContext';
+import React, { useEffect, useState } from 'react';
+import { usePlayer } from '@/contexts/PlayerContext';
 import styles from './FeaturedBanner.module.css';
 
 const FeaturedBanner = ({ track }) => {
@@ -12,10 +11,13 @@ const FeaturedBanner = ({ track }) => {
     return (
         <div
             className={styles.banner}
-            style={{
-                backgroundImage: `url(${getStorageUrl(track.coverpath)})`
-            }}
         >
+            <img
+                src={getStorageUrl(track.coverpath)}
+                alt={track.title}
+                className={styles.bannerBgImage}
+                crossOrigin="anonymous"
+            />
             <div className={styles.gradientVertical}>
                 <div className={styles.gradientHorizontal}>
                     <div className={styles.content}>

@@ -1,102 +1,775 @@
+/* Spotify Style Artist Profile */
 .container {
-    padding-bottom: 40px;
+    position: relative;
+    color: white;
+    min-height: 100vh;
+    padding-bottom: 120px;
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
+    overflow-x: hidden;
 }
 
+/* Header Section */
 .header {
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 40vh;
+    min-height: 340px;
+    max-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 32px 24px;
+    overflow: hidden;
+}
+
+.headerBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    margin-bottom: 60px;
-    /* Space for avatar overlap */
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+    background-position: center 20%;
+    z-index: 0;
+    transform: scale(1.1);
+    /* Slight zoom for parallax feel */
+    filter: brightness(0.5);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0) 100%);
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #121212 0%, rgba(18, 18, 18, 0.8) 20%, transparent 100%);
+    z-index: 1;
 }
 
 .headerContent {
-    position: absolute;
-    bottom: -40px;
-    left: 40px;
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: flex-end;
-    gap: 30px;
-    width: calc(100% - 80px);
+    gap: 32px;
+    width: 100%;
+}
+
+.avatarWrapper {
+    flex-shrink: 0;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
 }
 
 .avatar {
     width: 180px;
+    /* Adjusted size */
     height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #121212;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    background-color: #333;
+    display: block;
 }
 
 .artistInfo {
-    margin-bottom: 40px;
-    /* Align with bottom of avatar roughly */
     flex: 1;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+}
+
+.verifiedBadge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 0.875rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.verifiedBadge svg {
+    background: #3d91f4;
+    color: white;
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 1.2rem;
 }
 
 .artistName {
-    font-size: 4rem;
-    font-weight: 800;
-    margin: 0;
-    line-height: 1;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    margin: 0 0 16px;
     color: #fff;
-    letter-spacing: -1px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .stats {
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-    color: #ccc;
     font-size: 1rem;
+    font-weight: 400;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/* Related Artists */
+.relatedList {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 10px 0 30px;
+    /* More padding for shadows */
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.relatedList::-webkit-scrollbar {
+    display: none;
+}
+
+.relatedItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #fff;
+    min-width: 140px;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.relatedItem:hover {
+    transform: translateY(-8px);
+}
+
+.relatedAvatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+.relatedItem:hover .relatedAvatar {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.relatedName {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.relatedItem:hover .relatedName {
+    opacity: 1;
+}
+
+/* Content Area */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 24px 32px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, #121212 40%);
+    /* Smooth blend */
+}
+
+/* Dynamic Gradient Overlay - To be used in JSX */
+.gradientBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background: linear-gradient(180deg, var(--artist-color, #535353) 0%, #121212 100%);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .actions {
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
     align-items: center;
+    gap: 24px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 3;
+}
+
+.playBtn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #1ed760;
+    border: none;
+    color: black;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.playBtn:hover {
+    transform: scale(1.05);
+    background-color: #1fdf64;
+}
+
+.followBtn {
+    padding: 8px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    /* Pill shape */
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+
+.followBtn:hover {
+    border-color: #fff;
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.following {
+    background: transparent;
+    border-color: #1ed760;
+    color: #1ed760;
+}
+
+.messageBtn,
+.socialBtn {
+    color: #b3b3b3;
+    font-size: 1.6rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.messageBtn:hover,
+.socialBtn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Sections */
+.section {
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 2;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+/* Popular List */
+.popularList {
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollableList {
+    display: flex;
+    flex-direction: column;
+    max-height: 350px;
+    /* Fixed height for scrolling */
+    overflow-y: auto;
+    padding-right: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    /* Subtle background */
+    border-radius: 8px;
+}
+
+.scrollableList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollableList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollableList::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.scrollableList::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.popularRow {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    /* Index, Content, Plays/Time */
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: #b3b3b3;
+    height: 56px;
+}
+
+.popularRow:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.popularRow:hover .popularIndex {
+    visibility: hidden;
+    /* Hide index */
+    position: relative;
+}
+
+/* Show play icon on hover */
+.popularRow:hover .popularIndex::after {
+    content: '▶';
+    /* Unicode Play Triangle */
+    visibility: visible;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    color: #fff;
+}
+
+.popularIndex {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    width: 20px;
+    display: inline-block;
+}
+
+.popularInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.popularThumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.popularTitle {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.popularPlays {
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Grid & Cards (Discography) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: #181818;
+    padding: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.card:hover {
+    background: #282828;
+}
+
+.cardImageWrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.card:hover .cardImage {
+    transform: scale(1.05);
+    /* Subtle zoom */
+}
+
+/* Hover Play Overlay for Cards */
+.cardPlayOverlay {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 48px;
+    /**/
+    height: 48px;
+    background: #1ed760;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: black;
+    font-size: 1.5rem;
+}
+
+.card:hover .cardPlayOverlay {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 10;
+}
+
+/* Move title/subtitle outside wrapper */
+.cardTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 4px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cardSubtitle {
+    font-size: 0.875rem;
+    color: #a7a7a7;
+    margin: 0;
+}
+
+.about {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #b3b3b3;
+    max-width: 800px;
+}
+
+/* Loading/Error */
+.loading,
+.error {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #121212;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        padding: 80px 20px 24px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .headerContent {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .avatar {
+        width: 160px;
+        height: 160px;
+    }
+
+    .artistInfo {
+        align-items: center;
+    }
+
+    .artistName {
+        font-size: 3rem;
+    }
+
+    .verifiedBadge {
+        justify-content: center;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+}
+
+/* Header Section */
+.header {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    /* Standard header height */
+    display: flex;
+    align-items: flex-end;
+    padding: 0 32px 24px;
+    overflow: hidden;
+}
+
+.headerBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 20%;
+    z-index: 0;
+    filter: brightness(0.6);
+    /* Darken banner image */
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 50%, #121212 100%);
+    z-index: 1;
+}
+
+.headerContent {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+    width: 100%;
+}
+
+.avatarWrapper {
+    flex-shrink: 0;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+.avatar {
+    width: 200px;
+    /* Reduced from 232px */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.artistInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+}
+
+.verifiedBadge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 0.875rem;
+    margin-bottom: 1px;
+}
+
+.verifiedBadge svg {
+    background: #3d91f4;
+    /* Verified blue */
+    color: white;
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 1.2rem;
+}
+
+.artistName {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    /* Massive responsive title */
+    font-weight: 900;
+    margin: 4px 0 16px;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.stats {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 50%;
+}
+
+/* Related Artists */
+.relatedList {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.relatedList::-webkit-scrollbar {
+    display: none;
+}
+
+.relatedItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #fff;
+    min-width: 120px;
+    transition: transform 0.2s;
+}
+
+.relatedItem:hover {
+    transform: translateY(-5px);
+}
+
+.relatedAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.2s;
+}
+
+.relatedItem:hover .relatedAvatar {
+    box-shadow: 0 8px 25px rgba(29, 185, 84, 0.4);
+}
+
+.relatedName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Content Area */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 24px 32px;
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0%, #121212 100%);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
 }
 
 .playBtn {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #1DB954;
+    background-color: #1ed760;
     border: none;
-    color: #000;
+    color: black;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
 .playBtn:hover {
     transform: scale(1.05);
-    background-color: #1ed760;
+    background-color: #1fdf64;
 }
 
 .followBtn {
-    padding: 8px 20px;
-    border: 1px solid #777;
+    padding: 7px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     background: transparent;
     color: #fff;
-    font-weight: bold;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 0.75rem;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: all 0.2s;
 }
 
 .followBtn:hover {
@@ -104,18 +777,102 @@
     transform: scale(1.02);
 }
 
+.following {
+    background: transparent;
+    border-color: #1ed760;
+    color: #1ed760;
+}
+
+.messageBtn,
+.socialBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    color: #b3b3b3;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.messageBtn:hover,
+.socialBtn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Sections */
 .section {
-    margin-top: 40px;
+    margin-bottom: 48px;
 }
 
 .sectionTitle {
     font-size: 1.5rem;
     font-weight: 700;
+    color: #fff;
     margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+/* Popular List */
+.popularList {
+    width: 100%;
+    /* max-width: 1000px; Removed max-width for full width feel */
+}
+
+.popularRow {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: #b3b3b3;
+    height: 56px;
+}
+
+.popularRow:hover {
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
 }
 
-/* Reusing grid styles */
+.popularIndex {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+}
+
+.popularInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-left: 8px;
+}
+
+.popularThumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.popularTitle {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.popularPlays {
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Grid & Cards (Discography) */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -125,12 +882,11 @@
 .card {
     background: #181818;
     padding: 16px;
-    border-radius: 8px;
-    transition: background-color 0.3s;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
     cursor: pointer;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    text-decoration: none;
+    display: block;
 }
 
 .card:hover {
@@ -138,13 +894,12 @@
 }
 
 .cardImageWrapper {
-    position: relative;
     width: 100%;
     aspect-ratio: 1;
-    border-radius: 4px;
-    overflow: hidden;
     margin-bottom: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .cardImage {
@@ -157,125 +912,148 @@
     font-size: 1rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
-    white-space: nowrap;
+    margin: 0 0 8px 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .cardSubtitle {
     font-size: 0.875rem;
     color: #b3b3b3;
+    margin: 0;
 }
 
-/* News Section */
-.newsGrid {
+.about {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #b3b3b3;
+    max-width: 800px;
+}
+
+/* Loading/Error */
+.loading,
+.error {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #121212;
+}
+
+/* Gallery */
+.galleryGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
 }
 
-.newsCard {
-    background: #222;
+.galleryItem {
+    aspect-ratio: 1;
     border-radius: 8px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    cursor: pointer;
     transition: transform 0.2s;
 }
 
-.newsCard:hover {
-    transform: translateY(-5px);
+.galleryItem:hover {
+    transform: scale(1.03);
 }
 
-.newsImage {
+.galleryItem img {
     width: 100%;
-    height: 150px;
+    height: 100%;
     object-fit: cover;
 }
 
-.newsContent {
-    padding: 15px;
-}
-
-.newsDate {
-    font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 5px;
-}
-
-.newsTitle {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.newsText {
-    font-size: 0.9rem;
-    color: #ccc;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* Popular List */
-.popularList {
-    display: flex;
-    flex-direction: column;
-    /* gap: 10px; remove gap to look more like a list */
-}
-
-.popularRow {
+/* Lightbox */
+.lightboxOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    justify-content: center;
+    animation: fadeIn 0.2s;
+}
+
+.lightboxImage {
+    max-width: 90vw;
+    max-height: 90vh;
     border-radius: 4px;
-    color: #b3b3b3;
-    font-size: 0.9rem;
-    gap: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-.popularRow:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
+.closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 1001;
 }
 
-.popularIndex {
-    width: 20px;
-    text-align: right;
-    font-size: 1rem;
+.navBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.2s;
+    z-index: 1001;
 }
 
-.popularInfo {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.navBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.popularThumb {
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
+.caption {
+    position: absolute;
+    bottom: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    border-radius: 20px;
 }
 
-.popularTitle {
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 500;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-.popularPlays {
-    width: 150px;
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-}
+/* Responsive */
+@media (max-width: 768px) {
 
-.popularDuration {
-    width: 50px;
-    text-align: right;
-    font-variant-numeric: tabular-nums;
+    /* ... existing responsive styles ... */
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .galleryGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .content {
+        padding: 20px;
+    }
 }

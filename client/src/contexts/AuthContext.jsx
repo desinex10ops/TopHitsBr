@@ -1,19 +1,16 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import * as React from 'react';
 import api from '../services/api';
 
-const AuthContext = createContext();
 
-console.log("Arquivo AuthContext carregado - VERSAO FIXED");
-console.log("Usando Named Imports");
+const AuthContext = React.createContext();
+
 // Provider Component
-
 export const AuthProvider = ({ children }) => {
-    console.log("Rendering AuthProvider");
+    const [user, setUser] = React.useState(null);
+    const [loading, setLoading] = React.useState(true);
 
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const loadUser = async () => {
             const token = localStorage.getItem('token');
             if (token) {
@@ -91,5 +88,5 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => React.useContext(AuthContext);
 

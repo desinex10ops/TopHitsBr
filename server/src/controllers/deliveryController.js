@@ -17,7 +17,7 @@ const deliveryController = {
 
             // Verify ownership
             const order = await Order.findOne({
-                where: { id: orderId, buyerId: userId, status: 'completed' }
+                where: { id: orderId, buyerId: userId, status: 'paid' }
             });
 
             if (!order) {
@@ -40,7 +40,7 @@ const deliveryController = {
             });
 
             // Return the secure URL
-            const downloadUrl = `/api/delivery/download/${token}`;
+            const downloadUrl = `/api/shop/delivery/download/${token}`;
             res.json({ downloadUrl, expiresAt });
 
         } catch (error) {
@@ -68,26 +68,25 @@ const deliveryController = {
             }
 
             if (!link.isActive) {
-                await logAttempt(link.id, ip, userAgent, 'expired', 'Link Inativo');
+                await logAttempt(link.id, ip, userAgent, 'expired', 'Link Inativo', link.UserId);
                 return res.status(410).send('Link expirado.');
             }
 
             if (new Date() > link.expiresAt) {
-                await logAttempt(link.id, ip, userAgent, 'expired', 'Link Expirado');
+                await logAttempt(link.id, ip, userAgent, 'expired', 'Link Expirado', link.UserId);
                 return res.status(410).send('Link expirado.');
             }
 
             if (link.downloadCount >= link.maxDownloads) {
-                await logAttempt(link.id, ip, userAgent, 'blocked', 'Limite de Downloads Excedido');
+                await logAttempt(link.id, ip, userAgent, 'blocked', 'Limite de Downloads Excedido', link.UserId);
                 return res.status(403).send('Limite de downloads excedido.');
             }
 
             // IP Lock Check
-            // if (link.lockedIp && link.lockedIp !== ip) {
-            //     // Optional: Disable for now to avoid issues with dynamic IPs or proxies
-            //     // await logAttempt(link.id, ip, userAgent, 'blocked', 'IP Bloqueado');
-            //     // return res.status(403).send('Download bloqueado para este IP.');
-            // }
+            if (link.lockedIp && link.lockedIp !== ip) {
+                await logAttempt(link.id, ip, userAgent, 'blocked', 'IP Bloqueado');
+                return res.status(403).send('Download bloqueado para este IP.');
+            }
 
             // Locate File
             const filePath = path.join(STORAGE_PATH, link.Product.file);
@@ -97,7 +96,7 @@ const deliveryController = {
 
             // Increment Count
             await link.increment('downloadCount');
-            await logAttempt(link.id, ip, userAgent, 'success', 'Download Iniciado');
+            await logAttempt(link.id, ip, userAgent, 'success', 'Download Iniciado', link.UserId);
 
             // --- WATERMARKING (METADATA INJECTION) ---
             // Instead of modifying audio stream (slow), we use FFmpeg to copy stream and add metadata
@@ -144,10 +143,11 @@ const deliveryController = {
     }
 };
 
-async function logAttempt(linkId, ip, userAgent, status, reason) {
+async function logAttempt(linkId, ip, userAgent, status, reason, userId = null) {
     try {
         await DownloadLog.create({
             DownloadLinkId: linkId,
+            UserId: userId, // Direct association
             ipAddress: ip,
             userAgent: userAgent && userAgent.substring(0, 255),
             status,
@@ -155,6 +155,27 @@ async function logAttempt(linkId, ip, userAgent, status, reason) {
         });
     } catch (e) {
         console.error("Log Error:", e);
+    }
+
+    // --- Suspicious Activity Detection ---
+    if (status === 'blocked' || status === 'expired') {
+        const { Op } = require('sequelize');
+        const recentAttempts = await DownloadLog.count({
+            where: {
+                ipAddress: ip,
+                status: { [Op.or]: ['blocked', 'expired'] },
+                createdAt: { [Op.gte]: new Date(new Date() - 10 * 60 * 1000) } // Last 10 mins
+            }
+        });
+
+        if (recentAttempts >= 5) {
+            const NotificationService = require('../services/NotificationService');
+            await NotificationService.notifySecurity(
+                'Atividade Suspeita Detectada',
+                `Múltiplas tentativas falhas de download do IP: ${ip}. Possível tentativa de fraude.`,
+                '/admin/piracy-logs'
+            );
+        }
     }
 }
 

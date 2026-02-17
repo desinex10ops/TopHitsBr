@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../config/multer');
+const upload = require('../middleware/upload');
 const musicController = require('../controllers/musicController');
 const streamController = require('../controllers/streamController');
 const pendriveController = require('../controllers/pendriveController');
-const playlistController = require('../controllers/playlistController');
+// Playlist routes moved to src/routes/playlistRoutes.js
 const adminController = require('../controllers/adminController');
 const authMiddleware = require('../middleware/auth'); // Middleware de Auth
 
@@ -14,6 +14,11 @@ router.get('/admin/settings', authMiddleware, adminController.getSettings);
 router.post('/admin/settings/upload', authMiddleware, upload.single('settingFile'), adminController.uploadSettingFile);
 router.post('/admin/settings', authMiddleware, adminController.updateSetting);
 router.get('/settings', adminController.getSettings); // Public route for frontend
+
+// Notification Management (Admin)
+router.get('/admin/notifications', authMiddleware, adminController.getNotifications);
+router.patch('/admin/notifications/:id/read', authMiddleware, adminController.markNotificationRead);
+router.post('/admin/notifications/read-all', authMiddleware, adminController.markAllNotificationsRead);
 
 // User Management (Admin)
 router.get('/admin/users', authMiddleware, adminController.getUsers);
@@ -32,43 +37,32 @@ const uploadAlbumController = require('../controllers/uploadAlbumController');
 router.post('/preview-album', authMiddleware, upload.fields([{ name: 'file' }, { name: 'cover' }]), uploadAlbumController.previewAlbum);
 router.post('/confirm-album', authMiddleware, upload.none(), uploadAlbumController.confirmAlbum);
 
+// Músicas CRUD
 router.get('/', musicController.getAllTracks);
+router.patch('/:id', authMiddleware, upload.fields([{ name: 'cover', maxCount: 1 }]), musicController.updateTrack);
+router.delete('/:id', musicController.deleteTrack);
+
 router.get('/stream/:id', streamController.streamTrack);
+router.get('/pendrive/smart-fill', pendriveController.getSmartFill); // [NEW] Smart Fill
 router.post('/pendrive', pendriveController.createPenDrive);
 
 // Rotas de Gêneros
 router.get('/genres', musicController.getGenres);
 router.get('/genres/:genre', musicController.getTracksByGenre);
 
-// Rotas de Playlists
-router.get('/playlists', playlistController.getAutoPlaylists);
-router.get('/playlists/user', authMiddleware, playlistController.getUserPlaylists); // Listar do usuário
-router.get('/playlists/top', playlistController.getTopPlaylists); // Top Playlists
-router.post('/playlists/:id/play', playlistController.incrementPlaylistPlays); // Registrar Play
-router.post('/playlists', authMiddleware, playlistController.createUserPlaylist); // Criar
-router.post('/playlists/:id/tracks', authMiddleware, playlistController.addTrackToPlaylist); // Add Track
-router.post('/playlists/:id/image', authMiddleware, upload.single('cover'), playlistController.uploadPlaylistCover); // [NEW] Upload Cover
-router.delete('/playlists/:id/tracks/:trackId', authMiddleware, playlistController.removeTrackFromPlaylist); // Remove Track
-router.get('/playlists/:id', playlistController.getPlaylistTracks); // Public/Auto/User tracks logic needs unification? 
-
-// Note: getPlaylistTracks currently handles Auto IDs. We should update it to handle DB IDs too or use separate route.
-// For now, let's assume getPlaylistTracks will be updated if needed or we use a separate one. 
-// Actually, `getPlaylistTracks` in controller handles 'random', 'top50', etc.
-// If valid ID (integer), it should fetch from DB. 
-// I should update getPlaylistTracks to switch logic based on ID format.
-
-router.delete('/:id', musicController.deleteTrack);
-
 // Artist Profile Routes
 // Artist Profile Routes
 const artistController = require('../controllers/artistController');
 const albumController = require('../controllers/albumController');
 
+router.get('/artists/search', artistController.searchArtists); // [NEW] Search Route
 router.get('/artist/stats', authMiddleware, artistController.getArtistStats); // [NEW] Antes de :id
 router.get('/artist/:id', artistController.getArtistProfile);
 router.post('/artist/news', authMiddleware, artistController.createNews);
 
 // Album Routes
+router.get('/albums/featured', albumController.getFeaturedAlbums); // [NEW]
+router.get('/albums/:id', albumController.getAlbum);
 router.get('/artist/:id/albums', albumController.getArtistAlbums);
 router.patch('/album/:id', authMiddleware, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'cover', maxCount: 1 }]), albumController.updateAlbum);
 router.delete('/album/:id', authMiddleware, albumController.deleteAlbum);

@@ -4,9 +4,9 @@ import api from '../../services/api';
 import ProductCard from '../../components/Shop/ProductCard';
 import styles from './ShopHome.module.css';
 import { FiSearch, FiFilter } from 'react-icons/fi';
-import { usePlayer } from '../../contexts/PlayerContext';
-import { useToast } from '../../contexts/ToastContext';
-import { useCart } from '../../contexts/CartContext';
+import { usePlayer } from '@/contexts/PlayerContext';
+import { useToast } from '@/contexts/ToastContext';
+import { useCart } from '@/contexts/CartContext';
 
 const ShopHome = () => {
     const [products, setProducts] = useState([]);
@@ -17,9 +17,7 @@ const ShopHome = () => {
         type: 'all',
         sort: 'newest'
     });
-    const { playTrack } = usePlayer(); // Assuming we use same player for previews? 
-    // Actually, previews might be short. But using main player is better for persistence.
-    // We'd need to adapt the track structure to play it.
+    const { playTrack } = usePlayer();
 
     const { addToast } = useToast();
 

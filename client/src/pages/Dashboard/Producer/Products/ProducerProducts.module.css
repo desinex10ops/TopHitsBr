@@ -1,0 +1,161 @@
+.container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.titleInfo h1 {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.titleInfo p {
+    color: #aaa;
+    margin-top: 5px;
+}
+
+.addBtn {
+    background: #1db954;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.addBtn:hover {
+    background: #1ed760;
+}
+
+.searchBar {
+    background: #181818;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.searchBar svg {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.searchBar input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.tableWrapper {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #222;
+}
+
+.table th {
+    background: #222;
+    color: #aaa;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.prodName {
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.badge {
+    background: #333;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #ccc;
+    text-transform: uppercase;
+}
+
+.status {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status.active {
+    color: #1ed760;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actionBtn {
+    background: #333;
+    border: none;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.actionBtn:hover {
+    background: #444;
+}
+
+.actionBtn.delete:hover {
+    background: #ff4444;
+}
+
+.empty {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    color: #aaa;
+    font-size: 1.2rem;
+}

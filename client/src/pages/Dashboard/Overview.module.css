@@ -1,0 +1,254 @@
+.container {
+    padding: 0;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.welcomeSection {
+    margin-bottom: 40px;
+}
+
+.welcomeTitle {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.welcomeSubtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.statCard {
+    background: var(--bg-secondary);
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s, background 0.2s;
+    cursor: default;
+}
+
+.statCard:hover {
+    transform: translateY(-4px);
+    background: var(--bg-hover);
+}
+
+.iconBox {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Sections */
+.sectionsGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 1024px) {
+    .sectionsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.glassCard {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+}
+
+.cardTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+}
+
+/* Activity List */
+.activityList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activityItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--bg-primary);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.activityItem:hover {
+    border-color: var(--accent-color);
+    background: var(--bg-hover);
+}
+
+.activityIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+}
+
+.activityDetails {
+    flex: 1;
+}
+
+.activityText {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.activityTime {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Quick Links */
+.quickLinks {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.quickLink {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.quickLink:hover {
+    background: var(--accent-color);
+    color: #000;
+    transform: translateX(5px);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sellerCta {
+    background: linear-gradient(135deg, #1DB954 0%, #15803d 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    color: #000;
+}
+
+.ctaContent h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.ctaContent p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.ctaBtn {
+    background: #000;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border-radius: 100px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.ctaBtn:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .sellerCta {
+        padding: 1.5rem;
+    }
+
+    .ctaContent h2 {
+        font-size: 1.4rem;
+    }
+}

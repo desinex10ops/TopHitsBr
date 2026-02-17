@@ -1,0 +1,138 @@
+.container {
+    padding: 30px;
+    color: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.header p {
+    color: #aaa;
+    margin-top: 5px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.statCard {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s;
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    border-color: #444;
+}
+
+.iconWrapper {
+    width: 60px;
+    height: 60px;
+    background: rgba(29, 185, 84, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #1db954;
+}
+
+.statContent h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.statContent span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: block;
+    margin-top: 5px;
+}
+
+.link {
+    display: inline-block;
+    color: #1ed760;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.chartSection {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.chartSection h2 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.topProducts {
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.topProducts h2 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.productItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+}
+
+.productItem:last-child {
+    border-bottom: none;
+}
+
+.prodTitle {
+    font-weight: 600;
+}
+
+.prodSales {
+    color: #1ed760;
+    font-weight: 700;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: #aaa;
+    font-size: 1.2rem;
+}
