@@ -57,9 +57,9 @@ const MainBanner = () => {
                     api.get('/music/admin/settings').catch(() => ({ data: {} }))
                 ]);
 
-                const boosts = (boostsRes.data || [])
+                const boosts = Array.isArray(boostsRes.data) ? boostsRes.data
                     .filter(b => b && b.item)
-                    .map(b => b.item);
+                    .map(b => b.item) : [];
                 const tracks = Array.isArray(musicRes.data) ? musicRes.data : [];
                 const settings = settingsRes.data || {};
 

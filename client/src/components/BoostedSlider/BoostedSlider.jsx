@@ -20,9 +20,9 @@ const BoostedSlider = () => {
             try {
                 // 1. Try to fetch active boosts
                 const boostRes = await api.get('/credits/boost/active?limit=10&type=album');
-                let items = boostRes.data
+                let items = Array.isArray(boostRes.data) ? boostRes.data
                     .filter(b => b && b.item)
-                    .map(b => b.item);
+                    .map(b => b.item) : [];
 
                 // 2. If no boosts, fetch random albums to ensure section appears (Fallback)
                 if (items.length === 0) {
@@ -30,8 +30,9 @@ const BoostedSlider = () => {
                     setTitle('🔥 CDs Mais Acessados (Recomendados)');
 
                     const musicRes = await api.get('/music');
+                    const musicData = Array.isArray(musicRes.data) ? musicRes.data : [];
                     // Group/Unique logic
-                    const uniqueAlbums = Object.values(musicRes.data.reduce((acc, track) => {
+                    const uniqueAlbums = Object.values(musicData.reduce((acc, track) => {
                         if (!acc[track.album]) acc[track.album] = track;
                         return acc;
                     }, {}));

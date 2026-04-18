@@ -18,7 +18,7 @@ const FeaturedArtists = () => {
         const fetchFeatured = async () => {
             try {
                 const res = await api.get('/boost/featured-artists');
-                setArtists(res.data);
+                setArtists(Array.isArray(res.data) ? res.data : []);
             } catch (error) {
                 console.error("Error fetching featured:", error);
             }
