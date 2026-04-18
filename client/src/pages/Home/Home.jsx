@@ -48,25 +48,29 @@ const Home = () => {
             fetchTrending();
             fetchTopPlaylists();
             fetchFeaturedAlbums(); // [NEW]
-            api.get('/playlists/auto').then(res => setPlaylists(res.data)).catch(console.error);
+            api.get('/playlists/auto')
+               .then(res => setPlaylists(Array.isArray(res.data) ? res.data : []))
+               .catch(err => { console.error(err); setPlaylists([]); });
         }
     }, [searchParams]);
 
     const fetchFeaturedAlbums = async () => {
         try {
             const res = await api.get('/music/albums/featured');
-            setFeaturedAlbums(res.data);
+            setFeaturedAlbums(Array.isArray(res.data) ? res.data : []);
         } catch (error) {
             console.error("Erro ao carregar álbuns em destaque:", error);
+            setFeaturedAlbums([]);
         }
     };
 
     const fetchTrending = async () => {
         try {
             const res = await api.get('/music/trending');
-            setTrending(res.data);
+            setTrending(Array.isArray(res.data) ? res.data : []);
         } catch (error) {
             console.error("Erro ao carregar trending:", error);
+            setTrending([]);
         }
     };
 
@@ -86,16 +90,21 @@ const Home = () => {
                     api.get('/playlists/search', { params: { search: searchTerm } })
                 ]);
 
-                setTracks(trackRes.data); // Albums/Tracks mix from original endpoint
-                setSearchTracks(trackRes.data.filter(t => !t.album || t.album === 'Singles').slice(0, 5)); // Just songs
-                setSearchArtists(artistRes.data);
-                setSearchPlaylists(playlistRes.data);
+                const trackData = Array.isArray(trackRes.data) ? trackRes.data : [];
+                const artistData = Array.isArray(artistRes.data) ? artistRes.data : [];
+                const playlistData = Array.isArray(playlistRes.data) ? playlistRes.data : [];
+
+                setTracks(trackData); // Albums/Tracks mix from original endpoint
+                setSearchTracks(trackData.filter(t => !t.album || t.album === 'Singles').slice(0, 5)); // Just songs
+                setSearchArtists(artistData);
+                setSearchPlaylists(playlistData);
             } else {
                 // Default Home Behavior
                 const response = await api.get('/music');
-                setTracks(response.data);
-                if (response.data.length > 0) {
-                    setFeaturedTrack(response.data[0]);
+                const trackData = Array.isArray(response.data) ? response.data : [];
+                setTracks(trackData);
+                if (trackData.length > 0) {
+                    setFeaturedTrack(trackData[0]);
                 }
             }
 
