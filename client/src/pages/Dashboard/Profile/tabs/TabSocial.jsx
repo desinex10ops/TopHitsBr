@@ -58,7 +58,7 @@ const TabSocial = ({ formData, onChange, onSave, saving }) => {
                 <div className={styles.inputGroup}>
                     <label className={styles.label}>WhatsApp / Fan Club</label>
                     <div style={{ position: 'relative' }}>
-                        <FiMessageCircle style={{ position: 'absolute', left: 15, top: '50%', transform: 'translateY(-50%)', color: '#1db954' }} />
+                        <FiMessageCircle style={{ position: 'absolute', left: 15, top: '50%', transform: 'translateY(-50%)', color: 'var(--dynamic-accent)' }} />
                         <input
                             name="whatsapp"
                             className={styles.input}

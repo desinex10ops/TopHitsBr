@@ -5,7 +5,7 @@ import { FiTrendingUp, FiMusic, FiHeart, FiPlay } from 'react-icons/fi';
 const TabStats = () => {
     // Mock stats for the tab view
     const stats = [
-        { label: 'Alcance Mensal', value: '12.4K', trend: '+15%', icon: <FiTrendingUp />, color: '#1db954' },
+        { label: 'Alcance Mensal', value: '12.4K', trend: '+15%', icon: <FiTrendingUp />, color: 'var(--dynamic-accent)' },
         { label: 'Músicas Lançadas', value: '28', trend: '', icon: <FiMusic />, color: '#2E77D0' },
         { label: 'Total de Curtidas', value: '4.2K', trend: '+5%', icon: <FiHeart />, color: '#E91E63' },
         { label: 'Streams Totais', value: '1.2M', trend: '+22%', icon: <FiPlay />, color: '#F59B23' },
@@ -24,7 +24,7 @@ const TabStats = () => {
                             <div style={{ color: s.color, marginBottom: 10, fontSize: '1.2rem' }}>{s.icon}</div>
                             <div style={{ fontSize: '1.5rem', fontWeight: 900 }}>{s.value}</div>
                             <div style={{ fontSize: '0.8rem', color: '#999', textTransform: 'uppercase' }}>{s.label}</div>
-                            {s.trend && <div style={{ fontSize: '0.75rem', color: '#1db954', marginTop: 5 }}>{s.trend} este mês</div>}
+                            {s.trend && <div style={{ fontSize: '0.75rem', color: 'var(--dynamic-accent)', marginTop: 5 }}>{s.trend} este mês</div>}
                         </div>
                     ))}
                 </div>

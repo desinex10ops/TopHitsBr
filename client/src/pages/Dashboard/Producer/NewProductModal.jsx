@@ -184,8 +184,8 @@ const NewProductModal = ({ onClose, onSuccess }) => {
                                 <label><FiUploadCloud /> Preview de Áudio (MP3)</label>
                                 <input type="file" accept="audio/*" onChange={e => handleFileChange(e, 'preview')} />
                             </div>
-                            <div className={styles.fileInput} style={{ borderColor: '#1db954' }}>
-                                <label style={{ color: '#1db954' }}><FiUploadCloud /> Arquivo do Produto (ZIP/RAR/MP3)</label>
+                            <div className={styles.fileInput} style={{ borderColor: 'var(--dynamic-accent)' }}>
+                                <label style={{ color: 'var(--dynamic-accent)' }}><FiUploadCloud /> Arquivo do Produto (ZIP/RAR/MP3)</label>
                                 <input type="file" required={!files.file} accept=".zip,.rar,.mp3,.wav" onChange={e => handleFileChange(e, 'file')} />
                                 <small>Arquivo que o cliente irá baixar.</small>
                             </div>

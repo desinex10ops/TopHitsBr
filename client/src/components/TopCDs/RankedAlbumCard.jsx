@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 
 const RankedAlbumCard = ({ album, rank }) => {
     // Generate valid ID
-    const albumId = album.AlbumId || album.id;
-    // Fallback URL if no ID (should rely on ID though)
-    const linkTo = albumId ? `/album/${albumId}` : '#';
+    const linkTo = album.AlbumId
+        ? `/album/${album.AlbumId}`
+        : `/album/${encodeURIComponent(album.artist)}/${encodeURIComponent(album.album || album.title)}`;
 
     return (
         <Link to={linkTo} className={styles.card} style={{ textDecoration: 'none' }}>

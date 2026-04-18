@@ -26,7 +26,7 @@
 .logoArea {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #1ed760;
+    color: var(--dynamic-accent);
     letter-spacing: 1px;
     display: flex;
     align-items: center;
@@ -98,7 +98,7 @@
 
 .progressFill {
     height: 100%;
-    background: #1ed760;
+    background: var(--dynamic-accent);
     transition: width 0.5s linear;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .playBtn {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     border-radius: 12px;

@@ -86,7 +86,7 @@
 .markAllBtn {
     background: none;
     border: none;
-    color: #1DB954;
+    color: var(--dynamic-accent);
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
@@ -151,7 +151,7 @@
 }
 
 .iconSale {
-    color: #1DB954;
+    color: var(--dynamic-accent);
 }
 
 .iconComment {
@@ -210,7 +210,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #1DB954;
+    background: var(--dynamic-accent);
     position: absolute;
     right: 15px;
     top: 50%;

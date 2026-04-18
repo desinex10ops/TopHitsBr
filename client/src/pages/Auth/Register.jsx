@@ -59,7 +59,7 @@ const Register = () => {
             });
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.error || 'Falha no cadastro.');
+            setError(err.response?.data?.message || err.response?.data?.error || 'Falha no cadastro.');
         } finally {
             setLoading(false);
         }

@@ -21,7 +21,7 @@ const Login = () => {
             await login(email, password);
             navigate('/dashboard'); // Redirecionar para Dashboard
         } catch (err) {
-            setError(err.response?.data?.error || 'Falha ao fazer login.');
+            setError(err.response?.data?.message || err.response?.data?.error || 'Falha ao fazer login.');
         } finally {
             setLoading(false);
         }

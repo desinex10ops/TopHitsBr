@@ -74,15 +74,15 @@ const ProducerOverview = () => {
                         <AreaChart data={stats.chartData}>
                             <defs>
                                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#1db954" stopOpacity={0.8} />
-                                    <stop offset="95%" stopColor="#1db954" stopOpacity={0} />
+                                    <stop offset="5%" stopColor="var(--dynamic-accent)" stopOpacity={0.8} />
+                                    <stop offset="95%" stopColor="var(--dynamic-accent)" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
                             <XAxis dataKey="name" stroke="#666" />
                             <YAxis stroke="#666" />
                             <CartesianGrid strokeDasharray="3 3" stroke="#222" />
                             <Tooltip contentStyle={{ backgroundColor: '#111', border: '1px solid #333' }} />
-                            <Area type="monotone" dataKey="revenue" stroke="#1db954" fillOpacity={1} fill="url(#colorRevenue)" />
+                            <Area type="monotone" dataKey="revenue" stroke="var(--dynamic-accent)" fillOpacity={1} fill="url(#colorRevenue)" />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>

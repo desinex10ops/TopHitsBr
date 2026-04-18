@@ -6,6 +6,7 @@ import styles from './Sidebar.module.css';
 import api from '../../services/api';
 import { useToast } from '@/contexts/ToastContext';
 import logoImg from '../../assets/logo_tophits.png';
+import { getStorageUrl } from '@/utils/urlUtils';
 
 
 
@@ -20,7 +21,7 @@ const Sidebar = () => {
         if (!name) return;
 
         try {
-            const response = await api.post('/music/playlists', { name });
+            const response = await api.post('/playlists', { name });
             setPlaylists([response.data, ...playlists]);
             addToast("Playlist criada!", "success");
         } catch (error) {
@@ -31,9 +32,12 @@ const Sidebar = () => {
 
     useEffect(() => {
         if (user) {
-            api.get('/music/playlists/user')
-                .then(res => setPlaylists(res.data))
-                .catch(err => console.error("Erro ao carregar playlists sidebar:", err));
+            api.get('/playlists/user')
+                .then(res => setPlaylists(Array.isArray(res.data) ? res.data : []))
+                .catch(err => {
+                    console.error("Erro ao carregar playlists sidebar:", err);
+                    setPlaylists([]);
+                });
         }
     }, [user]);
 
@@ -58,7 +62,7 @@ const Sidebar = () => {
                     <FiDisc className={styles.icon} />
                     <span>Gêneros</span>
                 </NavLink>
-                <NavLink to="/shop" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem} style={{ color: '#1db954' }}>
+                <NavLink to="/shop" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem} style={{ color: 'var(--dynamic-accent)' }}>
                     <FiShoppingBag className={styles.icon} />
                     <span>SHOP</span>
                 </NavLink>
@@ -130,7 +134,7 @@ const Sidebar = () => {
                 {user ? (
                     <div className={styles.userProfile}>
                         <div className={styles.avatar}>
-                            {user.avatar ? <img src={user.avatar} alt={user.name} /> : <FiUser />}
+                            {user.avatar ? <img src={getStorageUrl(user.avatar)} alt={user.name} /> : <FiUser />}
                         </div>
                         <span className={styles.userName}>{user.name}</span>
                     </div>

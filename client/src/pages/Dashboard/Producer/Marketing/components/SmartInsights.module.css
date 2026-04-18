@@ -18,7 +18,7 @@
 .card:hover {
     background: #282828;
     transform: translateX(5px);
-    border-left-color: #1db954;
+    border-left-color: var(--dynamic-accent);
 }
 
 .icon {

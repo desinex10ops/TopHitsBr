@@ -29,7 +29,7 @@
 }
 
 .active {
-    color: #1db954;
+    color: var(--dynamic-accent);
     /* Spotify Green */
     transform: scale(1.05);
     font-size: 1.8rem;

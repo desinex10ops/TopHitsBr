@@ -29,7 +29,7 @@ export const ToastProvider = ({ children }) => {
                     position: 'fixed',
                     bottom: '80px',
                     right: '20px',
-                    background: toast.type === 'error' ? '#e74c3c' : '#1DB954',
+                    background: toast.type === 'error' ? '#e74c3c' : 'var(--dynamic-accent)',
                     color: 'white',
                     padding: '10px 20px',
                     borderRadius: '5px',

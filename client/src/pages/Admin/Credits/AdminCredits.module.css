@@ -58,7 +58,7 @@
 }
 
 .addBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -100,7 +100,7 @@
 
 .credits {
     background: rgba(29, 185, 84, 0.1);
-    color: #1db954;
+    color: var(--dynamic-accent);
     padding: 4px 10px;
     border-radius: 12px;
     font-size: 0.8rem;
@@ -203,7 +203,7 @@
 }
 
 .saveBtn {
-    background: #1db954 !important;
+    background: var(--dynamic-accent) !important;
     color: #fff !important;
     padding: 8px 24px !important;
     border-radius: 20px !important;
@@ -244,7 +244,7 @@
 
 .saveSettingsBtn {
     width: 100%;
-    background: #1db954;
+    background: var(--dynamic-accent);
     border: none;
     color: #fff;
     padding: 12px;
@@ -305,7 +305,7 @@
 
 .statusBadge.paid {
     background: rgba(29, 185, 84, 0.1);
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .statusBadge.rejected {
@@ -329,7 +329,7 @@
 }
 
 .approveBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #fff;
 }
 

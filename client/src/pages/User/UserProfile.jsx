@@ -7,16 +7,12 @@ import { toast } from 'react-toastify';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { getStorageUrl } from '../../utils/urlUtils';
 
-import { FiMessageSquare } from 'react-icons/fi';
-import ChatModal from '../Dashboard/Chat/ChatModal';
-
 const UserProfile = () => {
     const { id } = useParams();
     const { user: currentUser } = useAuth();
     const [profile, setProfile] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [isChatOpen, setIsChatOpen] = useState(false);
 
     useEffect(() => {
         fetchProfile();
@@ -34,14 +30,6 @@ const UserProfile = () => {
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleSendMessage = () => {
-        if (!currentUser) {
-            toast.error("Você precisa estar logado para enviar mensagens.");
-            return;
-        }
-        setIsChatOpen(true);
     };
 
     const handleFollow = async () => {
@@ -102,17 +90,12 @@ const UserProfile = () => {
 
                 <div className={styles.actions}>
                     {currentUser && currentUser.id !== profile.id && (
-                        <>
-                            <button
-                                className={`${styles.followBtn} ${isFollowing ? styles.following : styles.notFollowing}`}
-                                onClick={handleFollow}
-                            >
-                                {isFollowing ? 'Deixar de seguir' : 'Seguir'}
-                            </button>
-                            <button className={styles.messageBtn} onClick={handleSendMessage} title="Enviar Mensagem">
-                                <FiMessageSquare />
-                            </button>
-                        </>
+                        <button
+                            className={`${styles.followBtn} ${isFollowing ? styles.following : styles.notFollowing}`}
+                            onClick={handleFollow}
+                        >
+                            {isFollowing ? 'Deixar de seguir' : 'Seguir'}
+                        </button>
                     )}
                 </div>
             </div>
@@ -126,17 +109,6 @@ const UserProfile = () => {
                 </div>
             </div> 
             */}
-
-            {/* Chat Modal */}
-            {currentUser && profile && (
-                <ChatModal
-                    isOpen={isChatOpen}
-                    onClose={() => setIsChatOpen(false)}
-                    recipientId={profile.id}
-                    recipientName={profile.artisticName || profile.name}
-                    recipientAvatar={avatarUrl}
-                />
-            )}
         </div>
     );
 };

@@ -11,15 +11,15 @@ const Advertise = () => {
             <h2>Nossos Números</h2>
             <div style={{ display: 'flex', gap: '40px', margin: '30px 0', flexWrap: 'wrap' }}>
                 <div>
-                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: '#1ed760', display: 'block' }}>+5M</span>
+                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--dynamic-accent)', display: 'block' }}>+5M</span>
                     <span style={{ color: '#aaa' }}>Usuários Ativos</span>
                 </div>
                 <div>
-                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: '#1ed760', display: 'block' }}>+12M</span>
+                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--dynamic-accent)', display: 'block' }}>+12M</span>
                     <span style={{ color: '#aaa' }}>Plays Mensais</span>
                 </div>
                 <div>
-                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: '#1ed760', display: 'block' }}>+50k</span>
+                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--dynamic-accent)', display: 'block' }}>+50k</span>
                     <span style={{ color: '#aaa' }}>Artistas Cadastrados</span>
                 </div>
             </div>
@@ -36,7 +36,7 @@ const Advertise = () => {
             <p>
                 Para receber nosso Mídia Kit atualizado e discutir oportunidades, envie um email para:
             </p>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1ed760' }}>
+            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--dynamic-accent)' }}>
                 comercial@tophitsbr.com
             </p>
         </InfoPageLayout>

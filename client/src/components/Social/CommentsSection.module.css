@@ -42,12 +42,12 @@
 
 .input:focus {
     outline: none;
-    border-color: #1db954;
+    border-color: var(--dynamic-accent);
 }
 
 .submitBtn {
     margin-top: 10px;
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 8px 16px;
@@ -60,7 +60,7 @@
 
 .submitBtn:hover {
     transform: scale(1.05);
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .submitBtn:disabled {

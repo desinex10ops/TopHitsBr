@@ -89,7 +89,7 @@
 }
 
 .trackItem.active .trackTitle {
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .trackInfo {
@@ -112,6 +112,6 @@
 }
 
 .playingIcon {
-    color: #1db954;
+    color: var(--dynamic-accent);
     font-size: 0.8rem;
 }

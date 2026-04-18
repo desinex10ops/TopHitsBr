@@ -72,7 +72,7 @@ const Overview = () => {
             <div className={styles.statsGrid}>
                 {isProducer ? (
                     <>
-                        <StatCard title="Total de Plays" value={stats.totalPlays || 0} icon={<FiMusic />} color="#1DB954" />
+                        <StatCard title="Total de Plays" value={stats.totalPlays || 0} icon={<FiMusic />} color="var(--dynamic-accent)" />
                         <StatCard title="Seguidores" value={stats.followers || 0} icon={<FiUsers />} color="#2E77D0" />
                         {(user?.isSeller || user?.type === 'admin') && (
                             <>
@@ -88,7 +88,7 @@ const Overview = () => {
                     <>
                         <StatCard title="Músicas Curtidas" value={stats.likedSongs || 0} icon={<FiStar />} color="#ec4899" />
                         <StatCard title="Minhas Compras" value={stats.purchases || 0} icon={<FiShoppingBag />} color="#3b82f6" />
-                        <StatCard title="Playlists" value={stats.playlistsCount || 0} icon={<FiMusic />} color="#1DB954" />
+                        <StatCard title="Playlists" value={stats.playlistsCount || 0} icon={<FiMusic />} color="var(--dynamic-accent)" />
                         <StatCard title="Créditos" value="R$ 0,00" icon={<FiStar />} color="#eab308" />
                     </>
                 )}

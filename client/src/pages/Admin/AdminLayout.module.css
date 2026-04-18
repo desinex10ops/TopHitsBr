@@ -37,7 +37,7 @@
 }
 
 .logo span {
-    color: #1ed760;
+    color: var(--dynamic-accent);
 }
 
 .closeBtn {
@@ -54,6 +54,16 @@
     flex-direction: column;
     gap: 10px;
     flex: 1;
+    overflow-y: auto;
+}
+
+.nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.nav::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
 }
 
 .navItem {
@@ -75,7 +85,7 @@
 }
 
 .navItem.active {
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     color: #000;
 }
 

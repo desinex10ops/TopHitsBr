@@ -11,14 +11,14 @@
 
 .insight {
     background: rgba(29, 185, 84, 0.1);
-    border-left: 3px solid #1db954;
+    border-left: 3px solid var(--dynamic-accent);
     padding: 12px;
     border-radius: 0 4px 4px 0;
     margin-top: 10px;
 }
 
 .insight strong {
-    color: #1db954;
+    color: var(--dynamic-accent);
     display: block;
     margin-bottom: 4px;
 }

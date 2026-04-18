@@ -32,11 +32,10 @@ exports.listUsers = async (req, res) => {
             totalPages: Math.ceil(count / limit),
             currentPage: parseInt(page)
         });
-    });
-} catch (error) {
-    console.error('Erro ao listar usuários:', error);
-    res.status(500).json({ error: 'Erro ao listar usuários.' });
-}
+    } catch (error) {
+        console.error('Erro ao listar usuários:', error);
+        res.status(500).json({ error: 'Erro ao listar usuários.' });
+    }
 };
 
 exports.searchUsers = async (req, res) => {

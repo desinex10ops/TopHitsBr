@@ -59,8 +59,8 @@
 }
 
 .tabs button.activeTab {
-    color: #1db954;
-    border-bottom: 2px solid #1db954;
+    color: var(--dynamic-accent);
+    border-bottom: 2px solid var(--dynamic-accent);
 }
 
 .form {
@@ -146,7 +146,7 @@
 
 .submitBtn,
 .nextBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -160,7 +160,7 @@
 .submitBtn:hover,
 .nextBtn:hover {
     transform: scale(1.05);
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .submitBtn:disabled {

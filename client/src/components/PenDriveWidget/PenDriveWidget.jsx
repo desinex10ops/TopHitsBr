@@ -186,7 +186,7 @@ const PenDriveWidget = () => {
                 <div className={styles.rightCol}>
                     <div className={styles.queueHeader}>
                         <strong>Meu Pen Drive</strong>
-                        <span style={{ color: '#1db954' }}>{pendriveItems.length} itens</span>
+                        <span style={{ color: 'var(--dynamic-accent)' }}>{pendriveItems.length} itens</span>
                     </div>
 
                     <div className={styles.queueList}>
@@ -248,7 +248,7 @@ const PenDriveWidget = () => {
                                 });
 
                                 return groups.map((group, idx) => (
-                                    <div key={idx} className={styles.queueItem} style={group.type === 'album' ? { borderLeft: '3px solid #1db954', backgroundColor: '#2a2a2a' } : {}}>
+                                    <div key={idx} className={styles.queueItem} style={group.type === 'album' ? { borderLeft: '3px solid var(--dynamic-accent)', backgroundColor: '#2a2a2a' } : {}}>
                                         <div style={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
                                             {group.type === 'album' ? (
                                                 <>

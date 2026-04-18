@@ -22,7 +22,7 @@
 .logo {
     font-size: 2rem;
     font-weight: bold;
-    color: #1DB954;
+    color: var(--dynamic-accent);
     margin-bottom: 30px;
     display: block;
 }
@@ -57,7 +57,7 @@
 }
 
 .input:focus {
-    border-color: #1DB954;
+    border-color: var(--dynamic-accent);
     outline: none;
     background: #404040;
 }
@@ -75,7 +75,7 @@
 .button {
     width: 100%;
     padding: 14px;
-    background: #1DB954;
+    background: var(--dynamic-accent);
     color: white;
     border: none;
     border-radius: 50px;
@@ -87,7 +87,7 @@
 }
 
 .button:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     transform: scale(1.02);
 }
 
@@ -161,7 +161,7 @@
 
 .link:hover {
     text-decoration: underline;
-    color: #1DB954;
+    color: var(--dynamic-accent);
 }
 
 .error {
@@ -194,9 +194,9 @@
 }
 
 .radioLabel.active {
-    background: #1DB954;
+    background: var(--dynamic-accent);
     color: white;
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
 }
 
 .radioInput {

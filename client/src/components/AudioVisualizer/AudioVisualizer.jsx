@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { usePlayer } from '@/contexts/PlayerContext';
 
-const AudioVisualizer = ({ height = 50, width = 300, color = '#1db954' }) => {
+const AudioVisualizer = ({ height = 50, width = 300, color = 'var(--dynamic-accent)' }) => {
     const canvasRef = useRef(null);
     const { analyserRef, isPlaying } = usePlayer();
 
@@ -27,13 +27,21 @@ const AudioVisualizer = ({ height = 50, width = 300, color = '#1db954' }) => {
             const barWidth = (width / bufferLength) * 2;
             let x = 0;
 
+            // Resolve CSS variable to actual color if it's a var()
+            let resolvedColor = color;
+            if (color.startsWith('var(')) {
+                const varName = color.match(/var\(([^)]+)\)/)[1];
+                resolvedColor = getComputedStyle(document.documentElement).getPropertyValue(varName).trim() || '#ff0055';
+            }
+
             for (let i = 0; i < bufferLength; i++) {
                 const barHeight = (dataArray[i] / 255) * height;
 
                 // Create a sleek gradient for each bar
                 const gradient = ctx.createLinearGradient(0, height - barHeight, 0, height);
-                gradient.addColorStop(0, color);
-                gradient.addColorStop(1, `${color}40`); // Fades out at bottom
+                // Canvas API doesn't understand var() natively inside addColorStop without parsing
+                gradient.addColorStop(0, resolvedColor);
+                gradient.addColorStop(1, `${resolvedColor}40`); // Fades out at bottom
 
                 ctx.fillStyle = gradient;
 

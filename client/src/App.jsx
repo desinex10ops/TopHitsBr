@@ -39,7 +39,6 @@ const Privacy = lazy(() => import('./pages/Info/Privacy'));
 const Cookies = lazy(() => import('./pages/Info/Cookies'));
 const HelpDownload = lazy(() => import('./pages/Info/HelpDownload'));
 const HelpLogin = lazy(() => import('./pages/Info/HelpLogin'));
-const ChatOnline = lazy(() => import('./pages/ChatOnline/ChatOnline'));
 const Notifications = lazy(() => import('./pages/Notifications/Notifications')); // [NEW] Notification Page
 const UserProfile = lazy(() => import('./pages/User/UserProfile')); // [NEW] Public User Profile
 const Library = lazy(() => import('./pages/Library/Library')); // [NEW] Unified Library
@@ -97,7 +96,6 @@ function App() {
 
               <Route path="/help/download" element={<HelpDownload />} />
               <Route path="/help/login" element={<HelpLogin />} />
-              <Route path="/chat-online" element={<ChatOnline />} />
 
               {/* Auth */}
               <Route path="/login" element={<Login />} />

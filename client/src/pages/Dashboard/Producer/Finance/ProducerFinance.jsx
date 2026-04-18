@@ -141,7 +141,7 @@ const ProducerFinance = () => {
                                     <td>{formatDate(t.createdAt)}</td>
                                     <td>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                            {t.type === 'sale' ? <FiArrowUpRight color="#1ed760" /> : <FiArrowDownLeft color="#ff4d4d" />}
+                                            {t.type === 'sale' ? <FiArrowUpRight color="var(--dynamic-accent)" /> : <FiArrowDownLeft color="#ff4d4d" />}
                                             {t.description}
                                         </div>
                                     </td>

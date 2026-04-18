@@ -42,7 +42,7 @@
     align-items: center;
     gap: 12px;
     margin-bottom: 25px;
-    color: #1ed760;
+    color: var(--dynamic-accent);
 }
 
 .sectionHeader h3 {
@@ -96,8 +96,8 @@
 }
 
 .saveIconBtn:hover {
-    background: #1ed760;
-    border-color: #1ed760;
+    background: var(--dynamic-accent);
+    border-color: var(--dynamic-accent);
     color: #000;
 }
 

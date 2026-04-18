@@ -181,7 +181,7 @@ const PenDrive = () => {
                                     <div className={styles.capacityBarWrapper}>
                                         <div
                                             className={styles.capacityBar}
-                                            style={{ width: `${usedPercentage}%`, backgroundColor: usedPercentage > 90 ? '#ff4444' : '#1db954' }}
+                                            style={{ width: `${usedPercentage}%`, backgroundColor: usedPercentage > 90 ? '#ff4444' : 'var(--dynamic-accent)' }}
                                         />
                                     </div>
                                     <span className={styles.usbLabel}>{formatSize(usedBytes)} / {formatSize(capacity)}</span>

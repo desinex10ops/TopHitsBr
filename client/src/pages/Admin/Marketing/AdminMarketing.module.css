@@ -23,7 +23,7 @@
 }
 
 .addBtn {
-    background: #1DB954;
+    background: var(--dynamic-accent);
     color: #fff;
     border: none;
     padding: 12px 24px;
@@ -67,7 +67,7 @@
 }
 
 .tagIcon {
-    color: #1DB954;
+    color: var(--dynamic-accent);
     font-size: 1.2rem;
 }
 
@@ -95,7 +95,7 @@
 .discount {
     font-size: 2.5rem;
     font-weight: 900;
-    color: #1DB954;
+    color: var(--dynamic-accent);
     margin-bottom: 20px;
 }
 
@@ -124,7 +124,7 @@
 
 .badgeActive {
     background: rgba(29, 185, 84, 0.1);
-    color: #1DB954;
+    color: var(--dynamic-accent);
     padding: 5px 12px;
     border-radius: 50px;
     font-size: 0.8rem;
@@ -185,7 +185,7 @@
 }
 
 .formGroup input:focus {
-    border-color: #1DB954;
+    border-color: var(--dynamic-accent);
 }
 
 .formRow {
@@ -210,7 +210,7 @@
 }
 
 .saveBtn {
-    background: #1DB954;
+    background: var(--dynamic-accent);
     color: #fff;
     border: none;
     padding: 10px 25px;

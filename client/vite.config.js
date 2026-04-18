@@ -17,7 +17,7 @@ export default defineConfig({
   },
   server: {
     host: true, // Exposes IP
-    port: 5174
+    port: 5173
   }
 })
 

@@ -262,7 +262,7 @@ const AdminHighlights = () => {
                             <li key={track.id} style={{ display: 'flex', alignItems: 'center', padding: '8px', borderBottom: '1px solid #333' }}>
                                 <img src={getStorageUrl(track.coverpath)} alt="" style={{ width: '40px', height: '40px', borderRadius: '4px', marginRight: '10px', objectFit: 'cover' }} />
                                 <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{track.title} - {track.artist}</span>
-                                <button style={{ ...btnStyle, background: '#1db954', color: '#000', fontSize: '0.8rem', padding: '5px 10px' }} onClick={() => addFeaturedTrack(track)}>
+                                <button style={{ ...btnStyle, background: 'var(--dynamic-accent)', color: '#000', fontSize: '0.8rem', padding: '5px 10px' }} onClick={() => addFeaturedTrack(track)}>
                                     Adicionar
                                 </button>
                             </li>
@@ -290,7 +290,7 @@ const AdminHighlights = () => {
                 </div>
 
                 <div style={{ marginTop: '20px', textAlign: 'right' }}>
-                    <button style={{ ...btnStyle, background: '#1db954', color: '#000', padding: '10px 30px' }} onClick={saveFeaturedTracks}>
+                    <button style={{ ...btnStyle, background: 'var(--dynamic-accent)', color: '#000', padding: '10px 30px' }} onClick={saveFeaturedTracks}>
                         Salvar Alterações
                     </button>
                 </div>

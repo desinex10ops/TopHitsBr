@@ -63,14 +63,14 @@ const BoostBlock = () => {
                                 className={`${styles.selectOption} ${selectedType === 'album' ? styles.active : ''}`}
                                 onClick={() => setSelectedType('album')}
                             >
-                                <FiStar size={24} color={selectedType === 'album' ? '#1db954' : '#666'} />
+                                <FiStar size={24} color={selectedType === 'album' ? 'var(--dynamic-accent)' : '#666'} />
                                 <span>Álbum Completo</span>
                             </div>
                             <div
                                 className={`${styles.selectOption} ${selectedType === 'music' ? styles.active : ''}`}
                                 onClick={() => setSelectedType('music')}
                             >
-                                <FiMusic size={24} color={selectedType === 'music' ? '#1db954' : '#666'} />
+                                <FiMusic size={24} color={selectedType === 'music' ? 'var(--dynamic-accent)' : '#666'} />
                                 <span>Música Única</span>
                             </div>
                         </div>

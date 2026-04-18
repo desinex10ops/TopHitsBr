@@ -141,7 +141,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     /* Spotify Green */
     border: none;
     color: black;
@@ -254,7 +254,7 @@
 }
 
 .trackItem.active .trackName {
-    color: #1ed760;
+    color: var(--dynamic-accent);
 }
 
 .trackIndex {

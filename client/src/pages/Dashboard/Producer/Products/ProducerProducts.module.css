@@ -24,7 +24,7 @@
 }
 
 .addBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 12px 24px;
@@ -38,7 +38,7 @@
 }
 
 .addBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .searchBar {
@@ -117,7 +117,7 @@
 }
 
 .status.active {
-    color: #1ed760;
+    color: var(--dynamic-accent);
 }
 
 .actions {

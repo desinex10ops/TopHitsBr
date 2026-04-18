@@ -16,7 +16,7 @@
     margin-top: 0;
     margin-bottom: 30px;
     font-size: 1.2rem;
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .nav {
@@ -49,7 +49,7 @@
     background-color: #333;
     color: #fff;
     font-weight: bold;
-    border-left: 3px solid #1db954;
+    border-left: 3px solid var(--dynamic-accent);
 }
 
 .content {
@@ -65,7 +65,7 @@
 }
 
 .newBtn {
-    background-color: #1DB954;
+    background-color: var(--dynamic-accent);
     color: white;
     padding: 10px 20px;
     border-radius: 20px;

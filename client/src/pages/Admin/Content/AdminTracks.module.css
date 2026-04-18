@@ -92,7 +92,7 @@
 
 .badgeSuccess {
     background: rgba(29, 185, 84, 0.2);
-    color: #1ed760;
+    color: var(--dynamic-accent);
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;

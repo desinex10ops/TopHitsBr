@@ -33,7 +33,7 @@
     align-items: center;
     gap: 0.8rem;
     /* Green to Gold Gradient */
-    background: linear-gradient(90deg, #1db954, #1ed760);
+    background: linear-gradient(90deg, var(--dynamic-accent), var(--dynamic-accent));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -43,7 +43,7 @@
 }
 
 .icon {
-    color: #1ed760;
+    color: var(--dynamic-accent);
     font-size: 2.2rem;
     filter: drop-shadow(0 0 10px rgba(29, 185, 84, 0.5));
 }
@@ -209,8 +209,8 @@
 }
 
 .actionBtnSmall:hover {
-    background: #1db954;
-    border-color: #1db954;
+    background: var(--dynamic-accent);
+    border-color: var(--dynamic-accent);
     color: black;
 }
 
@@ -218,7 +218,7 @@
     width: 55px;
     /* Slightly larger */
     height: 55px;
-    background: #1db954;
+    background: var(--dynamic-accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -240,7 +240,7 @@
 .playCircle:hover {
     transform: scale(1.2) !important;
     background: #ffffff;
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 /* Badge (Ranking) */
@@ -250,7 +250,7 @@
     left: -10px;
     width: 40px;
     height: 40px;
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     font-size: 1.2rem;
     font-weight: 900;
@@ -377,8 +377,8 @@
 }
 
 .profileBtn:hover {
-    background: #1db954;
-    border-color: #1db954;
+    background: var(--dynamic-accent);
+    border-color: var(--dynamic-accent);
     color: black;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(29, 185, 84, 0.3);

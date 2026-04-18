@@ -10,7 +10,7 @@
     margin-bottom: 20px;
     color: white;
     padding-left: 10px;
-    border-left: 4px solid #1db954;
+    border-left: 4px solid var(--dynamic-accent);
 }
 
 .slider {
@@ -103,7 +103,7 @@
 }
 
 .revealOverlay span {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: black;
     padding: 8px 20px;
     border-radius: 50px;
@@ -174,7 +174,7 @@
 }
 
 .navBtn:hover {
-    background: #1db954;
+    background: var(--dynamic-accent);
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 0 15px rgba(29, 185, 84, 0.4);
 }

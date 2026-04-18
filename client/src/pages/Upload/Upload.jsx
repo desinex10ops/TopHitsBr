@@ -248,7 +248,7 @@ const Upload = () => {
                 {dragActive && (
                     <div className={styles.dragOverlay} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}>
                         <div className={styles.dragContent}>
-                            <FiUploadCloud size={80} color="#1db954" />
+                            <FiUploadCloud size={80} color="var(--dynamic-accent)" />
                             <h3>Solte seu arquivo aqui</h3>
                             <p>Detectaremos os metadados automaticamente.</p>
                         </div>
@@ -324,7 +324,7 @@ const Upload = () => {
                                 {mode === 'single' ? (
                                     files.audio ? (
                                         <div className={styles.fileInfo}>
-                                            <FiMusic size={24} color="#1db954" />
+                                            <FiMusic size={24} color="var(--dynamic-accent)" />
                                             <span>{files.audio.name}</span>
                                         </div>
                                     ) : (
@@ -336,7 +336,7 @@ const Upload = () => {
                                 ) : (
                                     files.zip ? (
                                         <div className={styles.fileInfo}>
-                                            <FiPackage size={24} color="#1db954" />
+                                            <FiPackage size={24} color="var(--dynamic-accent)" />
                                             <span>{files.zip.name}</span>
                                         </div>
                                     ) : (

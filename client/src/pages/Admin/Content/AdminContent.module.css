@@ -113,6 +113,6 @@
 }
 
 .active {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: black;
 }

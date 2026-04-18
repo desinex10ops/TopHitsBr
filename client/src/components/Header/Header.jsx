@@ -12,6 +12,7 @@ import {
 
 import NotificationBell from '../Notifications/NotificationBell';
 import { useNotifications } from '@/contexts/NotificationContext';
+import { getStorageUrl } from '@/utils/urlUtils';
 
 const Header = () => {
     const { pendriveItems } = usePlayer();
@@ -73,7 +74,6 @@ const Header = () => {
                         <NavLink to="/genres" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} title="Explorar">
                             <FiCompass /> <span className={styles.linkText}>Explorar</span>
                         </NavLink>
-                        <NavLink to="/chat-online" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} title="Chat Online"><span className={styles.linkText} style={{ color: '#1ed760' }}>💬 Chat Online</span></NavLink>
                     </nav>
                 </div>
 
@@ -130,7 +130,7 @@ const Header = () => {
                                 className={styles.avatar}
                                 onClick={() => setShowProfileMenu(!showProfileMenu)}
                             >
-                                {user && user.avatar ? <img src={user.avatar} alt="Avatar" /> : <FiUser />}
+                                {user && user.avatar ? <img src={getStorageUrl(user.avatar)} alt="Avatar" /> : <FiUser />}
                             </div>
 
                             {showProfileMenu && (

@@ -17,9 +17,9 @@
 }
 
 .active {
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .active:hover {
-    color: #1ed760;
+    color: var(--dynamic-accent);
 }

@@ -108,7 +108,7 @@ const Karaoke = () => {
                                 key={g.name}
                                 className={styles.genreCard}
                                 onClick={() => setSelectedGenre(g.name === selectedGenre ? '' : g.name)}
-                                style={{ borderColor: selectedGenre === g.name ? '#1db954' : '#333' }}
+                                style={{ borderColor: selectedGenre === g.name ? 'var(--dynamic-accent)' : '#333' }}
                             >
                                 <div className={styles.genreIcon}>{g.icon}</div>
                                 <div className={styles.genreName}>{g.name}</div>

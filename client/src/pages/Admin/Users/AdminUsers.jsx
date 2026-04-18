@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../services/api';
 import { useToast } from '@/contexts/ToastContext';
-import { FiSearch, FiShield, FiUser, FiSlash, FiCheckCircle, FiEdit3, FiDownload } from 'react-icons/fi';
+import { FiSearch, FiShield, FiUser, FiSlash, FiCheckCircle, FiEdit3, FiDownload, FiDollarSign, FiX } from 'react-icons/fi';
 import styles from './AdminUsers.module.css';
 import { getStorageUrl } from '../../../utils/urlUtils';
 
@@ -11,6 +11,13 @@ const AdminUsers = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+
+    // Credit Modal State
+    const [isCreditModalOpen, setIsCreditModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [creditAmount, setCreditAmount] = useState('');
+    const [creditLoading, setCreditLoading] = useState(false);
+
     const { addToast } = useToast();
 
     useEffect(() => {
@@ -54,6 +61,37 @@ const AdminUsers = () => {
             addToast(`Usuário ${newStatus ? 'ativado' : 'banido'}!`, 'success');
         } catch (error) {
             addToast('Erro ao atualizar status.', 'error');
+        }
+    };
+
+    const handleOpenCreditModal = (user) => {
+        setSelectedUser(user);
+        setCreditAmount('');
+        setIsCreditModalOpen(true);
+    };
+
+    const handleAddCredits = async () => {
+        if (!creditAmount || isNaN(creditAmount) || Number(creditAmount) <= 0) {
+            return addToast('Insira um valor válido', 'error');
+        }
+
+        setCreditLoading(true);
+        try {
+            const res = await api.post(`/admin/users/${selectedUser.id}/credits`, {
+                amount: Number(creditAmount),
+                action: 'add'
+            });
+
+            // Update local user state if needed (users array doesn't currently show balance directly but Wallet is joined)
+            // Just notify success
+            addToast(`Adicionado ${Number(creditAmount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} para ${selectedUser.name}!`, 'success');
+            setIsCreditModalOpen(false);
+            fetchUsers(); // Refresh to update possible balances or logs if needed
+        } catch (error) {
+            console.error('Erro ao adicionar saldo:', error);
+            addToast(error.response?.data?.error || 'Erro ao adicionar saldo', 'error');
+        } finally {
+            setCreditLoading(false);
         }
     };
 
@@ -152,6 +190,13 @@ const AdminUsers = () => {
                                                 >
                                                     <FiEdit3 />
                                                 </button>
+                                                <button
+                                                    className={`${styles.btnIcon} ${styles.btnAddCredit}`}
+                                                    title="Adicionar Créditos"
+                                                    onClick={() => handleOpenCreditModal(user)}
+                                                >
+                                                    <FiDollarSign />
+                                                </button>
                                                 {user.active !== false ? (
                                                     <button
                                                         className={`${styles.btnIcon} ${styles.btnBan}`}
@@ -207,6 +252,45 @@ const AdminUsers = () => {
                         </div>
                     )}
                 </>
+            )}
+
+            {isCreditModalOpen && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <h3>Adicionar Créditos</h3>
+                        <p style={{ color: '#b3b3b3', marginBottom: 20 }}>
+                            Adicionando saldo para: <strong style={{ color: '#fff' }}>{selectedUser?.name}</strong>
+                        </p>
+
+                        <input
+                            type="number"
+                            className={styles.inputAmount}
+                            placeholder="R$ 0,00"
+                            value={creditAmount}
+                            onChange={(e) => setCreditAmount(e.target.value)}
+                            min="1"
+                            step="1"
+                            autoFocus
+                        />
+
+                        <div className={styles.modalActions}>
+                            <button
+                                className={`${styles.modalBtn} ${styles.btnCancel}`}
+                                onClick={() => setIsCreditModalOpen(false)}
+                                disabled={creditLoading}
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                className={`${styles.modalBtn} ${styles.btnConfirm}`}
+                                onClick={handleAddCredits}
+                                disabled={creditLoading}
+                            >
+                                {creditLoading ? 'Processando...' : 'Confirmar'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

@@ -103,7 +103,7 @@
 }
 
 .benefitIcon {
-    color: #1db954;
+    color: var(--dynamic-accent);
     font-size: 1.2rem;
 }
 
@@ -149,14 +149,14 @@
 }
 
 .pricePeriod {
-    color: #1db954;
+    color: var(--dynamic-accent);
     font-weight: 600;
     margin-bottom: 25px;
     font-size: 1rem;
 }
 
 .ctaButton {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     width: 100%;
@@ -175,7 +175,7 @@
 }
 
 .ctaButton:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgba(29, 185, 84, 0.5);
 }
@@ -263,7 +263,7 @@
 .selectOption:hover,
 .selectOption.active {
     background: #2a2a2a;
-    border-color: #1db954;
+    border-color: var(--dynamic-accent);
 }
 
 .selectOption span {
@@ -303,7 +303,7 @@
 }
 
 .confirmBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     width: 100%;
@@ -316,7 +316,7 @@
 }
 
 .confirmBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 /* Responsive */

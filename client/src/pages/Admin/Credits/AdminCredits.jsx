@@ -238,7 +238,7 @@ const AdminCredits = () => {
                                 </div>
                                 <div className={styles.summaryCard}>
                                     <h4>Comissão Estimada (10%)</h4>
-                                    <span className={styles.value} style={{ color: '#1db954' }}>R$ {summary.summary.platformEarnings.toFixed(2)}</span>
+                                    <span className={styles.value} style={{ color: 'var(--dynamic-accent)' }}>R$ {summary.summary.platformEarnings.toFixed(2)}</span>
                                 </div>
                                 <div className={styles.summaryCard}>
                                     <h4>Saques Pendentes</h4>

@@ -221,7 +221,7 @@ exports.updateUserCredits = async (req, res) => {
             wallet = await Wallet.create({ UserId: id });
         }
 
-        const oldBalance = wallet.balance;
+        const oldBalance = parseFloat(wallet.balance) || 0;
         let newBalance = oldBalance;
 
         if (action === 'set') {

@@ -50,7 +50,7 @@
 }
 
 .iconGreen {
-    color: #1db954;
+    color: var(--dynamic-accent);
     font-size: 1.2rem;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .withdrawBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     border: none;
     padding: 12px;
     border-radius: 4px;
@@ -207,7 +207,7 @@
 }
 
 .transAmount.green {
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .transAmount.red {

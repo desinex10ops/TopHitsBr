@@ -43,8 +43,10 @@ const adminController = require('../controllers/adminController');
 router.get('/admin/delivery/logs', authMiddleware, adminMiddleware, deliveryController.retrieveLogs);
 router.get('/admin/export-sales', authMiddleware, adminMiddleware, adminController.exportSalesCSV);
 
-// Future: Checkout, Withdrawals
-// router.post('/checkout', authMiddleware, shopController.checkout);
+// Checkout and Purchases
+router.post('/checkout', authMiddleware, shopController.checkout);
+
+// Future: Withdrawals (handled by financeController right now)
 // router.post('/withdrawals', authMiddleware, shopController.requestWithdrawal);
 
 module.exports = router;

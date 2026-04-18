@@ -54,7 +54,7 @@
 }
 
 .navItem.active {
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     color: #000;
 }
 
@@ -211,7 +211,7 @@
 
 /* Karaoke Link Customizations */
 .karaokeLink {
-    color: #1ed760 !important;
+    color: var(--dynamic-accent) !important;
 }
 
 .karaokeLink:hover {

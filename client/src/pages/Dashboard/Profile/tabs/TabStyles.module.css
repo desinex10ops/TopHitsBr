@@ -78,7 +78,7 @@
 }
 
 .saveBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 14px 40px;
@@ -92,7 +92,7 @@
 
 .saveBtn:hover {
     transform: scale(1.02);
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .saveBtn:disabled {

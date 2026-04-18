@@ -32,12 +32,19 @@ class AuthService {
         const token = this.signToken(newUser);
 
         if (newUser.type === 'artist') {
-            const NotificationService = require('./NotificationService');
-            NotificationService.notifyUser(
-                'Novo Produtor Registrado',
-                `O usuário ${newUser.name} se cadastrou como produtor.`,
-                `/admin/users`
-            ).catch(console.error); // Async fire and forget
+            try {
+                const { AdminNotification } = require('../database');
+                if (AdminNotification) {
+                    await AdminNotification.create({
+                        type: 'info',
+                        title: 'Novo Produtor Registrado',
+                        message: `O usuário ${newUser.name} se cadastrou como produtor.`,
+                        link: `/admin/users`
+                    });
+                }
+            } catch (err) {
+                console.error('Failed to create AdminNotification:', err);
+            }
         }
 
         return { user: newUser, token };

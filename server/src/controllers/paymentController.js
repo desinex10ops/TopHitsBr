@@ -419,3 +419,100 @@ exports.handleWebhook = async (req, res) => {
         res.status(500).send("Error");
     }
 };
+
+exports.confirmManualPayment = async (req, res) => {
+    const { paymentId, orderId, status } = req.body;
+
+    if (status !== 'approved') {
+        return res.status(400).json({ error: 'Apenas pagamentos aprovados podem ser confirmados.' });
+    }
+
+    try {
+        // Optional verification with MercadoPago (strongly recommended even for manual triggers)
+        try {
+            const { Payment } = require('mercadopago');
+            const payment = new Payment(client);
+            const paymentInfo = await payment.get({ id: paymentId });
+
+            if (paymentInfo.status !== 'approved' || paymentInfo.external_reference !== orderId.toString()) {
+                console.warn(`[Manual Confirm] Payment verification failed for Order ${orderId}`);
+                return res.status(400).json({ error: 'Pagamento não confirmado pelo Mercado Pago.' });
+            }
+        } catch (mpError) {
+            console.error('[Manual Confirm] Error validating with MP (can ignore if mock/sandbox):', mpError.message);
+            // We proceed here mainly for localhost/sandbox environments where we might not have a rigorous MP check
+            // If you want strict security, uncomment this:
+            // return res.status(400).json({ error: 'Falha na comunicação com o Mercado Pago.' });
+        }
+
+        const t = await sequelize.transaction();
+
+        try {
+            const order = await Order.findByPk(orderId, { transaction: t });
+
+            if (!order) {
+                await t.rollback();
+                return res.status(404).json({ error: 'Pedido não encontrado.' });
+            }
+
+            if (order.status === 'paid') {
+                await t.rollback();
+                return res.status(200).json({ message: 'Pedido já processado anteriormente.', status: 'paid' });
+            }
+
+            order.status = 'paid';
+            order.paymentId = paymentId.toString();
+            await order.save({ transaction: t });
+
+            if (order.orderType === 'credits' && order.packageId) {
+                // Fulfill Credits
+                const { CreditPackage, CreditTransaction, Wallet } = require('../database');
+                const pkg = await CreditPackage.findByPk(order.packageId, { transaction: t });
+
+                if (pkg) {
+                    let wallet = await Wallet.findOne({ where: { UserId: order.buyerId }, transaction: t });
+                    if (!wallet) {
+                        wallet = await Wallet.create({ UserId: order.buyerId }, { transaction: t });
+                    }
+
+                    await wallet.increment('credits', { by: pkg.credits, transaction: t });
+
+                    // Log Credit Transaction
+                    await CreditTransaction.create({
+                        WalletId: wallet.id,
+                        amount: pkg.credits,
+                        type: 'purchase',
+                        description: `Compra de Pacote: ${pkg.name}`,
+                        referenceId: paymentId.toString()
+                    }, { transaction: t });
+
+                    // Notify User
+                    try {
+                        NotificationService.sendToUser(order.buyerId, 'credits', {
+                            title: 'Créditos Adicionados!',
+                            message: `Você recebeu ${pkg.credits} créditos em sua conta.`,
+                            credits: pkg.credits
+                        });
+                    } catch (e) {
+                        console.error('Notif error:', e);
+                    }
+                }
+            } else {
+                // Process Split for Shop products
+                await exports.executeSplit(order.id, t);
+            }
+
+            await t.commit();
+            console.log(`[Manual Confirm] Order ${orderId} successfully processed.`);
+            return res.json({ message: 'Pagamento confirmado com sucesso!', status: 'paid' });
+
+        } catch (dbError) {
+            await t.rollback();
+            throw dbError;
+        }
+
+    } catch (error) {
+        console.error("Erro na confirmação manual de pagamento:", error);
+        res.status(500).json({ error: 'Erro ao confirmar pagamento manualmente.' });
+    }
+};

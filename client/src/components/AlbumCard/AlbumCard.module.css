@@ -87,7 +87,7 @@
 }
 
 .overlay span {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: black;
     padding: 10px 20px;
     border-radius: 50px;
@@ -164,6 +164,6 @@
 }
 
 .actionBtn:hover {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: black;
 }

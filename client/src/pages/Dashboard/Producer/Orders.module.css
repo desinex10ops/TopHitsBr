@@ -64,7 +64,7 @@
 }
 
 .orderId {
-    color: #1DB954;
+    color: var(--dynamic-accent);
     font-weight: bold;
 }
 
@@ -154,5 +154,5 @@
 
 .status.completed {
     background: rgba(29, 185, 84, 0.2);
-    color: #1db954;
+    color: var(--dynamic-accent);
 }

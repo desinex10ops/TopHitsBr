@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={value}>
             {console.log("AuthProvider rendering children, loading:", loading)}
             {loading ? (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#000', color: '#1DB954' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#000', color: 'var(--dynamic-accent)' }}>
                     <h2>Carregando...</h2>
                 </div>
             ) : (

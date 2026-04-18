@@ -41,7 +41,7 @@
 }
 
 .addBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 10px 20px;
@@ -86,7 +86,7 @@
 }
 
 .icon {
-    color: #1db954;
+    color: var(--dynamic-accent);
     font-size: 1.2rem;
 }
 
@@ -199,7 +199,7 @@
 
 .pixelInput:focus,
 .modalInput:focus {
-    border-color: #1db954;
+    border-color: var(--dynamic-accent);
 }
 
 .savePixelBtn {
@@ -215,7 +215,7 @@
 }
 
 .savePixelBtn:hover {
-    background: #1db954;
+    background: var(--dynamic-accent);
 }
 
 /* Modal */
@@ -270,7 +270,7 @@
 }
 
 .confirmBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 10px 20px;

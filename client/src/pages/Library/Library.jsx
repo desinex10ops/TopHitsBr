@@ -73,7 +73,7 @@ const Library = () => {
                                         <span className={styles.trackArtist}>{track.artist}</span>
                                     </div>
                                     <div className={styles.trackActions}>
-                                        <FiHeart style={{ fill: '#1db954', color: '#1db954' }} />
+                                        <FiHeart style={{ fill: 'var(--dynamic-accent)', color: 'var(--dynamic-accent)' }} />
                                     </div>
                                 </Link>
                             ))

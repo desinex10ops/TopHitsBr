@@ -34,7 +34,7 @@ const BecomeSeller = () => {
         return (
             <div className={styles.container}>
                 <div className={styles.successCard}>
-                    <FiCheckCircle size={64} color="#1DB954" />
+                    <FiCheckCircle size={64} color="var(--dynamic-accent)" />
                     <h2>Você já é um Vendedor!</h2>
                     <p>Agora você tem acesso total ao Catálogo, Vendas e Financeiro no seu menu lateral.</p>
                 </div>

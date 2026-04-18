@@ -34,7 +34,7 @@
     font-size: 3.5rem;
     font-weight: 900;
     margin-bottom: 15px;
-    background: linear-gradient(45deg, #fff, #1db954);
+    background: linear-gradient(45deg, #fff, var(--dynamic-accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -2px;
@@ -52,7 +52,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 25px;
-    border-left: 4px solid #1db954;
+    border-left: 4px solid var(--dynamic-accent);
     padding-left: 15px;
 }
 
@@ -83,7 +83,7 @@
 .genreCard:hover {
     transform: translateY(-10px);
     background: #282828;
-    border-color: #1db954;
+    border-color: var(--dynamic-accent);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -157,7 +157,7 @@
     align-items: center;
     gap: 5px;
     background: rgba(29, 185, 84, 0.1);
-    color: #1ed760;
+    color: var(--dynamic-accent);
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.7rem;
@@ -191,7 +191,7 @@
 }
 
 .playBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     border: none;
     color: #000;
     padding: 0 24px;
@@ -204,7 +204,7 @@
 }
 
 .playBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(29, 185, 84, 0.4);
 }

@@ -40,7 +40,7 @@
 
 .navItem.active,
 .navItem:active {
-    color: #1DB954;
+    color: var(--dynamic-accent);
 }
 
 .navItem.active svg {
@@ -56,7 +56,7 @@
 }
 
 .navItem:active .avatarIcon {
-    border-color: #1DB954;
+    border-color: var(--dynamic-accent);
 }
 
 @media (max-width: 1024px) {

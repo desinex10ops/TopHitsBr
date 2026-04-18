@@ -158,7 +158,7 @@ const LikedSongs = () => {
                                                 onClick={(e) => { e.stopPropagation(); removeFavorite(track.id); }}
                                                 title="Remover"
                                             >
-                                                <FiHeart fill="#1ed760" color="#1ed760" />
+                                                <FiHeart fill="var(--dynamic-accent)" color="var(--dynamic-accent)" />
                                             </button>
                                         </div>
 

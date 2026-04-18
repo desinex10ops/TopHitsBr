@@ -4,6 +4,8 @@
     align-items: flex-end;
     margin-bottom: 16px;
     padding: 0 16px;
+    gap: 16px;
+    flex-wrap: wrap;
     /* Mobile safe padding */
 }
 

@@ -90,7 +90,7 @@ export const PlayerProvider = ({ children }) => {
     const [themeColors, setThemeColors] = React.useState({
         primary: '#121212',
         secondary: '#282828',
-        accent: '#1db954',
+        accent: 'var(--dynamic-accent)',
         text: '#ffffff'
     });
 
@@ -114,7 +114,7 @@ export const PlayerProvider = ({ children }) => {
                         .then((palette) => {
                             const primary = palette.DarkMuted?.hex || '#121212';
                             const secondary = palette.DarkVibrant?.hex || '#282828';
-                            const accent = palette.Vibrant?.hex || '#1db954';
+                            const accent = palette.Vibrant?.hex || 'var(--dynamic-accent)';
 
                             console.log("[Theme] Colors extracted:", { primary, secondary, accent });
 
@@ -141,7 +141,7 @@ export const PlayerProvider = ({ children }) => {
                 setThemeColors({
                     primary: '#121212',
                     secondary: '#282828',
-                    accent: '#1db954',
+                    accent: 'var(--dynamic-accent)',
                     text: '#ffffff'
                 });
             }

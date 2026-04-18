@@ -47,7 +47,6 @@ const DashboardLayout = () => {
         { path: '/dashboard', label: 'Visão Geral', icon: <FiHome /> },
         { path: '/notifications', label: 'Notificações', icon: <FiBell /> }, // [NEW] Link direto
         { path: '/dashboard/library', label: 'Minha Biblioteca', icon: <FiHeart /> },
-        { path: '/dashboard/chat', label: 'Mensagens', icon: <FiMessageCircle /> },
         { path: '/dashboard/profile', label: 'Meu Perfil', icon: <FiUser /> },
     ];
 
@@ -73,7 +72,7 @@ const DashboardLayout = () => {
             );
         } else {
             menuItems.push(
-                { path: '/dashboard/become-seller', label: 'Seja um Vendedor', icon: <FiDollarSign />, color: '#1DB954' }
+                { path: '/dashboard/become-seller', label: 'Seja um Vendedor', icon: <FiDollarSign />, color: 'var(--dynamic-accent)' }
             );
         }
     }
@@ -147,7 +146,6 @@ const DashboardLayout = () => {
                     <Routes>
                         <Route path="/" element={user?.type === 'artist' || user?.type === 'admin' ? <ProducerOverview /> : <Overview />} />
                         <Route path="/library" element={<Library />} />
-                        <Route path="/chat" element={<ChatPage />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/purchases" element={<MyPurchases />} />
                         <Route path="/products" element={<ProducerProducts />} />

@@ -6,20 +6,20 @@ const helmet = require('helmet');
 const path = require('path');
 const { initDb } = require('./src/database');
 
-// Middleware
-// app.use(helmet({
-//     crossOriginResourcePolicy: { policy: "cross-origin" },
-//     contentSecurityPolicy: {
-//         directives: {
-//             defaultSrc: ["'self'"],
-//             connectSrc: ["'self'", "http://localhost:*", "http://192.168.*.*", "ws://localhost:*"],
-//             imgSrc: ["'self'", "data:", "blob:", "*"],
-//             mediaSrc: ["'self'", "data:", "blob:", "*"],
-//             scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-//             styleSrc: ["'self'", "'unsafe-inline'"],
-//         },
-//     },
-// }));
+// Middleware Security Hardening
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" }, // Allows images/audio to be fetched cross-origin
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            connectSrc: ["'self'", "http://localhost:*", "http://192.168.*.*", "ws://localhost:*"],
+            imgSrc: ["'self'", "data:", "blob:", "*"], // '*' necessary for external avatars/covers if applicable
+            mediaSrc: ["'self'", "data:", "blob:", "*"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+        },
+    },
+}));
 
 // Dynamic CORS for Local Network
 const allowedOrigins = [
@@ -145,7 +145,7 @@ const clientBuildPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientBuildPath));
 
 // Handle SPA Routing (Send index.html for any unknown route)
-app.get('*', (req, res) => {
+app.use((req, res) => {
     // Determine if request is for API or Storage (should have been handled above)
     // If we are here, it's likely a frontend route
     res.sendFile(path.join(clientBuildPath, 'index.html'));

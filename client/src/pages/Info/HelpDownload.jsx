@@ -11,7 +11,7 @@ const HelpDownload = () => {
 
             <div style={{ display: 'grid', gap: '20px', marginTop: '30px' }}>
                 <div style={{ background: '#222', padding: '20px', borderRadius: '8px', display: 'flex', gap: '15px' }}>
-                    <div style={{ background: '#1ed760', color: '#000', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>1</div>
+                    <div style={{ background: 'var(--dynamic-accent)', color: '#000', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>1</div>
                     <div>
                         <h3 style={{ margin: '0 0 10px 0', color: '#fff' }}>Encontre a Música</h3>
                         <p style={{ margin: 0, fontSize: '0.9rem', color: '#ccc' }}>Use a barra de pesquisa ou navegue pelas categorias para encontrar a faixa ou álbum que deseja.</p>
@@ -19,7 +19,7 @@ const HelpDownload = () => {
                 </div>
 
                 <div style={{ background: '#222', padding: '20px', borderRadius: '8px', display: 'flex', gap: '15px' }}>
-                    <div style={{ background: '#1ed760', color: '#000', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>2</div>
+                    <div style={{ background: 'var(--dynamic-accent)', color: '#000', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>2</div>
                     <div>
                         <h3 style={{ margin: '0 0 10px 0', color: '#fff' }}>Clique no Botão Baixar</h3>
                         <p style={{ margin: 0, fontSize: '0.9rem', color: '#ccc' }}>
@@ -29,7 +29,7 @@ const HelpDownload = () => {
                 </div>
 
                 <div style={{ background: '#222', padding: '20px', borderRadius: '8px', display: 'flex', gap: '15px' }}>
-                    <div style={{ background: '#1ed760', color: '#000', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>3</div>
+                    <div style={{ background: 'var(--dynamic-accent)', color: '#000', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>3</div>
                     <div>
                         <h3 style={{ margin: '0 0 10px 0', color: '#fff' }}>Aguarde o Download</h3>
                         <p style={{ margin: 0, fontSize: '0.9rem', color: '#ccc' }}>O download começará automaticamente. Músicas individuais são baixadas em MP3 de alta qualidade.</p>

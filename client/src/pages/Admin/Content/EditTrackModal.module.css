@@ -136,7 +136,7 @@
 }
 
 .formGroup input:focus {
-    border-color: #1db954;
+    border-color: var(--dynamic-accent);
 }
 
 .row {
@@ -164,7 +164,7 @@
 }
 
 .saveBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 10px 24px;
@@ -176,7 +176,7 @@
 }
 
 .saveBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     transform: scale(1.02);
 }
 

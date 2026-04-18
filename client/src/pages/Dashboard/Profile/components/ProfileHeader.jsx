@@ -3,6 +3,13 @@ import styles from '../Profile.module.css';
 import { FiCheck, FiCamera, FiVideo } from 'react-icons/fi';
 import { getStorageUrl } from '../../../../utils/urlUtils';
 
+// Formatador simples para números de milhares (ex: 1500 -> 1.5K)
+const formatNumber = (num) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num || 0;
+};
+
 const ProfileHeader = ({ user, previewAvatar, previewBanner, previewBannerVideo, onFileChange }) => {
     const avatarInputRef = useRef(null);
     const bannerInputRef = useRef(null);
@@ -54,7 +61,7 @@ const ProfileHeader = ({ user, previewAvatar, previewBanner, previewBannerVideo,
                     <img src={avatarUrl} alt="Avatar" />
                     <button
                         onClick={() => avatarInputRef.current.click()}
-                        style={{ position: 'absolute', bottom: 5, right: 5, background: 'var(--accent-color)', border: 'none', color: '#000', width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '3px solid var(--bg-primary)' }}
+                        style={{ position: 'absolute', bottom: 5, right: 5, background: 'var(--dynamic-accent)', border: 'none', color: '#000', width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '3px solid var(--bg-primary)' }}
                     >
                         <FiCamera size={14} />
                     </button>
@@ -73,16 +80,16 @@ const ProfileHeader = ({ user, previewAvatar, previewBanner, previewBannerVideo,
 
                     <div className={styles.statsRow}>
                         <div className={styles.stat}>
-                            <span className={styles.statValue}>1.4K</span>
+                            <span className={styles.statValue}>{formatNumber(user?.stats?.followers || 0)}</span>
                             <span className={styles.statLabel}>Seguidores</span>
                         </div>
                         <div className={styles.stat}>
-                            <span className={styles.statValue}>85.2K</span>
+                            <span className={styles.statValue}>{formatNumber(user?.stats?.plays || 0)}</span>
                             <span className={styles.statLabel}>Plays</span>
                         </div>
                         <div className={styles.stat}>
-                            <span className={styles.statValue}>12K</span>
-                            <span className={styles.statLabel}>Curtidas</span>
+                            <span className={styles.statValue}>{formatNumber(user?.stats?.downloads || 0)}</span>
+                            <span className={styles.statLabel}>Downloads</span>
                         </div>
                     </div>
                 </div>

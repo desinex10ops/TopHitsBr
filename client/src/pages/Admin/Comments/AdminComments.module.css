@@ -31,7 +31,7 @@
 }
 
 .searchBox:focus-within {
-    border-color: #1DB954;
+    border-color: var(--dynamic-accent);
 }
 
 .searchBox svg {
@@ -139,7 +139,7 @@
 }
 
 .statusActive {
-    color: #1DB954;
+    color: var(--dynamic-accent);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -183,8 +183,8 @@
 
 .btnApprove:hover {
     background: rgba(29, 185, 84, 0.1);
-    color: #1DB954;
-    border-color: #1DB954;
+    color: var(--dynamic-accent);
+    border-color: var(--dynamic-accent);
 }
 
 .btnUnapprove:hover {

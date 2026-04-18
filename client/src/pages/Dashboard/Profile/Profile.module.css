@@ -104,13 +104,13 @@
 }
 
 .badge {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
 }
 
 .sellerBadge {
     background: rgba(29, 185, 84, 0.2);
-    color: #1DB954;
+    color: var(--dynamic-accent);
     border: 1px solid rgba(29, 185, 84, 0.3);
 }
 
@@ -171,7 +171,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #1db954;
+    background: var(--dynamic-accent);
     border-radius: 2px 2px 0 0;
 }
 

@@ -57,7 +57,7 @@
 
 /* Link Ver Pen Drive */
 .headerLink {
-    color: #1ed760;
+    color: var(--dynamic-accent);
     /* Verde Spotify Clean */
     text-decoration: none;
     font-size: 0.8rem;
@@ -185,7 +185,7 @@
 
 .inputArrow {
     font-size: 1.4rem;
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 /* Resultados da Busca de Álbuns (Grid Visual) */
@@ -325,7 +325,7 @@
 }
 
 .queueHeader span {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: black;
     font-weight: 800;
     font-size: 0.75rem;
@@ -354,7 +354,7 @@
 }
 
 .checkIcon {
-    color: #1db954;
+    color: var(--dynamic-accent);
     margin-right: 15px;
     font-size: 0.9rem;
 }
@@ -367,7 +367,7 @@
 
 .actionBtn {
     margin: 20px;
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: black;
     border: none;
     padding: 18px;
@@ -384,7 +384,7 @@
 
 .actionBtn:hover {
     transform: scale(1.02);
-    background: #1ed760;
+    background: var(--dynamic-accent);
     box-shadow: 0 6px 25px rgba(29, 185, 84, 0.4);
 }
 

@@ -25,7 +25,7 @@
 .sectionTitle {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #1db954;
+    color: var(--dynamic-accent);
     /* Brand Green */
     text-transform: uppercase;
     margin: 0;
@@ -57,7 +57,7 @@
     color: #fff;
     /* or Accent Color */
     font-weight: 800;
-    border-bottom: 2px solid #1db954;
+    border-bottom: 2px solid var(--dynamic-accent);
     /* visual indicator */
 }
 
@@ -76,7 +76,7 @@
 .dropdownBtn {
     background: transparent;
     border: 1px solid #333;
-    color: #1db954;
+    color: var(--dynamic-accent);
     padding: 6px 16px;
     border-radius: 20px;
     /* Capsule shape */
@@ -90,7 +90,7 @@
 }
 
 .dropdownBtn:hover {
-    border-color: #1db954;
+    border-color: var(--dynamic-accent);
     background: rgba(29, 185, 84, 0.1);
 }
 
@@ -121,8 +121,8 @@
 /* Grid */
 .grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    /* 6 cards per row */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    /* cards grow up to fill gap but min width 160 */
     gap: 20px;
 }
 
@@ -164,11 +164,11 @@
     top: 0;
     left: 0;
     background: #0066ff;
-    /* The Blue from reference, OR #1db954 for Green */
+    /* The Blue from reference, OR var(--dynamic-accent) for Green */
     /* To match reference exactly, I'd use blue, but for app consistency, Green. 
        Let's stick to user request "adaptado para meu ui", which usually means Site Brand Color.
        I'll use a dynamic variable or strict Site Green. */
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #fff;
     width: 40px;
     height: 40px;
@@ -199,7 +199,7 @@
 
 /* Make title blue on hover to mimic reference feel? */
 .title:hover {
-    color: #1db954;
+    color: var(--dynamic-accent);
     text-decoration: underline;
 }
 
@@ -213,7 +213,7 @@
 
 .artistName {
     font-size: 0.9rem;
-    color: #1db954;
+    color: var(--dynamic-accent);
     /* Blue in reference, Green here */
     font-weight: 800;
     /* Bold like reference */
@@ -221,7 +221,7 @@
 }
 
 .verifiedIcon {
-    color: #1db954;
+    color: var(--dynamic-accent);
     font-size: 0.9rem;
 }
 
@@ -245,7 +245,7 @@
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
     .grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
 }
 

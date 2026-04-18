@@ -31,7 +31,7 @@
 }
 
 .newChatBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     border: none;
     color: #000;
     width: 30px;
@@ -45,7 +45,7 @@
 }
 
 .newChatBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .conversationList {

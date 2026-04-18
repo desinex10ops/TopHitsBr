@@ -74,7 +74,7 @@
 }
 
 .label {
-    background-color: var(--accent-color);
+    background-color: var(--dynamic-accent);
     /* e.g. red or spotify green */
     color: white;
     padding: 4px 12px;
@@ -132,9 +132,9 @@
 }
 
 .btnPrimary {
-    background-color: var(--accent-color);
+    background-color: var(--dynamic-accent);
     color: white;
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     /* Assuming Netflix Red or similar */
 }
 
@@ -278,7 +278,7 @@
 
 .progressFill {
     height: 100%;
-    background: var(--accent-color);
+    background: var(--dynamic-accent);
     transition: width 0.1s linear;
 }
 
@@ -296,7 +296,7 @@
 }
 
 .miniControls svg:hover {
-    color: var(--accent-color);
+    color: var(--dynamic-accent);
 }
 
 .indicators {
@@ -335,7 +335,7 @@
 
 .bar {
     width: 6px;
-    background: var(--accent-color);
+    background: var(--dynamic-accent);
     border-radius: 3px;
     animation: bounce 1.2s infinite ease-in-out;
 }

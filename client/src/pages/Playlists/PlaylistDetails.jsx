@@ -263,7 +263,7 @@ const PlaylistDetails = () => {
                                 style={{
                                     padding: '12px 35px',
                                     fontSize: '1.1rem',
-                                    background: '#1db954',
+                                    background: 'var(--dynamic-accent)',
                                     border: 'none',
                                     borderRadius: '50px',
                                     cursor: 'pointer',
@@ -278,8 +278,8 @@ const PlaylistDetails = () => {
                             {/* Social Actions */}
                             {!isSystemPlaylist && (
                                 <>
-                                    <button onClick={handleLike} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: isLiked ? '#1db954' : 'white' }} title="Salvar na Biblioteca">
-                                        <FiHeart size={32} fill={isLiked ? '#1db954' : 'none'} />
+                                    <button onClick={handleLike} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: isLiked ? 'var(--dynamic-accent)' : 'white' }} title="Salvar na Biblioteca">
+                                        <FiHeart size={32} fill={isLiked ? 'var(--dynamic-accent)' : 'none'} />
                                     </button>
                                     <button onClick={handleShare} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'white' }} title="Compartilhar">
                                         <FiShare2 size={28} />
@@ -397,7 +397,7 @@ const PlaylistDetails = () => {
                             onKeyDown={(e) => e.key === 'Enter' && handlePostComment()}
                             style={{ flex: 1, background: '#333', border: 'none', padding: '10px', borderRadius: '4px', color: 'white' }}
                         />
-                        <button onClick={handlePostComment} style={{ background: '#1db954', border: 'none', padding: '0 20px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Enviar</button>
+                        <button onClick={handlePostComment} style={{ background: 'var(--dynamic-accent)', border: 'none', padding: '0 20px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Enviar</button>
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -422,7 +422,7 @@ const PlaylistDetails = () => {
                                     key={i + 1}
                                     onClick={() => setCurrentPage(i + 1)}
                                     style={{
-                                        background: currentPage === i + 1 ? '#1db954' : '#333',
+                                        background: currentPage === i + 1 ? 'var(--dynamic-accent)' : '#333',
                                         color: 'white',
                                         border: 'none',
                                         padding: '5px 10px',

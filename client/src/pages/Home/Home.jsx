@@ -48,7 +48,7 @@ const Home = () => {
             fetchTrending();
             fetchTopPlaylists();
             fetchFeaturedAlbums(); // [NEW]
-            api.get('/music/playlists').then(res => setPlaylists(res.data)).catch(console.error);
+            api.get('/playlists/auto').then(res => setPlaylists(res.data)).catch(console.error);
         }
     }, [searchParams]);
 
@@ -83,7 +83,7 @@ const Home = () => {
                 const [trackRes, artistRes, playlistRes] = await Promise.all([
                     api.get('/music', { params: { search: searchTerm } }),
                     api.get('/music/artists/search', { params: { search: searchTerm } }),
-                    api.get('/music/playlists/search', { params: { search: searchTerm } })
+                    api.get('/playlists/search', { params: { search: searchTerm } })
                 ]);
 
                 setTracks(trackRes.data); // Albums/Tracks mix from original endpoint
@@ -108,10 +108,11 @@ const Home = () => {
 
     const fetchTopPlaylists = async () => {
         try {
-            const res = await api.get('/music/playlists/top');
-            setTopPlaylists(res.data);
+            const res = await api.get('/playlists/top');
+            setTopPlaylists(Array.isArray(res.data) ? res.data : []);
         } catch (error) {
             console.error("Erro loading top playlists:", error);
+            setTopPlaylists([]);
         }
     };
 
@@ -229,7 +230,7 @@ const Home = () => {
                                                 <p className={styles.artistName} style={{ color: '#aaa', fontSize: '0.9rem' }}>
                                                     {pl.User ? (pl.User.artisticName || pl.User.name) : 'Usuário'}
                                                 </p>
-                                                <div style={{ marginTop: '5px', fontSize: '12px', color: '#1DB954', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                <div style={{ marginTop: '5px', fontSize: '12px', color: 'var(--dynamic-accent)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                     🔥 {pl.plays ? pl.plays.toLocaleString() : 0} plays
                                                 </div>
                                             </div>

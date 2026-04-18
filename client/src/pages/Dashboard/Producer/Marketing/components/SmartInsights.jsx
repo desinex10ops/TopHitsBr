@@ -17,7 +17,7 @@ const SmartInsights = () => {
             </div>
 
             <div className={styles.card}>
-                <div className={styles.icon} style={{ background: '#1db954' }}>
+                <div className={styles.icon} style={{ background: 'var(--dynamic-accent)' }}>
                     <FiTrendingUp />
                 </div>
                 <div className={styles.content}>

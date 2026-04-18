@@ -68,10 +68,10 @@
     top: 5px;
     width: 4px;
     height: 4px;
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     /* Brand Green */
     border-radius: 50%;
-    box-shadow: 0 0 8px #1ed760;
+    box-shadow: 0 0 8px var(--dynamic-accent);
 }
 
 /* Touch Feedback */

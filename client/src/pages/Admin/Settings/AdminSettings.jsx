@@ -4,6 +4,7 @@ import { useToast } from '@/contexts/ToastContext';
 import { useSettings } from '@/contexts/SettingsContext';
 import styles from './AdminSettings.module.css';
 import { getStorageUrl } from '../../../utils/urlUtils';
+import AdminFooterEditor from './AdminFooterEditor';
 import { FiSave, FiImage, FiMonitor, FiSmartphone, FiLayout, FiActivity, FiGlobe, FiSearch, FiCode } from 'react-icons/fi';
 
 const AdminSettings = () => {
@@ -52,26 +53,33 @@ const AdminSettings = () => {
         }
     };
 
-    const renderSetting = (label, key, type = 'text', description = '') => (
-        <div className={styles.formGroup}>
-            <label>{label}</label>
-            <div className={styles.row}>
-                <input
-                    type={type}
-                    value={localSettings[key] || ''}
-                    onChange={(e) => setLocalSettings(prev => ({ ...prev, [key]: e.target.value }))}
-                    className={type === 'color' ? styles.colorInput : ''}
-                />
-                <button
-                    className={styles.saveIconBtn}
-                    onClick={() => handleSave(key, localSettings[key], description)}
-                    disabled={loading}
-                >
-                    <FiSave />
-                </button>
+    const renderSetting = (label, key, type = 'text', description = '') => {
+        let inputValue = localSettings[key] || '';
+        if (type === 'color' && !inputValue) {
+            inputValue = '#000000'; // HTML5 color input requires 7-char hex
+        }
+
+        return (
+            <div className={styles.formGroup}>
+                <label>{label}</label>
+                <div className={styles.row}>
+                    <input
+                        type={type}
+                        value={inputValue}
+                        onChange={(e) => setLocalSettings(prev => ({ ...prev, [key]: e.target.value }))}
+                        className={type === 'color' ? styles.colorInput : ''}
+                    />
+                    <button
+                        className={styles.saveIconBtn}
+                        onClick={() => handleSave(key, localSettings[key] || inputValue, description)}
+                        disabled={loading}
+                    >
+                        <FiSave />
+                    </button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    };
 
     const renderMediaSetting = (label, key, description, Icon) => (
         <div className={styles.mediaCard}>
@@ -113,7 +121,7 @@ const AdminSettings = () => {
                         </div>
                         {renderSetting('Nome do Site', 'site_name', 'text', 'Nome principal da aba do navegador')}
                         <div className={styles.themeGrid}>
-                            {renderSetting('Cor Destaque (Accent)', 'color_accent', 'color', 'Cor principal de botões e links')}
+                            {renderSetting('Cor Principal (Botões e Links)', 'color_accent', 'color', 'Cor principal de botões e links')}
                             {renderSetting('Fundo Primário', 'color_primary', 'color', 'Cor de fundo das páginas')}
                             {renderSetting('Fundo Secundário', 'color_secondary', 'color', 'Cor de cards e menus')}
                         </div>
@@ -169,6 +177,12 @@ const AdminSettings = () => {
                     </section>
                 </div>
             </div>
+
+            {/* Footer Editor Section */}
+            <AdminFooterEditor
+                footerData={localSettings.site_footer}
+                onSave={(data) => handleSave('site_footer', JSON.stringify(data), 'Configuração do Rodapé (JSON)')}
+            />
         </div>
     );
 };

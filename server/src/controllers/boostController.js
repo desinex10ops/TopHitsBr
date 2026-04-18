@@ -33,19 +33,21 @@ exports.createBoost = async (req, res) => {
     try {
         // 1. Verificar Saldo de Créditos
         const wallet = await Wallet.findOne({ where: { UserId: userId }, transaction: t });
-        if (!wallet || wallet.credits < cost) {
+        const currentBalance = wallet ? (parseFloat(wallet.balance) || 0) : 0;
+
+        if (!wallet || currentBalance < cost) {
             await t.rollback();
             return res.status(402).json({ error: 'Créditos insuficientes. Recarregue sua carteira.' });
         }
 
         // 2. Debitar da Carteira
-        wallet.credits -= cost;
+        wallet.balance = currentBalance - cost;
         await wallet.save({ transaction: t });
 
         // 3. Registrar Transação
         await CreditTransaction.create({
             WalletId: wallet.id,
-            type: 'spent',
+            type: 'boost',
             amount: cost,
             description: `Boost ${tier} para ${type} #${targetId} por ${durationDays} dias`
         }, { transaction: t });

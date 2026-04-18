@@ -17,7 +17,7 @@
 
 .refreshBtn,
 .exportBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -35,7 +35,7 @@
 }
 
 .refreshBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .exportBtn:hover {

@@ -7,7 +7,6 @@ import { usePlayer } from '@/contexts/PlayerContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { getStorageUrl } from '../../utils/urlUtils';
 import { toast } from 'react-toastify';
-import ChatModal from '../Dashboard/Chat/ChatModal';
 
 const ArtistProfile = () => {
     const { id } = useParams();
@@ -104,16 +103,6 @@ const ArtistProfile = () => {
         // Call API to follow/unfollow
     };
 
-    const [isChatOpen, setIsChatOpen] = useState(false);
-
-    const handleSendMessage = () => {
-        if (!user) {
-            toast.error("Você precisa estar logado para enviar mensagens.");
-            return;
-        }
-        setIsChatOpen(true);
-    };
-
     if (loading) return <div className={styles.loading}>Carregando...</div>;
     if (!artist) return <div className={styles.error}>Artista não encontrado.</div>;
 
@@ -132,7 +121,7 @@ const ArtistProfile = () => {
     const getAccentColor = (id) => {
         const colors = [
             '#535353', '#7e2020', '#203e7e', '#207e4e', '#7e2d7e', '#7e6c20',
-            '#e91429', '#1db954', '#f59b23', '#b91d88'
+            '#e91429', 'var(--dynamic-accent)', '#f59b23', '#b91d88'
         ];
         if (!id) return colors[0];
         const hash = id.toString().split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -178,11 +167,6 @@ const ArtistProfile = () => {
                     <button className={`${styles.followBtn} ${following ? styles.following : ''}`} onClick={toggleFollow}>
                         {following ? 'SEGUINDO' : 'SEGUIR'}
                     </button>
-                    {user && user.id !== artist.id && (
-                        <button className={styles.messageBtn} onClick={handleSendMessage} title="Enviar Mensagem">
-                            <FiMessageSquare />
-                        </button>
-                    )}
 
                     {artist.instagram && (
                         <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className={styles.socialBtn} title="Instagram">
@@ -340,18 +324,6 @@ const ArtistProfile = () => {
                     )}
                 </div>
             )}
-
-            {
-                user && (
-                    <ChatModal
-                        isOpen={isChatOpen}
-                        onClose={() => setIsChatOpen(false)}
-                        recipientId={artist.id}
-                        recipientName={artist.artisticName}
-                        recipientAvatar={avatarUrl}
-                    />
-                )
-            }
         </div >
     );
 };

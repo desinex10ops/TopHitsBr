@@ -127,7 +127,7 @@
 }
 
 .controlBtn.active {
-    color: var(--player-accent, #1db954);
+    color: var(--player-accent, var(--dynamic-accent));
 }
 
 .controlBtn:disabled {

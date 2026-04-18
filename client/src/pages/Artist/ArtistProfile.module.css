@@ -220,7 +220,7 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     border: none;
     color: black;
     font-size: 1.8rem;
@@ -260,8 +260,8 @@
 
 .following {
     background: transparent;
-    border-color: #1ed760;
-    color: #1ed760;
+    border-color: var(--dynamic-accent);
+    color: var(--dynamic-accent);
 }
 
 .messageBtn,
@@ -454,7 +454,7 @@
     width: 48px;
     /**/
     height: 48px;
-    background: #1ed760;
+    background: var(--dynamic-accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -741,7 +741,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     border: none;
     color: black;
     font-size: 1.5rem;
@@ -779,8 +779,8 @@
 
 .following {
     background: transparent;
-    border-color: #1ed760;
-    color: #1ed760;
+    border-color: var(--dynamic-accent);
+    color: var(--dynamic-accent);
 }
 
 .messageBtn,

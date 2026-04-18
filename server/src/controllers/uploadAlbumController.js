@@ -197,6 +197,7 @@ exports.confirmAlbum = async (req, res) => {
         });
 
         // Processar Faixas Aprovadas
+        let trackIndex = 1;
         for (const trackInfo of tracksList) {
             // trackInfo: { filename, title, selected }
             if (!trackInfo.selected) continue;
@@ -215,7 +216,10 @@ exports.confirmAlbum = async (req, res) => {
             const ext = path.extname(trackInfo.filename);
             const artistClean = sanitizeName(defaultArtist || 'Unknown');
             const albumClean = sanitizeName(defaultAlbumName || 'Unknown');
-            const trackClean = sanitizeName(trackInfo.title) + ext;
+
+            // Ensure unique filename to prevent overwriting tracks with identical metadata
+            const trackClean = `${trackIndex.toString().padStart(2, '0')}_${sanitizeName(trackInfo.title)}${ext}`;
+            trackIndex++;
 
             const finalDir = path.join(storageBase, artistClean, albumClean);
             if (!fs.existsSync(finalDir)) fs.mkdirSync(finalDir, { recursive: true });

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FiHome, FiShoppingBag, FiDollarSign, FiMenu, FiList, FiHeart, FiUser } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
 import styles from './DashboardMobileNav.module.css';
+import { getStorageUrl } from '@/utils/urlUtils';
 
 const DashboardMobileNav = ({ onToggleMenu }) => {
     const { user } = useAuth();
@@ -59,7 +60,7 @@ const DashboardMobileNav = ({ onToggleMenu }) => {
 
             <button onClick={onToggleMenu} className={styles.navItem}>
                 {user?.avatar ? (
-                    <img src={user.avatar} alt="Menu" className={styles.avatarIcon} />
+                    <img src={getStorageUrl(user.avatar)} alt="Menu" className={styles.avatarIcon} />
                 ) : (
                     <FiMenu />
                 )}

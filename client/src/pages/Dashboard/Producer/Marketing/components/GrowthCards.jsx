@@ -14,7 +14,7 @@ const GrowthCards = () => {
             change: '+12.5%',
             positive: true,
             icon: <FiPlay />,
-            color: '#1db954'
+            color: 'var(--dynamic-accent)'
         },
         {
             id: 2,

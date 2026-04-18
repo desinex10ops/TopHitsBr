@@ -109,7 +109,7 @@ const AdminUsers = () => {
                                     <td>{user.email}</td>
                                     <td>
                                         <span style={{
-                                            backgroundColor: user.type === 'admin' ? '#e50914' : user.type === 'artist' ? '#1db954' : '#333',
+                                            backgroundColor: user.type === 'admin' ? '#e50914' : user.type === 'artist' ? 'var(--dynamic-accent)' : '#333',
                                             padding: '2px 8px', borderRadius: '4px', fontSize: '0.8rem', color: '#fff'
                                         }}>
                                             {user.type.toUpperCase()}
@@ -120,7 +120,7 @@ const AdminUsers = () => {
                                     </td>
                                     <td>
                                         {user.active ?
-                                            <span style={{ color: '#1db954' }}>Ativo</span> :
+                                            <span style={{ color: 'var(--dynamic-accent)' }}>Ativo</span> :
                                             <span style={{ color: '#e50914' }}>Banido</span>
                                         }
                                     </td>
@@ -138,7 +138,7 @@ const AdminUsers = () => {
                                             <button
                                                 onClick={() => handleToggleBan(user)}
                                                 className={styles.actionBtn}
-                                                style={{ backgroundColor: user.active ? '#e50914' : '#1db954' }}
+                                                style={{ backgroundColor: user.active ? '#e50914' : 'var(--dynamic-accent)' }}
                                                 title={user.active ? 'Banir' : 'Ativar'}
                                             >
                                                 {user.active ? <FiSlash /> : <FiCheckCircle />}
@@ -207,7 +207,7 @@ const AdminUsers = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', background: '#1db954', color: '#fff', cursor: 'pointer' }}
+                                    style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', background: 'var(--dynamic-accent)', color: '#fff', cursor: 'pointer' }}
                                 >
                                     Salvar
                                 </button>

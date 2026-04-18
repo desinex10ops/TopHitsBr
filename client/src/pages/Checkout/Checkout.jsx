@@ -71,7 +71,7 @@ const Checkout = () => {
                         ))}
                     </div>
                     {coupon && (
-                        <div className={styles.itemRow} style={{ color: '#1db954' }}>
+                        <div className={styles.itemRow} style={{ color: 'var(--dynamic-accent)' }}>
                             <span>Cupom: {coupon.code}</span>
                             <span>-{coupon.discountPercentage}%</span>
                         </div>

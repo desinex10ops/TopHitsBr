@@ -41,7 +41,7 @@
     align-items: center;
     gap: 12px;
     font-weight: 700;
-    color: #1ed760;
+    color: var(--dynamic-accent);
     text-transform: uppercase;
     font-size: 0.8rem;
     letter-spacing: 1px;
@@ -134,8 +134,8 @@
 }
 
 .statusDot.online {
-    background: #1ed760;
-    box-shadow: 0 0 10px #1ed760;
+    background: var(--dynamic-accent);
+    box-shadow: 0 0 10px var(--dynamic-accent);
 }
 
 .statusDot.away {
@@ -319,7 +319,7 @@
 }
 
 .myMessage .msgContent {
-    background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
+    background: linear-gradient(135deg, var(--dynamic-accent) 0%, var(--dynamic-accent) 100%);
     color: #000;
     border-radius: 18px 0 18px 18px;
     border: none;
@@ -393,7 +393,7 @@
 }
 
 .inputWrapper:focus-within {
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
     box-shadow: 0 0 20px rgba(30, 215, 96, 0.1);
 }
 
@@ -447,7 +447,7 @@
 }
 
 .sendBtn {
-    background: #1ed760 !important;
+    background: var(--dynamic-accent) !important;
     color: #000 !important;
     width: 36px;
     height: 36px;
@@ -469,7 +469,7 @@
 }
 
 .userItem.selected .userRank {
-    color: #1ed760;
+    color: var(--dynamic-accent);
 }
 
 /* ... existing styles ... */
@@ -512,7 +512,7 @@
     margin-bottom: 20px;
     padding: 4px;
     border-radius: 50%;
-    background: linear-gradient(45deg, #1ed760, #a109ff);
+    background: linear-gradient(45deg, var(--dynamic-accent), #a109ff);
     animation: rotateBorder 4s linear infinite;
 }
 
@@ -589,7 +589,7 @@
 
 .barFill {
     height: 100%;
-    background: linear-gradient(90deg, #1ed760, #a109ff);
+    background: linear-gradient(90deg, var(--dynamic-accent), #a109ff);
     box-shadow: 0 0 10px rgba(161, 9, 255, 0.5);
 }
 
@@ -600,7 +600,7 @@
 }
 
 .actionBtnPrimary {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 14px;
@@ -865,7 +865,7 @@
 }
 
 .frame_14 {
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
     clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
 }
 
@@ -1048,8 +1048,8 @@
 }
 
 .frame_50 {
-    border-color: #1ed760;
-    box-shadow: 0 0 10px #1ed760;
+    border-color: var(--dynamic-accent);
+    box-shadow: 0 0 10px var(--dynamic-accent);
 }
 
 /* SIGHT/LIGHT (51-60) */
@@ -1363,7 +1363,7 @@
 
 /* SHOP STYLES */
 .openShopBtn {
-    background: linear-gradient(45deg, #1ed760, #a109ff);
+    background: linear-gradient(45deg, var(--dynamic-accent), #a109ff);
     border: none;
     color: #fff;
     padding: 8px 16px;
@@ -1653,7 +1653,7 @@
 .giftCard:hover {
     background: #1a1a1a;
     transform: translateY(-5px);
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
 }
 
 .giftIcon {
@@ -1758,7 +1758,7 @@
     }
 
     .tabBtnActive {
-        color: #1ed760 !important;
+        color: var(--dynamic-accent) !important;
         background: rgba(30, 215, 96, 0.05);
     }
 

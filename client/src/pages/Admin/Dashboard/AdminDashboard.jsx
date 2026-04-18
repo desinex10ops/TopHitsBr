@@ -67,7 +67,7 @@ const AdminDashboard = () => {
 
             <div className={styles.grid}>
                 <div className={styles.card}>
-                    <div className={styles.iconBox} style={{ background: 'rgba(29, 185, 84, 0.1)', color: '#1db954' }}>
+                    <div className={styles.iconBox} style={{ background: 'rgba(29, 185, 84, 0.1)', color: 'var(--dynamic-accent)' }}>
                         <FiMusic size={24} />
                     </div>
                     <div className={styles.cardInfo}>
@@ -127,8 +127,8 @@ const AdminDashboard = () => {
                             <AreaChart data={stats?.chartData || []} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorPlays" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#1db954" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#1db954" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="var(--dynamic-accent)" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="var(--dynamic-accent)" stopOpacity={0} />
                                     </linearGradient>
                                     <linearGradient id="colorTracks" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="#9966ff" stopOpacity={0.3} />
@@ -147,7 +147,7 @@ const AdminDashboard = () => {
                                     type="monotone"
                                     name="Novos Plays"
                                     dataKey="plays"
-                                    stroke="#1db954"
+                                    stroke="var(--dynamic-accent)"
                                     fillOpacity={1}
                                     fill="url(#colorPlays)"
                                     strokeWidth={2}

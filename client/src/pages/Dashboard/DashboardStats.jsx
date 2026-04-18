@@ -74,7 +74,7 @@ const DashboardStats = () => {
                             padding: '10px 20px',
                             background: 'transparent',
                             border: 'none',
-                            borderBottom: activeTab === 'music' ? '2px solid #1db954' : '2px solid transparent',
+                            borderBottom: activeTab === 'music' ? '2px solid var(--dynamic-accent)' : '2px solid transparent',
                             color: activeTab === 'music' ? '#fff' : '#b3b3b3',
                             fontSize: '1rem',
                             fontWeight: '600',
@@ -89,7 +89,7 @@ const DashboardStats = () => {
                             padding: '10px 20px',
                             background: 'transparent',
                             border: 'none',
-                            borderBottom: activeTab === 'sales' ? '2px solid #1db954' : '2px solid transparent',
+                            borderBottom: activeTab === 'sales' ? '2px solid var(--dynamic-accent)' : '2px solid transparent',
                             color: activeTab === 'sales' ? '#fff' : '#b3b3b3',
                             fontSize: '1rem',
                             fontWeight: '600',
@@ -106,7 +106,7 @@ const DashboardStats = () => {
                 <>
                     <div className={styles.statsGrid}>
                         <div className={styles.statCard}>
-                            <div className={styles.statIcon} style={{ background: 'rgba(29, 185, 84, 0.1)', color: '#1DB954' }}>
+                            <div className={styles.statIcon} style={{ background: 'rgba(29, 185, 84, 0.1)', color: 'var(--dynamic-accent)' }}>
                                 <FiBarChart2 />
                             </div>
                             <div className={styles.statInfo}>
@@ -171,7 +171,7 @@ const DashboardStats = () => {
                 <>
                     <div className={styles.statsGrid}>
                         <div className={styles.statCard}>
-                            <div className={styles.statIcon} style={{ background: 'rgba(29, 185, 84, 0.2)', color: '#1db954' }}>
+                            <div className={styles.statIcon} style={{ background: 'rgba(29, 185, 84, 0.2)', color: 'var(--dynamic-accent)' }}>
                                 <FiDollarSign />
                             </div>
                             <div className={styles.statInfo}>
@@ -208,8 +208,8 @@ const DashboardStats = () => {
                                 <AreaChart data={salesStats.chartData}>
                                     <defs>
                                         <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#1db954" stopOpacity={0.8} />
-                                            <stop offset="95%" stopColor="#1db954" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="var(--dynamic-accent)" stopOpacity={0.8} />
+                                            <stop offset="95%" stopColor="var(--dynamic-accent)" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
                                     <XAxis dataKey="name" stroke="#666" />
@@ -220,7 +220,7 @@ const DashboardStats = () => {
                                         itemStyle={{ color: '#fff' }}
                                         formatter={(value) => `R$ ${value.toFixed(2)}`}
                                     />
-                                    <Area type="monotone" dataKey="revenue" stroke="#1db954" fillOpacity={1} fill="url(#colorSales)" />
+                                    <Area type="monotone" dataKey="revenue" stroke="var(--dynamic-accent)" fillOpacity={1} fill="url(#colorSales)" />
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>

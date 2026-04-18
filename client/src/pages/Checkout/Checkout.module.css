@@ -43,14 +43,14 @@
     justify-content: space-between;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .secureText {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #1db954;
+    color: var(--dynamic-accent);
     margin-bottom: 20px;
     font-size: 0.9rem;
 }
@@ -75,8 +75,8 @@
 }
 
 .methodCard.active {
-    border-color: #1db954;
-    background: #1db95420;
+    border-color: var(--dynamic-accent);
+    background: var(--dynamic-accent)20;
 }
 
 .methodCard.disabled {
@@ -86,7 +86,7 @@
 
 .payButton {
     width: 100%;
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     font-weight: bold;
     font-size: 1.1rem;
@@ -115,7 +115,7 @@
 
 .successIcon {
     font-size: 4rem;
-    color: #1db954;
+    color: var(--dynamic-accent);
     margin-bottom: 20px;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .button {
-    background: #1db954;
+    background: var(--dynamic-accent);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;

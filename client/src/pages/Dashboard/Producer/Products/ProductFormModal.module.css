@@ -107,7 +107,7 @@
 .formGroup input:focus,
 .formGroup select:focus,
 .formGroup textarea:focus {
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
 }
 
 .fileSection {
@@ -165,7 +165,7 @@
 }
 
 .submitBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     border: none;
     color: #000;
     padding: 10px 24px;
@@ -179,7 +179,7 @@
 }
 
 .submitBtn:hover {
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 .submitBtn:disabled {

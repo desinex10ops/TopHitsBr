@@ -62,7 +62,7 @@
 
 .unread {
     background: #222;
-    border-left: 4px solid #1db954;
+    border-left: 4px solid var(--dynamic-accent);
 }
 
 .iconWrapper {

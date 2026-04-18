@@ -37,7 +37,7 @@ const Overview = () => {
 
             <div className={styles.kpiGrid}>
                 <div className={styles.kpiCard}>
-                    <div className={styles.kpiIcon} style={{ background: 'rgba(29, 185, 84, 0.2)', color: '#1db954' }}>
+                    <div className={styles.kpiIcon} style={{ background: 'rgba(29, 185, 84, 0.2)', color: 'var(--dynamic-accent)' }}>
                         <FiDollarSign />
                     </div>
                     <div className={styles.kpiInfo}>
@@ -75,8 +75,8 @@ const Overview = () => {
                             <AreaChart data={stats.chartData}>
                                 <defs>
                                     <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#1db954" stopOpacity={0.8} />
-                                        <stop offset="95%" stopColor="#1db954" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="var(--dynamic-accent)" stopOpacity={0.8} />
+                                        <stop offset="95%" stopColor="var(--dynamic-accent)" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
                                 <XAxis dataKey="name" stroke="#666" />
@@ -86,7 +86,7 @@ const Overview = () => {
                                     contentStyle={{ background: '#222', border: 'none', borderRadius: '8px' }}
                                     itemStyle={{ color: '#fff' }}
                                 />
-                                <Area type="monotone" dataKey="uv" stroke="#1db954" fillOpacity={1} fill="url(#colorPv)" />
+                                <Area type="monotone" dataKey="uv" stroke="var(--dynamic-accent)" fillOpacity={1} fill="url(#colorPv)" />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>

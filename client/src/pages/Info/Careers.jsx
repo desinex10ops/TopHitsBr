@@ -17,7 +17,7 @@ const Careers = () => {
                 Se você é desenvolvedor, designer, curador musical ou especialista em marketing digital e quer fazer parte da nossa revolução musical, envie seu currículo e portfólio para:
             </p>
 
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1ed760' }}>
+            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--dynamic-accent)' }}>
                 carreiras@tophitsbr.com
             </p>
 

@@ -1,6 +1,6 @@
 /* App.css */
 :root {
-    --primary-color: #1ed760;
+    --primary-color: var(--dynamic-accent);
     /* Spotify Green */
     --hover-color: #1fdf64;
     --bg-dark: #121212;
@@ -12,7 +12,7 @@
     /* Dynamic Theme Variables (Default) */
     --dynamic-primary: #121212;
     --dynamic-secondary: #282828;
-    --dynamic-accent: #1ed760;
+    --dynamic-accent: var(--dynamic-accent);
     --dynamic-overlay: rgba(0, 0, 0, 0.5);
 }
 

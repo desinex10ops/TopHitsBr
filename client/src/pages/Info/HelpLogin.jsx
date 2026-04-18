@@ -11,7 +11,7 @@ const HelpLogin = () => {
 
             <h2>Como Criar uma Conta</h2>
             <ol style={{ paddingLeft: '20px', color: '#ccc', lineHeight: '1.8' }}>
-                <li>Clique em <strong>"Criar conta"</strong> no canto superior direito ou <Link to="/register" style={{ color: '#1ed760' }}>clique aqui</Link>.</li>
+                <li>Clique em <strong>"Criar conta"</strong> no canto superior direito ou <Link to="/register" style={{ color: 'var(--dynamic-accent)' }}>clique aqui</Link>.</li>
                 <li>Preencha seus dados (Nome, Email e Senha) ou use o login social (Google/Facebook).</li>
                 <li>Confirme seu email se solicitado.</li>
                 <li>Pronto! Agora você pode aproveitar todos os recursos.</li>

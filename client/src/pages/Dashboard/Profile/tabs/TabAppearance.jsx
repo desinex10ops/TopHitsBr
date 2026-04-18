@@ -17,7 +17,7 @@ const TabAppearance = () => {
                     <div
                         onClick={() => setTheme('light')}
                         style={{
-                            background: theme === 'light' ? '#1db954' : '#222',
+                            background: theme === 'light' ? 'var(--dynamic-accent)' : '#222',
                             border: theme === 'light' ? 'none' : '1px solid #333',
                             padding: 20, borderBottomLeftRadius: 12, borderTopLeftRadius: 12, textAlign: 'center', cursor: 'pointer',
                             color: theme === 'light' ? '#000' : '#fff'
@@ -29,7 +29,7 @@ const TabAppearance = () => {
                     <div
                         onClick={() => setTheme('dark')}
                         style={{
-                            background: theme === 'dark' ? '#1db954' : '#222',
+                            background: theme === 'dark' ? 'var(--dynamic-accent)' : '#222',
                             border: theme === 'dark' ? 'none' : '1px solid #333',
                             padding: 20, textAlign: 'center', cursor: 'pointer',
                             color: theme === 'dark' ? '#000' : '#fff'
@@ -41,7 +41,7 @@ const TabAppearance = () => {
                     <div
                         onClick={() => setTheme('system')}
                         style={{
-                            background: theme === 'system' ? '#1db954' : '#222',
+                            background: theme === 'system' ? 'var(--dynamic-accent)' : '#222',
                             border: theme === 'system' ? 'none' : '1px solid #333',
                             padding: 20, borderBottomRightRadius: 12, borderTopRightRadius: 12, textAlign: 'center', cursor: 'pointer',
                             color: theme === 'system' ? '#000' : '#fff'
@@ -56,7 +56,7 @@ const TabAppearance = () => {
             <div className={styles.card}>
                 <h3 className={styles.cardTitle}>Cor Principal do Artista</h3>
                 <div style={{ display: 'flex', gap: 15 }}>
-                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1db954', border: '3px solid #fff' }}></div>
+                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--dynamic-accent)', border: '3px solid #fff' }}></div>
                     <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#E1306C' }}></div>
                     <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#2E77D0' }}></div>
                     <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#F59B23' }}></div>

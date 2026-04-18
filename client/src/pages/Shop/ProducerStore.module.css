@@ -124,7 +124,7 @@
 }
 
 .socialLink:hover {
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 /* Content */

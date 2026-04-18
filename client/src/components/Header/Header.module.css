@@ -68,7 +68,7 @@
 }
 
 .navLink.active {
-    background-color: #1ed760;
+    background-color: var(--dynamic-accent);
     color: #000;
 }
 
@@ -110,7 +110,7 @@
 
 .searchBar input:focus {
     background-color: rgba(255, 255, 255, 0.08);
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
     box-shadow: 0 0 15px rgba(30, 215, 96, 0.1);
 }
 
@@ -205,7 +205,7 @@
 }
 
 .avatar:hover {
-    border-color: #1ed760;
+    border-color: var(--dynamic-accent);
 }
 
 .avatar img {

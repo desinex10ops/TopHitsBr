@@ -69,7 +69,7 @@
 }
 
 .heroCta {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: #000;
     border: none;
     padding: 12px 32px;
@@ -85,7 +85,7 @@
 .heroCta:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
-    background: #1ed760;
+    background: var(--dynamic-accent);
 }
 
 /* Controls & Filters */

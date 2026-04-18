@@ -144,7 +144,7 @@ const Financial = () => {
                             transactions.map(t => (
                                 <div key={t.id} className={styles.transactionItem}>
                                     <div className={styles.transIcon}>
-                                        {t.type === 'sale' ? <FiArrowDownLeft color="#1db954" /> :
+                                        {t.type === 'sale' ? <FiArrowDownLeft color="var(--dynamic-accent)" /> :
                                             t.type === 'withdrawal' ? <FiArrowUpRight color="#ff5555" /> :
                                                 <FiDollarSign />}
                                     </div>

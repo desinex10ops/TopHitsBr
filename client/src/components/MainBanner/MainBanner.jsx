@@ -381,8 +381,8 @@ const MainBanner = () => {
                             onClick={() => toggleFavorite(activeItem)}
                         >
                             <FiHeart
-                                fill={isFavorite ? "#1ed760" : "none"}
-                                color={isFavorite ? "#1ed760" : "white"}
+                                fill={isFavorite ? "var(--dynamic-accent)" : "none"}
+                                color={isFavorite ? "var(--dynamic-accent)" : "white"}
                             />
                         </button>
                     </div>

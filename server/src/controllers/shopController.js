@@ -371,3 +371,81 @@ exports.getMyOrders = async (req, res) => {
         res.status(500).json({ error: 'Erro ao buscar pedidos.' });
     }
 };
+
+exports.checkout = async (req, res) => {
+    const t = await sequelize.transaction();
+    try {
+        const { productId } = req.body;
+        const buyerId = req.user.id;
+
+        const product = await Product.findByPk(productId, { transaction: t });
+        if (!product || product.status !== 'active') {
+            await t.rollback();
+            return res.status(404).json({ error: 'Produto indisponível.' });
+        }
+
+        // Check stock
+        if (product.stock === 0) {
+            await t.rollback();
+            return res.status(400).json({ error: 'Produto esgotado.' });
+        }
+
+        const price = parseFloat(product.price);
+
+        // Fetch buyer wallet
+        let buyerWallet = await req.user.getWallet({ transaction: t });
+        if (!buyerWallet) buyerWallet = await req.user.createWallet({}, { transaction: t });
+
+        const currentBalance = parseFloat(buyerWallet.balance) || 0;
+
+        if (currentBalance < price) {
+            await t.rollback();
+            return res.status(402).json({ error: 'Saldo insuficiente na carteira.' });
+        }
+
+        // Deduct from buyer
+        buyerWallet.balance = currentBalance - price;
+        await buyerWallet.save({ transaction: t });
+
+        // Credit Producer (minus 10% fee for the platform)
+        const feePercent = 0.10;
+        const platformFee = price * feePercent;
+        const producerAmount = price - platformFee;
+
+        const { User } = require('../database');
+        const producer = await User.findByPk(product.producerId, { transaction: t });
+        let producerWallet = await producer.getWallet({ transaction: t });
+        if (!producerWallet) producerWallet = await producer.createWallet({}, { transaction: t });
+
+        producerWallet.balance = (parseFloat(producerWallet.balance) || 0) + producerAmount;
+        await producerWallet.save({ transaction: t });
+
+        // Create Order & Items
+        const order = await Order.create({
+            buyerId,
+            totalAmount: price,
+            status: 'paid'
+        }, { transaction: t });
+
+        await OrderItem.create({
+            OrderId: order.id,
+            ProductId: product.id,
+            price: price,
+            producerAmount: producerAmount,
+            commissionRate: feePercent * 100
+        }, { transaction: t });
+
+        // Update product stats
+        product.salesCount += 1;
+        if (product.stock > 0) product.stock -= 1;
+        await product.save({ transaction: t });
+
+        await t.commit();
+        res.status(200).json({ success: true, orderId: order.id });
+
+    } catch (error) {
+        await t.rollback();
+        console.error("Erro no checkout:", error);
+        res.status(500).json({ error: 'Erro ao processar o pagamento.' });
+    }
+};

@@ -75,13 +75,39 @@ exports.createPenDrive = async (req, res) => {
                         break;
                 }
 
-                // TODO: Implement Conversion Logic here if 'convertTo' is 'mp3_128' using ffmpeg
-                // For now, direct copy
-                archive.file(sourcePath, { name: zipPath });
+                if (convertTo === 'mp3_128') {
+                    const ffmpeg = require('fluent-ffmpeg');
+                    const { PassThrough } = require('stream');
+
+                    await new Promise((resolve) => {
+                        const conversionStream = new PassThrough();
+
+                        ffmpeg(sourcePath)
+                            .audioCodec('libmp3lame')
+                            .audioBitrate('128k')
+                            .format('mp3')
+                            .on('error', (err) => {
+                                console.error(`Erro ao converter ${safeTitle}:`, err.message);
+                                // Se falhar a conversão, adiciona o original para não perder a música no pendrive
+                                archive.file(sourcePath, { name: zipPath });
+                                resolve();
+                            })
+                            .on('end', () => {
+                                // Evento 'end' garante que o FFmpeg terminou a conversão
+                                resolve();
+                            })
+                            .pipe(conversionStream);
+
+                        archive.append(conversionStream, { name: zipPath });
+                    });
+                } else {
+                    // Original copy
+                    archive.file(sourcePath, { name: zipPath });
+                }
             }
         }
 
-        await archive.finalize();
+        archive.finalize();
 
     } catch (error) {
         console.error(error);

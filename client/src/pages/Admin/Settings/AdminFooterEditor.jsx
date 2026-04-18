@@ -164,7 +164,7 @@ const AdminFooterEditor = ({ footerData, onSave }) => {
                                         </button>
                                     </div>
                                 ))}
-                                <button onClick={() => addLink(colIndex)} style={{ background: 'transparent', color: '#1DB954', border: '1px dashed #1DB954', padding: '5px 10px', borderRadius: '4px', fontSize: '0.9rem', cursor: 'pointer' }}>
+                                <button onClick={() => addLink(colIndex)} style={{ background: 'transparent', color: 'var(--dynamic-accent)', border: '1px dashed var(--dynamic-accent)', padding: '5px 10px', borderRadius: '4px', fontSize: '0.9rem', cursor: 'pointer' }}>
                                     + Adicionar Link
                                 </button>
                             </div>

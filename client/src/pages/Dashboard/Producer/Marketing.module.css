@@ -15,7 +15,7 @@
 }
 
 .addBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -49,7 +49,7 @@
     top: 0;
     bottom: 0;
     width: 5px;
-    background: #1db954;
+    background: var(--dynamic-accent);
 }
 
 .couponHeader {
@@ -61,7 +61,7 @@
 
 .icon {
     font-size: 1.5rem;
-    color: #1db954;
+    color: var(--dynamic-accent);
 }
 
 .code {
@@ -162,6 +162,6 @@
 }
 
 .confirmBtn {
-    background: #1db954;
+    background: var(--dynamic-accent);
     color: white;
 }

@@ -128,7 +128,7 @@
 .addCoinsBtn {
     width: 100%;
     margin-top: 10px;
-    background: #1ed760;
+    background: var(--dynamic-accent);
     border: none;
     color: #000;
     padding: 8px;
@@ -308,7 +308,7 @@
     font-size: 2.5rem;
     font-weight: 950;
     letter-spacing: -1px;
-    background: linear-gradient(to right, #fff, #1ed760);
+    background: linear-gradient(to right, #fff, var(--dynamic-accent));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -597,7 +597,7 @@
 .savings {
     font-size: 0.75rem;
     font-weight: 900;
-    color: #1ed760;
+    color: var(--dynamic-accent);
     margin-top: 10px;
     text-transform: uppercase;
 }
@@ -795,7 +795,7 @@
     position: absolute;
     top: 15px;
     right: -25px;
-    background: #1ed760;
+    background: var(--dynamic-accent);
     color: #000;
     font-size: 0.5rem;
     font-weight: 900;
@@ -1000,7 +1000,7 @@
     content: '';
     width: 4px;
     height: 20px;
-    background: #1ed760;
+    background: var(--dynamic-accent);
     border-radius: 2px;
 }
 
@@ -1085,7 +1085,7 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #1ed760;
+    background: var(--dynamic-accent);
     color: #000;
     font-size: 0.55rem;
     font-weight: 900;
@@ -1154,7 +1154,7 @@
 }
 
 .activePill {
-    background: #1ed760;
+    background: var(--dynamic-accent);
     color: #000;
     font-size: 0.5rem;
     font-weight: 900;
@@ -1355,7 +1355,7 @@
 }
 
 .frame_14 {
-    border: 1px solid #1ed760 !important;
+    border: 1px solid var(--dynamic-accent) !important;
     clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
 }
 
@@ -1534,8 +1534,8 @@
 }
 
 .frame_50 {
-    border: 1px solid #1ed760 !important;
-    box-shadow: 0 0 10px #1ed760;
+    border: 1px solid var(--dynamic-accent) !important;
+    box-shadow: 0 0 10px var(--dynamic-accent);
 }
 
 /* SIGHT/LIGHT (51-60) */
